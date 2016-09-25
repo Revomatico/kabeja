@@ -16,8 +16,8 @@
 package org.kabeja.svg;
 
 import java.util.Map;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.xml.AbstractSAXFilter;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -31,6 +31,7 @@ public class FixedStrokeWidthFilter extends AbstractSAXFilter {
     protected boolean replace = true;
     protected boolean fixFontsize = true;
 
+    @Override
     public void startElement(String uri, String localName, String qName,
         Attributes atts) throws SAXException {
         AttributesImpl attsImpl = new AttributesImpl(atts);
@@ -89,6 +90,7 @@ public class FixedStrokeWidthFilter extends AbstractSAXFilter {
         super.startElement(uri, localName, qName, attsImpl);
     }
 
+    @Override
     public void endElement(String uri, String localName, String qName)
         throws SAXException {
         if (localName.equals(SVGConstants.SVG_DEFS)) {
@@ -124,7 +126,8 @@ public class FixedStrokeWidthFilter extends AbstractSAXFilter {
         }
     }
 
-    public void setProperties(Map properties) {
+    @Override
+    public void setProperties(Map<String, Object> properties) {
         super.setProperties(properties);
 
         if (this.properties.containsKey(PROPERTY_FIXED_FONTSIZE)) {

@@ -92,7 +92,8 @@ public abstract class AbstractSAXSerializer extends AbstractSAXFilter
      *
      * @see org.kabeja.xml.SAXSerializer#setProperties(java.util.Map)
      */
-    public void setProperties(Map properties) {
+    @Override
+    public void setProperties(Map<String, Object> properties) {
         if (properties.containsKey(PROPERTY_DPI)) {
             this.DPI = Integer.parseInt((String) properties.get(PROPERTY_DPI));
             this.PIXEL_UNIT_TO_MM = INCH_TO_MM / this.DPI;
@@ -140,6 +141,7 @@ public abstract class AbstractSAXSerializer extends AbstractSAXFilter
      *
      * @see org.xml.sax.ContentHandler#endDocument()
      */
+    @Override
     public void endDocument() throws SAXException {
         super.endDocument();
 
@@ -184,6 +186,7 @@ public abstract class AbstractSAXSerializer extends AbstractSAXFilter
      *
      * @see org.xml.sax.ContentHandler#startDocument()
      */
+    @Override
     public void startDocument() throws SAXException {
         try {
             SAXTransformerFactory factory = (SAXTransformerFactory) SAXTransformerFactory.newInstance();
@@ -223,17 +226,17 @@ public abstract class AbstractSAXSerializer extends AbstractSAXFilter
             return (Float.parseFloat(size.substring(0, size.length() - 2)) * PT_TO_MM) / PIXEL_UNIT_TO_MM;
         } else if (size.endsWith("cm")) {
             float units = Float.parseFloat(size.substring(0, size.length() - 2));
-            float pixel = (float) ((units * 100) / PIXEL_UNIT_TO_MM);
+            float pixel = (units * 100) / PIXEL_UNIT_TO_MM;
 
             return pixel;
         } else if (size.endsWith("mm")) {
             float units = Float.parseFloat(size.substring(0, size.length() - 2));
-            float pixel = (float) (units / PIXEL_UNIT_TO_MM);
+            float pixel = units / PIXEL_UNIT_TO_MM;
 
             return pixel;
         } else if (size.endsWith("m")) {
             float units = Float.parseFloat(size.substring(0, size.length() - 1));
-            float pixel = (float) ((units * 1000) / PIXEL_UNIT_TO_MM);
+            float pixel = (units * 1000) / PIXEL_UNIT_TO_MM;
 
             return pixel;
         } else {
@@ -271,7 +274,8 @@ public abstract class AbstractSAXSerializer extends AbstractSAXFilter
         //add more papers here
     }
 
-    public Map getProperties() {
+    @Override
+    public Map<String, Object> getProperties() {
         return this.properties;
     }
 }

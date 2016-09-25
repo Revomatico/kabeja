@@ -31,7 +31,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 public class SVGArcGenerator extends AbstractSVGSAXGenerator
     implements SVGPathBoundaryGenerator {
-    public void toSAX(ContentHandler handler, Map svgContext, DXFEntity entity,
+    public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         DXFArc arc = (DXFArc) entity;
         AttributesImpl attr = new AttributesImpl();
@@ -74,7 +74,7 @@ public class SVGArcGenerator extends AbstractSVGSAXGenerator
             path.append(" 0 ");
         }
 
-        //TODO change the extrusion >0 
+        //TODO change the extrusion >0
         if (!arc.isCounterClockwise() && (arc.getExtrusion().getZ() > 0)) {
             // the sweep-flag
             path.append(" 1 ");
@@ -85,7 +85,7 @@ public class SVGArcGenerator extends AbstractSVGSAXGenerator
 
         double angle = arc.getEndAngle();
 
-        //handling of only for hatch boundary 
+        //handling of only for hatch boundary
         if (arc.isCounterClockwise()) {
             angle = -1 * angle;
         }

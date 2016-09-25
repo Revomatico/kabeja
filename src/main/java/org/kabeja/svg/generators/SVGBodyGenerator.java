@@ -24,8 +24,8 @@ import org.xml.sax.SAXException;
 
 
 public class SVGBodyGenerator extends AbstractSVGSAXGenerator {
-    public void toSAX(ContentHandler handler, Map svgContext, DXFEntity entity,
+    public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
-        //nothing yet 
+        //nothing yet
     }
 }

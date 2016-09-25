@@ -23,19 +23,20 @@ import javax.swing.tree.TreeNode;
 
 public class PropertiesTreeNode extends AbstractProcessingTreeNode {
     protected final static String LABEL = "Properties";
-    protected Map properties;
+    protected Map<String, Object> properties;
 
-    public PropertiesTreeNode(TreeNode parent, Map properties) {
+    public PropertiesTreeNode(TreeNode parent, Map<String, Object> properties) {
         super(parent, LABEL);
         this.properties = properties;
     }
 
+    @Override
     protected void initializeChildren() {
-        Iterator i = this.properties.keySet().iterator();
+        Iterator<String> i = this.properties.keySet().iterator();
 
         while (i.hasNext()) {
             this.addChild(new PropertyTreeNode(this, properties,
-                    (String) i.next()));
+                    i.next()));
         }
     }
 

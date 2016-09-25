@@ -50,8 +50,8 @@ import org.kabeja.svg.generators.SVGXLineGenerator;
 
 public class SVGSAXGeneratorManager {
 
-    protected Map generators = new HashMap();
-    protected Map pathBoundaryGenerator = new HashMap();
+    protected Map<String, SVGSAXGenerator> generators = new HashMap<String, SVGSAXGenerator>();
+    protected Map<String, SVGPathBoundaryGenerator> pathBoundaryGenerator = new HashMap<String, SVGPathBoundaryGenerator>();
 
     public SVGSAXGeneratorManager() {
         this.initialize();
@@ -59,7 +59,7 @@ public class SVGSAXGeneratorManager {
 
     public SVGSAXGenerator getSVGGenerator(String entityType)
             throws SVGGenerationException {
-        SVGSAXGenerator gen = (SVGSAXGenerator) this.generators.get(entityType);
+        SVGSAXGenerator gen = this.generators.get(entityType);
 
         if (gen == null) {
             throw new SVGGenerationException("EntityType:" + entityType
@@ -70,7 +70,7 @@ public class SVGSAXGeneratorManager {
     }
 
     public SVGPathBoundaryGenerator getSVGPathBoundaryGenerator(String type) {
-        return (SVGPathBoundaryGenerator) this.pathBoundaryGenerator.get(type);
+        return this.pathBoundaryGenerator.get(type);
     }
 
     public void setSVGSAXGenerator(SVGSAXGenerator generator, String entityType) {
@@ -111,14 +111,14 @@ public class SVGSAXGeneratorManager {
         this.generators.put(DXFConstants.ENTITY_TYPE_XLINE, new SVGXLineGenerator());
 
         //filter the boundarypathgenerators
-        Iterator i = this.generators.keySet().iterator();
+        Iterator<String> i = this.generators.keySet().iterator();
 
         while (i.hasNext()) {
-            String type = (String) i.next();
+            String type = i.next();
             Object obj = this.generators.get(type);
 
             if (obj instanceof SVGPathBoundaryGenerator) {
-                this.pathBoundaryGenerator.put(type, obj);
+                this.pathBoundaryGenerator.put(type, (SVGPathBoundaryGenerator) obj);
             }
         }
     }

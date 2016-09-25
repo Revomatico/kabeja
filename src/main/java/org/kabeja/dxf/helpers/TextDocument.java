@@ -25,7 +25,7 @@ import java.util.List;
  *
  */
 public class TextDocument {
-    protected List paragraphs = new ArrayList();
+    protected List<StyledTextParagraph> paragraphs = new ArrayList<StyledTextParagraph>();
 
     /**
      * Return the pure text content.
@@ -33,11 +33,11 @@ public class TextDocument {
      * @return the text content
      */
     public String getText() {
-        Iterator i = this.paragraphs.iterator();
+        Iterator<StyledTextParagraph> i = this.paragraphs.iterator();
         StringBuilder buf = new StringBuilder();
 
         while (i.hasNext()) {
-            StyledTextParagraph para = (StyledTextParagraph) i.next();
+            StyledTextParagraph para = i.next();
             buf.append(para.getText());
 
             if (para.isNewline()) {
@@ -52,7 +52,7 @@ public class TextDocument {
         this.paragraphs.add(para);
     }
 
-    public Iterator getStyledParagraphIterator() {
+    public Iterator<StyledTextParagraph> getStyledParagraphIterator() {
         return this.paragraphs.iterator();
     }
 
@@ -61,15 +61,15 @@ public class TextDocument {
     }
 
     public StyledTextParagraph getStyleTextParagraph(int i) {
-        return (StyledTextParagraph) this.paragraphs.get(i);
+        return this.paragraphs.get(i);
     }
 
     public int getLineCount() {
         int count = 1;
-        Iterator i = this.paragraphs.iterator();
+        Iterator<StyledTextParagraph> i = this.paragraphs.iterator();
 
         while (i.hasNext()) {
-            StyledTextParagraph para = (StyledTextParagraph) i.next();
+            StyledTextParagraph para = i.next();
 
             if (para.isNewline()) {
                 count++;
@@ -82,10 +82,10 @@ public class TextDocument {
     public int getMaximumLineLength() {
         int count = 0;
         int max = 0;
-        Iterator i = paragraphs.iterator();
+        Iterator<StyledTextParagraph> i = paragraphs.iterator();
 
         while (i.hasNext()) {
-            StyledTextParagraph para = (StyledTextParagraph) i.next();
+            StyledTextParagraph para = i.next();
 
             if (!para.isNewline()) {
                 count += para.getLength();

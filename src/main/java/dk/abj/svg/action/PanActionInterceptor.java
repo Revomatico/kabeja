@@ -24,6 +24,7 @@ package dk.abj.svg.action;
 
 import java.awt.event.InputEvent;
 
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 
 import org.apache.batik.swing.gvt.AbstractPanInteractor;
@@ -36,11 +37,11 @@ public class PanActionInterceptor extends ToggleInteractorActionAdapter {
     public PanActionInterceptor() {
         super(new AbstractPanInteractor() {
             }, InputEvent.SHIFT_MASK);
-        super.putValue(super.SMALL_ICON,
+        super.putValue(Action.SMALL_ICON,
             new ImageIcon(UIUtils.resourceToBytes(this.getClass(),
                     "/icons/zoom4.png")));
         super.putValue(SHORT_DESCRIPTION,
             Messages.getString("editor.action.panning"));
-        super.putValue(super.NAME, "Pan");
+        super.putValue(Action.NAME, "Pan");
     }
 }

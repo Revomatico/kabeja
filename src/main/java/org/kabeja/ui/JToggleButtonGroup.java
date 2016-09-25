@@ -25,7 +25,7 @@ import javax.swing.JToggleButton;
 
 
 public class JToggleButtonGroup implements ActionListener {
-    protected List unselectorButtons = new ArrayList();
+    protected List<AbstractButton> unselectorButtons = new ArrayList<AbstractButton>();
     protected boolean selected = false;
     protected JToggleButton selectedButton;
 

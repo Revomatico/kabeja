@@ -24,18 +24,18 @@ import java.util.Map;
  *
  */
 public class PostProcessorConfig {
-    private Map properties = new HashMap();
+    private Map<String, Object> properties = new HashMap<String, Object>();
     private String postProcessorName;
 
-    public PostProcessorConfig(Map properties) {
+    public PostProcessorConfig(Map<String, Object> properties) {
         this.properties = properties;
     }
 
     public PostProcessorConfig() {
-        this(new HashMap());
+        this(new HashMap<String, Object>());
     }
 
-    public Map getProperties() {
+    public Map<String, Object> getProperties() {
         return this.properties;
     }
 

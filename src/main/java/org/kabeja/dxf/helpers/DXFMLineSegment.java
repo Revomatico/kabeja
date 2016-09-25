@@ -23,7 +23,7 @@ public class DXFMLineSegment {
     protected Point startPoint = new Point();
     protected Vector direction = new Vector();
     protected Vector miterDirection = new Vector();
-    protected List elements = new ArrayList();
+    protected List<DXFMLineSegmentElement> elements = new ArrayList<DXFMLineSegmentElement>();
 
     public Point getStartPoint() {
         return startPoint;
@@ -58,6 +58,6 @@ public class DXFMLineSegment {
     }
 
     public DXFMLineSegmentElement getDXFMLineSegmentElement(int index) {
-        return (DXFMLineSegmentElement) this.elements.get(index);
+        return this.elements.get(index);
     }
 }

@@ -82,7 +82,7 @@ public abstract class AbstractSAXSerializer2 extends SAXSVGDocumentFactory
      *
      * @see org.kabeja.xml.SAXSerializer#setProperties(java.util.Map)
      */
-    public void setProperties(Map properties) {
+    public void setProperties(Map<String, Object> properties) {
         if (properties.containsKey(PROPERTY_WIDTH)) {
             this.width = Float.parseFloat((String) properties.get(
                         PROPERTY_WIDTH));
@@ -104,6 +104,7 @@ public abstract class AbstractSAXSerializer2 extends SAXSVGDocumentFactory
      *
      * @see org.xml.sax.ContentHandler#endDocument()
      */
+    @Override
     public void endDocument() throws SAXException {
         try {
             super.endDocument();

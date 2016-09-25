@@ -36,14 +36,14 @@ public class ViewportFilter extends AbstractPostProcessor {
      * @see org.kabeja.tools.PostProcessor#process(org.kabeja.dxf.DXFDocument,
      *      java.util.Map)
      */
-    public void process(DXFDocument doc, Map context) throws ProcessorException {
+    public void process(DXFDocument doc, Map<String, Object> context) throws ProcessorException {
         DXFViewport viewport = null;
-        Iterator i = doc.getDXFViewportIterator();
+        Iterator<DXFViewport> i = doc.getDXFViewportIterator();
 
         boolean found = false;
 
         while (i.hasNext() && !found) {
-            DXFViewport v = (DXFViewport) i.next();
+            DXFViewport v = i.next();
 
             if (v.isActive()) {
                 viewport = v;
@@ -70,18 +70,18 @@ public class ViewportFilter extends AbstractPostProcessor {
     }
 
     protected void filterEntities(Bounds b, DXFDocument doc) {
-        Iterator i = doc.getDXFLayerIterator();
+        Iterator<DXFLayer> i = doc.getDXFLayerIterator();
 
         while (i.hasNext()) {
-            DXFLayer l = (DXFLayer) i.next();
-            Iterator ti = l.getDXFEntityTypeIterator();
+            DXFLayer l = i.next();
+            Iterator<String> ti = l.getDXFEntityTypeIterator();
 
             while (ti.hasNext()) {
-                String type = (String) ti.next();
-                Iterator ei = l.getDXFEntities(type).iterator();
+                String type = ti.next();
+                Iterator<DXFEntity> ei = l.getDXFEntities(type).iterator();
 
                 while (ei.hasNext()) {
-                    DXFEntity entity = (DXFEntity) ei.next();
+                    DXFEntity entity = ei.next();
                     Bounds currentBounds = entity.getBounds();
 
                     if (!b.contains(currentBounds)) {
@@ -95,7 +95,8 @@ public class ViewportFilter extends AbstractPostProcessor {
     /* (non-Javadoc)
          * @see org.kabeja.tools.PostProcessor#setProperties(java.util.Map)
          */
-    public void setProperties(Map properties) {
+    @Override
+    public void setProperties(Map<String, Object> properties) {
         // TODO Auto-generated method stub
     }
 }

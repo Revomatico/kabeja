@@ -30,7 +30,7 @@ import org.kabeja.ui.Startable;
 
 
 public class ServiceContainer implements ServiceManager, Application {
-    protected List components = new ArrayList();
+    protected List<Component> components = new ArrayList<Component>();
     protected ProcessingManager manager;
 
     public ServiceContainer() {
@@ -42,20 +42,20 @@ public class ServiceContainer implements ServiceManager, Application {
     }
 
     public Component[] getServiceComponents(String service) {
-        List l = this.getServiceComponentsByServiceField(service);
-        return (Component[])l.toArray(new Component[l.size()]);
+        List<Component> l = this.getServiceComponentsByServiceField(service);
+        return l.toArray(new Component[l.size()]);
     }
 
-    protected List getServiceComponentsByServiceField(String service) {
-        List list = new ArrayList();
-        Iterator i = this.components.iterator();
+    protected List<Component> getServiceComponentsByServiceField(String service) {
+        List<Component> list = new ArrayList<Component>();
+        Iterator<Component> i = this.components.iterator();
 
         try {
-            Class serviceClass = this.getClass().getClassLoader()
+            Class<?> serviceClass = this.getClass().getClassLoader()
                                      .loadClass(service);
 
             while (i.hasNext()) {
-                Object obj = i.next();
+                Component obj = i.next();
 
                 if (serviceClass.isInstance(obj)) {
                     list.add(obj);
@@ -69,8 +69,7 @@ public class ServiceContainer implements ServiceManager, Application {
     }
 
     public void setupComponents() {
-        List list = new ArrayList();
-        Iterator i = this.components.iterator();
+        Iterator<Component> i = this.components.iterator();
 
         while (i.hasNext()) {
             Object obj = i.next();
@@ -88,7 +87,7 @@ public class ServiceContainer implements ServiceManager, Application {
     public void start() {
         this.setupComponents();
 
-        Iterator i = this.components.iterator();
+        Iterator<Component> i = this.components.iterator();
 
         while (i.hasNext()) {
             Object obj = i.next();
@@ -100,7 +99,7 @@ public class ServiceContainer implements ServiceManager, Application {
     }
 
     public void stop() {
-        Iterator i = this.components.iterator();
+        Iterator<Component> i = this.components.iterator();
 
         while (i.hasNext()) {
             Object obj = i.next();
@@ -116,7 +115,7 @@ public class ServiceContainer implements ServiceManager, Application {
     public void setProcessingManager(ProcessingManager manager) {
         this.manager = manager;
 
-        Iterator i = this.components.iterator();
+        Iterator<Component> i = this.components.iterator();
 
         while (i.hasNext()) {
             Object obj = i.next();

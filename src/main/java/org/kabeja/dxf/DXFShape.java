@@ -15,13 +15,8 @@
 */
 package org.kabeja.dxf;
 
-import java.util.Map;
 import org.apache.commons.lang.StringUtils;
-
 import org.kabeja.dxf.helpers.Point;
-import org.kabeja.math.TransformContext;
-import org.xml.sax.ContentHandler;
-import org.xml.sax.SAXException;
 
 
 /**
@@ -37,15 +32,9 @@ public class DXFShape extends DXFEntity {
     protected String name = StringUtils.EMPTY;
 
     /* (non-Javadoc)
-     * @see org.kabeja.dxf.DXFEntity#toSAX(org.xml.sax.ContentHandler, java.util.Map)
-     */
-    public void toSAX(ContentHandler handler, Map svgContext, DXFEntity entity,
-        TransformContext transformContext) throws SAXException {
-    }
-
-    /* (non-Javadoc)
      * @see org.kabeja.dxf.DXFEntity#getBounds()
      */
+    @Override
     public Bounds getBounds() {
         Bounds bounds = new Bounds();
         bounds.setValid(false);
@@ -56,6 +45,7 @@ public class DXFShape extends DXFEntity {
     /* (non-Javadoc)
      * @see org.kabeja.dxf.DXFEntity#getType()
      */
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_SHAPE;
     }
@@ -144,6 +134,7 @@ public class DXFShape extends DXFEntity {
         this.scaleFactor = scaleFactor;
     }
 
+    @Override
     public double getLength() {
         return 0;
     }

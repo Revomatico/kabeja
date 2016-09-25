@@ -15,12 +15,7 @@
 */
 package org.kabeja.dxf;
 
-import java.util.Map;
-
 import org.kabeja.dxf.helpers.Point;
-import org.kabeja.math.TransformContext;
-import org.xml.sax.ContentHandler;
-import org.xml.sax.SAXException;
 
 
 /**
@@ -77,15 +72,7 @@ public class DXFVertex extends DXFPoint {
         this.startWidth = startWidth;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see org.dxf2svg.dxf.DXFEntity#toSAX(org.xml.sax.ContentHandler)
-     */
-    public void toSAX(ContentHandler handler, Map svgContext, DXFEntity entity,
-        TransformContext transformContext) throws SAXException {
-    }
-
+    @Override
     public Bounds getBounds() {
         return super.getBounds();
     }
@@ -108,6 +95,7 @@ public class DXFVertex extends DXFPoint {
     /* (non-Javadoc)
      * @see de.miethxml.kabeja.dxf.DXFEntity#getType()
      */
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_VERTEX;
     }

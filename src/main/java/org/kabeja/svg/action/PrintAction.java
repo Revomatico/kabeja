@@ -18,6 +18,7 @@ package org.kabeja.svg.action;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 
@@ -33,7 +34,7 @@ public class PrintAction extends AbstractAction implements SVGDocumentAction {
 
     public PrintAction() {
         super();
-        super.putValue(super.SMALL_ICON,
+        super.putValue(Action.SMALL_ICON,
             new ImageIcon(UIUtils.resourceToBytes(this.getClass(),
                     "/icons/print.gif")));
         super.putValue(SHORT_DESCRIPTION,

@@ -19,7 +19,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
 
@@ -28,33 +27,21 @@ import org.xml.sax.helpers.XMLReaderFactory;
  *
  */
 public class ConfigHelper {
-    public static final String JAVA_14_SAX_DRIVER = "org.apache.crimson.parser.XMLReaderImpl";
-    public static final String JAVA_15_SAX_DRIVER = "com.sun.org.apache.xerces.internal.parsers.SAXParser";
 
     public static String getSAXSDDriver() {
-        // check for version 1.4 and above
-        String ver = System.getProperty("java.version");
         String parser = null;
 
         try {
             parser = SAXParserFactory.newInstance().newSAXParser().getXMLReader()
                                      .getClass().getName();
 
-            XMLReader r = XMLReaderFactory.createXMLReader(parser);
+            XMLReaderFactory.createXMLReader(parser);
         } catch (SAXException e) {
             e.printStackTrace();
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
 
-        //        if (ver.startsWith("1.2") || ver.startsWith("1.3")) {
-        //            parser = System.getProperty("org.xml.sax.driver");
-        //        } else if (ver.startsWith("1.4")) {
-        //            // jdk 1.4 uses crimson
-        //            parser = JAVA_14_SAX_DRIVER;
-        //        } else if (ver.startsWith("1.5")) {
-        //            parser = JAVA_15_SAX_DRIVER;
-        //        }
         return parser;
     }
 }

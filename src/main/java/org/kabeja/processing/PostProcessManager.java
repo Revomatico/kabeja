@@ -17,6 +17,7 @@ package org.kabeja.processing;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.kabeja.dxf.DXFDocument;
@@ -27,7 +28,7 @@ import org.kabeja.dxf.DXFDocument;
  *
  */
 public class PostProcessManager {
-    private ArrayList processors = new ArrayList();
+    private List<PostProcessor> processors = new ArrayList<PostProcessor>();
 
     public void addPostProcessor(PostProcessor pp) {
         processors.add(pp);
@@ -40,22 +41,19 @@ public class PostProcessManager {
                                                    .newInstance();
             addPostProcessor(pp);
         } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
-    public void process(DXFDocument doc, Map context) throws ProcessorException {
-        Iterator i = processors.iterator();
+    public void process(DXFDocument doc, Map<String, Object> context) throws ProcessorException {
+        Iterator<PostProcessor> i = processors.iterator();
 
         while (i.hasNext()) {
-            PostProcessor pp = (PostProcessor) i.next();
+            PostProcessor pp = i.next();
             pp.process(doc, context);
         }
     }

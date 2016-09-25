@@ -26,7 +26,7 @@ import java.util.Iterator;
  *
  */
 public class DXFHeader {
-    private Hashtable variables = new Hashtable();
+    private Hashtable<String, DXFVariable> variables = new Hashtable<String, DXFVariable>();
 
     public DXFHeader() {
     }
@@ -40,10 +40,10 @@ public class DXFHeader {
     }
 
     public DXFVariable getVariable(String name) {
-        return (DXFVariable) variables.get(name);
+        return variables.get(name);
     }
 
-    public Iterator getVarialbeIterator() {
+    public Iterator<DXFVariable> getVarialbeIterator() {
         return variables.values().iterator();
     }
 

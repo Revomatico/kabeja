@@ -29,7 +29,7 @@ public class DefaultLeafAdapter implements TreeNode {
         this.parent = parent;
     }
 
-    public Enumeration children() {
+    public Enumeration<?> children() {
         return null;
     }
 
@@ -38,7 +38,6 @@ public class DefaultLeafAdapter implements TreeNode {
     }
 
     public TreeNode getChildAt(int childIndex) {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -58,6 +57,7 @@ public class DefaultLeafAdapter implements TreeNode {
         return true;
     }
 
+    @Override
     public String toString() {
         return this.name;
     }

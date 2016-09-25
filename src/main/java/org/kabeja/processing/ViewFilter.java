@@ -37,10 +37,10 @@ public class ViewFilter extends AbstractPostProcessor {
      *
      * @see de.miethxml.kabeja.tools.PostProcessor#process(de.miethxml.kabeja.dxf.DXFDocument)
      */
-    public void process(DXFDocument doc, Map context) throws ProcessorException {
+    public void process(DXFDocument doc, Map<String, Object> context) throws ProcessorException {
         // get the active viewport
         DXFView view = null;
-        Iterator i = doc.getDXFViewIterator();
+        Iterator<DXFView> i = doc.getDXFViewIterator();
 
         if (context.containsKey(CONTEXT_OPTION_VIEW_NAME)) {
             String name = (String) context.get(CONTEXT_OPTION_VIEW_NAME);
@@ -48,7 +48,7 @@ public class ViewFilter extends AbstractPostProcessor {
             boolean found = false;
 
             while (i.hasNext() && !found) {
-                DXFView v = (DXFView) i.next();
+                DXFView v = i.next();
 
                 if (v.getName().trim().equals(name.trim())) {
                     view = v;
@@ -57,7 +57,7 @@ public class ViewFilter extends AbstractPostProcessor {
             }
         } else if (i.hasNext()) {
             // get the first view
-            view = (DXFView) i.next();
+            view = i.next();
         }
 
         if (view != null) {
@@ -77,18 +77,18 @@ public class ViewFilter extends AbstractPostProcessor {
     }
 
     protected void filterEntities(Bounds b, DXFDocument doc) {
-        Iterator i = doc.getDXFLayerIterator();
+        Iterator<DXFLayer> i = doc.getDXFLayerIterator();
 
         while (i.hasNext()) {
-            DXFLayer l = (DXFLayer) i.next();
-            Iterator ti = l.getDXFEntityTypeIterator();
+            DXFLayer l = i.next();
+            Iterator<String> ti = l.getDXFEntityTypeIterator();
 
             while (ti.hasNext()) {
-                String type = (String) ti.next();
-                Iterator ei = l.getDXFEntities(type).iterator();
+                String type = ti.next();
+                Iterator<DXFEntity> ei = l.getDXFEntities(type).iterator();
 
                 while (ei.hasNext()) {
-                    DXFEntity entity = (DXFEntity) ei.next();
+                    DXFEntity entity = ei.next();
                     Bounds currentBounds = entity.getBounds();
 
                     if (!b.contains(currentBounds)) {
@@ -100,9 +100,10 @@ public class ViewFilter extends AbstractPostProcessor {
     }
 
     /* (non-Javadoc)
-         * @see org.kabeja.tools.PostProcessor#setProperties(java.util.Map)
-         */
-    public void setProperties(Map properties) {
+     * @see org.kabeja.tools.PostProcessor#setProperties(java.util.Map)
+     */
+    @Override
+    public void setProperties(Map<String, Object> properties) {
         // TODO Auto-generated method stub
     }
 }

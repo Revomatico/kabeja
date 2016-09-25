@@ -40,14 +40,14 @@ public class ImageBase64Encoder extends XMLFilterImpl implements SAXFilter {
     public static final String ELEMENT_IMAGE = "image";
     public static final String XLINK_NAMESPACE = "http://www.w3.org/1999/xlink";
     public static final String XLINK_ATTRIBUTE_HREF = "href";
-    protected Map properties = new HashMap();
+    protected Map<String, Object> properties = new HashMap<String, Object>();
 
     /*
      * (non-Javadoc)
      *
      * @see org.kabeja.xml.SAXFilter#setProperties(java.util.Map)
      */
-    public void setProperties(Map properties) {
+    public void setProperties(Map<String, Object> properties) {
     }
 
     /*
@@ -56,6 +56,7 @@ public class ImageBase64Encoder extends XMLFilterImpl implements SAXFilter {
      * @see org.xml.sax.ContentHandler#startElement(java.lang.String,
      *      java.lang.String, java.lang.String, org.xml.sax.Attributes)
      */
+    @Override
     public void startElement(String uri, String localName, String qName,
         Attributes atts) throws SAXException {
         if (ELEMENT_IMAGE.equals(localName)) {
@@ -115,7 +116,7 @@ public class ImageBase64Encoder extends XMLFilterImpl implements SAXFilter {
         return StringUtils.EMPTY;
     }
 
-    public Map getProperties() {
+    public Map<String, Object> getProperties() {
         return this.properties;
     }
 }

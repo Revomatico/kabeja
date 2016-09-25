@@ -36,7 +36,6 @@ import java.util.Map;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -86,15 +85,15 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
     protected JPanel parentPanel;
     protected JPanel panel;
     protected CardLayout cards;
-    protected List actions = new ArrayList();
+    protected List<ViewerAction> actions = new ArrayList<ViewerAction>();
     String[] data = new String[] {
             "Modelspace-Calculated", "Modelspace", "Paperspace Calculated",
             "Paperspace", "Mixed"
         };
     protected DXFDocument doc;
-    protected JComboBox switchViewBox;
+    //protected JComboBox switchViewBox;
     protected JToolBar toolbar;
-    protected Map properties = new HashMap();
+    protected Map<String, Object> properties = new HashMap<String, Object>();
     protected JLabel mousePosition;
     private DecimalFormat format;
 
@@ -111,6 +110,7 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
 
             this.parentPanel = new JPanel(new BorderLayout());
             this.panel = new JPanel(cards) {
+                        @Override
                         public void setEnabled(boolean b) {
                             if (!b) {
                                 canvas.setSVGDocument(null);
@@ -122,6 +122,7 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
             this.infoLabel = new JLabel("DXF2SVGViewer", JLabel.CENTER) {
                         private static final long serialVersionUID = 1L;
 
+                        @Override
                         protected void paintComponent(Graphics g) {
                             Graphics2D g2 = (Graphics2D) g;
                             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -152,10 +153,12 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
             this.canvas.setDocumentState(JSVGCanvas.ALWAYS_DYNAMIC);
 
             this.canvas.addSVGDocumentLoaderListener(new SVGDocumentLoaderAdapter() {
+                    @Override
                     public void documentLoadingStarted(SVGDocumentLoaderEvent e) {
                         infoLabel.setText("Loading ...");
                     }
 
+                    @Override
                     public void documentLoadingCompleted(
                         SVGDocumentLoaderEvent e) {
                         infoLabel.setText("Draft loaded");
@@ -163,20 +166,24 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
                 });
 
             this.canvas.addGVTTreeBuilderListener(new GVTTreeBuilderAdapter() {
+                    @Override
                     public void gvtBuildStarted(GVTTreeBuilderEvent e) {
                         infoLabel.setText("Building draft ...");
                     }
 
+                    @Override
                     public void gvtBuildCompleted(GVTTreeBuilderEvent e) {
                         infoLabel.setText("Finished building");
                     }
                 });
 
             this.canvas.addGVTTreeRendererListener(new GVTTreeRendererAdapter() {
+                    @Override
                     public void gvtRenderingPrepare(GVTTreeRendererEvent e) {
                         infoLabel.setText("Rendering draft ...");
                     }
 
+                    @Override
                     public void gvtRenderingCompleted(GVTTreeRendererEvent e) {
                         infoLabel.setText(StringUtils.EMPTY);
                         cards.show(panel, "view");
@@ -185,6 +192,7 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
             this.canvas.addMouseMotionListener(new MouseMotionAdapter() {
                     private int count = 3;
 
+                    @Override
                     public void mouseMoved(MouseEvent e) {
                         if (count == 3) {
                             count = 0;
@@ -238,10 +246,10 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
         // this will invoke the view
         //this.switchViewBox.setSelectedIndex(-1);
         //this.switchViewBox.setSelectedIndex(0);
-        Iterator i = this.actions.iterator();
+        Iterator<ViewerAction> i = this.actions.iterator();
 
         while (i.hasNext()) {
-            Object obj = i.next();
+            ViewerAction obj = i.next();
 
             if (obj instanceof DXFDocumentAction) {
                 ((DXFDocumentAction) obj).setDXFDocument(doc);
@@ -260,9 +268,9 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
             DXFSAXDocumentFactory factory = new DXFSAXDocumentFactory();
             SVGDocument svgDoc = factory.createDocument(doc, this.properties);
             this.setSVGDocument(svgDoc);
-  
+
         } catch (Exception e) {
-           
+
             this.infoLabel.setText("Error:"+e.getMessage());
             this.infoLabel.repaint();
             this.cards.show(this.panel, "info");
@@ -303,10 +311,11 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
         this.canvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(r);
     }
 
+    @SuppressWarnings("unchecked")
     protected void registerActions() {
         this.toolbar.removeAll();
 
-        Iterator i = this.actions.iterator();
+        Iterator<ViewerAction> i = this.actions.iterator();
         JToggleButtonGroup group = new JToggleButtonGroup();
 
         //
@@ -315,7 +324,7 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
         //		this.canvas.setEnableRotateInteractor(false);
         //		this.canvas.setEnableZoomInteractor(false);
         while (i.hasNext()) {
-            ViewerAction action = (ViewerAction) i.next();
+            ViewerAction action = i.next();
 
             if (action instanceof CustomActionView) {
                 this.toolbar.add(((CustomActionView) action).getView());
@@ -348,7 +357,7 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
             }
 
             if (action instanceof Interactor) {
-                this.canvas.getInteractors().add((Interactor) action);
+                this.canvas.getInteractors().add(action);
             }
 
             if (action instanceof JSVGCanvasAction) {
@@ -364,10 +373,10 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
     protected void setSVGDocument(SVGDocument doc) {
         this.canvas.setSVGDocument(doc);
 
-        Iterator i = this.actions.iterator();
+        Iterator<ViewerAction> i = this.actions.iterator();
 
         while (i.hasNext()) {
-            ViewerAction action = (ViewerAction) i.next();
+            ViewerAction action = i.next();
 
             if (action instanceof SVGDocumentAction) {
                 ((SVGDocumentAction) action).setDocument(doc);
@@ -379,7 +388,7 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
         this.actions.add(action);
     }
 
-    public void propertiesChanged(Map properties) {
+    public void propertiesChanged(Map<String, Object> properties) {
         if (properties.containsKey(SVGGenerator.PROPERTY_DOCUMENT_BOUNDS_RULE) &&
                 (this.doc != null)) {
             this.properties.put(SVGGenerator.PROPERTY_DOCUMENT_BOUNDS_RULE,

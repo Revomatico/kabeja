@@ -34,7 +34,7 @@ public class SVG3DFaceGenerator extends AbstractSVGSAXGenerator {
         super();
     }
 
-    public void toSAX(ContentHandler handler, Map svgContext, DXFEntity entity,
+    public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         // all edges are visible
         DXF3DFace face = (DXF3DFace) entity;
@@ -114,7 +114,7 @@ public class SVG3DFaceGenerator extends AbstractSVGSAXGenerator {
     }
 
     protected void edgeToSAX(ContentHandler handler, Point p1, Point p2,
-        Map svgContext, DXF3DFace face) throws SAXException {
+        Map<String, Object> svgContext, DXF3DFace face) throws SAXException {
         AttributesImpl attr = new AttributesImpl();
         // set the attributes
         SVGUtils.addAttribute(attr, SVGConstants.SVG_ATTRIBUTE_X1,

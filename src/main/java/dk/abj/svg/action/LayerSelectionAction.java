@@ -48,6 +48,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.processing.LayerFilter;
 import org.kabeja.svg.SVGUtils;
 import org.kabeja.svg.action.CanvasUpdateManager;
@@ -61,16 +62,15 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.svg.SVGDocument;
 
 import de.miethxml.toolkit.ui.UIUtils;
-import org.apache.commons.lang.StringUtils;
 
 
 public class LayerSelectionAction extends AbstractAction
     implements SVGDocumentAction, PropertiesEditor, CanvasUpdateRunnable {
     protected SVGDocument doc;
-    protected Map properties = new HashMap();
-    protected List listeners = new ArrayList();
-    protected List layers = new ArrayList();
-    protected Set disabledLayers = new HashSet();
+    protected Map<String, Object> properties = new HashMap<String, Object>();
+    protected List<PropertiesListener> listeners = new ArrayList<PropertiesListener>();
+    protected List<Node> layers = new ArrayList<Node>();
+    protected Set<Node> disabledLayers = new HashSet<Node>();
     protected JCheckBox box;
     protected JDialog dialog;
     protected CanvasUpdateManager updateManager;
@@ -172,7 +172,7 @@ public class LayerSelectionAction extends AbstractAction
         this.listeners.add(listener);
     }
 
-    public Map getProperties() {
+    public Map<String, Object> getProperties() {
         return this.properties;
     }
 
@@ -180,21 +180,21 @@ public class LayerSelectionAction extends AbstractAction
         this.listeners.remove(listener);
     }
 
-    public void setProperties(Map props) {
-        Iterator i = props.keySet().iterator();
+    public void setProperties(Map<String, Object> props) {
+        Iterator<String> i = props.keySet().iterator();
 
         while (i.hasNext()) {
-            String key = (String) i.next();
+            String key = i.next();
 
             this.properties.put(key, props.get(key));
         }
     }
 
     protected void firePropertiesUpdated() {
-        Iterator i = this.listeners.iterator();
+        Iterator<PropertiesListener> i = this.listeners.iterator();
 
         while (i.hasNext()) {
-            PropertiesListener listener = (PropertiesListener) i.next();
+            PropertiesListener listener = i.next();
             listener.propertiesChanged(this.properties);
         }
     }
@@ -205,10 +205,10 @@ public class LayerSelectionAction extends AbstractAction
 
     protected String getDisabledLayersStringList() {
         StringBuilder buf = new StringBuilder();
-        Iterator i = disabledLayers.iterator();
+        Iterator<Node> i = disabledLayers.iterator();
 
         while (i.hasNext()) {
-            String layerName = SVGUtils.reverseID(((Node) i.next()).getAttributes()
+            String layerName = SVGUtils.reverseID(i.next().getAttributes()
                                                    .getNamedItem("id")
                                                    .getNodeValue());
             buf.append(layerName);
@@ -222,6 +222,7 @@ public class LayerSelectionAction extends AbstractAction
     }
 
     private class LayerTableModel extends AbstractTableModel {
+        @Override
         public String getColumnName(int column) {
             switch (column) {
             case 0:
@@ -244,7 +245,7 @@ public class LayerSelectionAction extends AbstractAction
         }
 
         public Object getValueAt(int rowIndex, int columnIndex) {
-            Node node = (Node) layers.get(rowIndex);
+            Node node = layers.get(rowIndex);
 
             Element el = (Element) node;
 
@@ -269,7 +270,8 @@ public class LayerSelectionAction extends AbstractAction
             return null;
         }
 
-        public Class getColumnClass(int columnIndex) {
+        @Override
+        public Class<?> getColumnClass(int columnIndex) {
             switch (columnIndex) {
             case 0:
                 return Boolean.class;
@@ -279,6 +281,7 @@ public class LayerSelectionAction extends AbstractAction
             }
         }
 
+        @Override
         public boolean isCellEditable(int rowIndex, int columnIndex) {
             if (columnIndex < 2) {
                 return true;
@@ -287,6 +290,7 @@ public class LayerSelectionAction extends AbstractAction
             return false;
         }
 
+        @Override
         public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
             switch (columnIndex) {
             case 0:
@@ -339,7 +343,7 @@ public class LayerSelectionAction extends AbstractAction
         }
 
         public void run() {
-            Node node = (Node) layers.get(nodeIndex);
+            Node node = layers.get(nodeIndex);
 
             if (visible) {
                 ((Element) node).setAttributeNS(null, "visibility", "visible");

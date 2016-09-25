@@ -34,14 +34,14 @@ import org.kabeja.processing.helper.PolylineQueue;
 
 public class PolylineConverter extends AbstractPostProcessor {
     public final static String PROPERTY_POINT_DISTANCE = "point.distance";
-    private List queues;
+    private List<PolylineQueue> queues;
     private double radius = DXFConstants.POINT_CONNECTION_RADIUS;
 
-    public void process(DXFDocument doc, Map context) throws ProcessorException {
-        Iterator i = doc.getDXFLayerIterator();
+    public void process(DXFDocument doc, Map<String, Object> context) throws ProcessorException {
+        Iterator<DXFLayer> i = doc.getDXFLayerIterator();
 
         while (i.hasNext()) {
-            DXFLayer layer = (DXFLayer) i.next();
+            DXFLayer layer = i.next();
 
             processLayer(layer);
         }
@@ -49,7 +49,8 @@ public class PolylineConverter extends AbstractPostProcessor {
         // TODO process the blocks too
     }
 
-    public void setProperties(Map properties) {
+    @Override
+    public void setProperties(Map<String, Object> properties) {
         if (properties.containsKey(PROPERTY_POINT_DISTANCE)) {
             this.radius = Double.parseDouble((String) properties.get(
                         PROPERTY_POINT_DISTANCE));
@@ -57,12 +58,12 @@ public class PolylineConverter extends AbstractPostProcessor {
     }
 
     protected void processLayer(DXFLayer layer) {
-        this.queues = new ArrayList();
+        this.queues = new ArrayList<PolylineQueue>();
 
         // check the lines
         if (layer.hasDXFEntities(DXFConstants.ENTITY_TYPE_LINE)) {
-            List l = layer.getDXFEntities(DXFConstants.ENTITY_TYPE_LINE);
-            Iterator i = l.iterator();
+            List<DXFEntity> l = layer.getDXFEntities(DXFConstants.ENTITY_TYPE_LINE);
+            Iterator<DXFEntity> i = l.iterator();
 
             while (i.hasNext()) {
                 DXFLine line = (DXFLine) i.next();
@@ -74,8 +75,8 @@ public class PolylineConverter extends AbstractPostProcessor {
 
         // check the polylines
         if (layer.hasDXFEntities(DXFConstants.ENTITY_TYPE_POLYLINE)) {
-            List l = layer.getDXFEntities(DXFConstants.ENTITY_TYPE_POLYLINE);
-            Iterator i = l.iterator();
+            List<DXFEntity> l = layer.getDXFEntities(DXFConstants.ENTITY_TYPE_POLYLINE);
+            Iterator<DXFEntity> i = l.iterator();
 
             while (i.hasNext()) {
                 DXFPolyline pl = (DXFPolyline) i.next();
@@ -93,8 +94,8 @@ public class PolylineConverter extends AbstractPostProcessor {
 
         // check the lwpolylines
         if (layer.hasDXFEntities(DXFConstants.ENTITY_TYPE_LWPOLYLINE)) {
-            List l = layer.getDXFEntities(DXFConstants.ENTITY_TYPE_LWPOLYLINE);
-            Iterator i = l.iterator();
+            List<DXFEntity> l = layer.getDXFEntities(DXFConstants.ENTITY_TYPE_LWPOLYLINE);
+            Iterator<DXFEntity> i = l.iterator();
 
             while (i.hasNext()) {
                 DXFLWPolyline pl = (DXFLWPolyline) i.next();
@@ -112,8 +113,8 @@ public class PolylineConverter extends AbstractPostProcessor {
 
         // check the arcs
         if (layer.hasDXFEntities(DXFConstants.ENTITY_TYPE_ARC)) {
-            List l = layer.getDXFEntities(DXFConstants.ENTITY_TYPE_ARC);
-            Iterator i = l.iterator();
+            List<DXFEntity> l = layer.getDXFEntities(DXFConstants.ENTITY_TYPE_ARC);
+            Iterator<DXFEntity> i = l.iterator();
 
             while (i.hasNext()) {
                 DXFArc arc = (DXFArc) i.next();
@@ -135,10 +136,10 @@ public class PolylineConverter extends AbstractPostProcessor {
     }
 
     protected void checkDXFEntity(DXFEntity e, Point start, Point end) {
-        Iterator i = this.queues.iterator();
+        Iterator<PolylineQueue> i = this.queues.iterator();
 
         while (i.hasNext()) {
-            PolylineQueue queue = (PolylineQueue) i.next();
+            PolylineQueue queue = i.next();
 
             if (queue.connectDXFEntity(e, start, end)) {
                 return;
@@ -152,10 +153,10 @@ public class PolylineConverter extends AbstractPostProcessor {
     }
 
     protected void cleanUp(DXFLayer layer) {
-        Iterator i = this.queues.iterator();
+        Iterator<PolylineQueue> i = this.queues.iterator();
 
         while (i.hasNext()) {
-            PolylineQueue queue = (PolylineQueue) i.next();
+            PolylineQueue queue = i.next();
 
             if (queue.size() > 1) {
                 queue.createDXFPolyline(layer);
@@ -173,14 +174,14 @@ public class PolylineConverter extends AbstractPostProcessor {
      */
     protected void connectPolylineQueues() {
         for (int i = 0; i < this.queues.size(); i++) {
-            PolylineQueue queue = (PolylineQueue) this.queues.get(i);
+            PolylineQueue queue = this.queues.get(i);
 
             boolean connected = false;
 
             //inner loop -> test all following polylines if
             //we can connect
             for (int x = i + 1; (x < this.queues.size()) && !connected; x++) {
-                if (((PolylineQueue) this.queues.get(x)).connect(queue)) {
+                if (this.queues.get(x).connect(queue)) {
                     this.queues.remove(i);
                     i--;
                     connected = true;

@@ -24,10 +24,10 @@ import java.util.Map;
  *
  */
 public class SAXSerializerConfig {
-    private Map properties = new HashMap();
+    private Map<String, Object> properties = new HashMap<String, Object>();
     private String saxSerializerName;
 
-    public Map getProperties() {
+    public Map<String, Object> getProperties() {
         return this.properties;
     }
 

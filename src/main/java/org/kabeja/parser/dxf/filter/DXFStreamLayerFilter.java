@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.parser.DXFValue;
 import org.kabeja.parser.ParseException;
 
@@ -31,13 +31,14 @@ public class DXFStreamLayerFilter extends DXFStreamEntityFilter {
     public final static String PROPERTY_LAYERS_EXCLUDE = "layers.exclude";
     public final static String PROPERTY_LAYERS_INCLUDE = "layers.include";
     public final static int LAYER_NAME = 8;
-    protected List parseValues = new ArrayList();
-    protected Set exclude = new HashSet();
-    protected Set include = new HashSet();
+    protected List<ParseValue> parseValues = new ArrayList<ParseValue>();
+    protected Set<String> exclude = new HashSet<String>();
+    protected Set<String> include = new HashSet<String>();
     protected String layer = StringUtils.EMPTY;
     boolean findLayer = true;
 
-    public void setProperties(Map properties) {
+    @Override
+    public void setProperties(Map<String, Object> properties) {
         if (properties.containsKey(PROPERTY_LAYERS_INCLUDE)) {
             this.include.clear();
 
@@ -63,6 +64,7 @@ public class DXFStreamLayerFilter extends DXFStreamEntityFilter {
         }
     }
 
+    @Override
     protected void endEntity() throws ParseException {
         if (include.contains(this.layer)) {
             this.outputEntity();
@@ -74,16 +76,18 @@ public class DXFStreamLayerFilter extends DXFStreamEntityFilter {
     protected void outputEntity() throws ParseException {
         // give the complete entity to the next handler
         for (int i = 0; i < this.parseValues.size(); i++) {
-            ParseValue v = (ParseValue) this.parseValues.get(i);
+            ParseValue v = this.parseValues.get(i);
             this.handler.parseGroup(v.getGroupCode(), v.getDXFValue());
         }
     }
 
+    @Override
     protected void startEntity(String type) throws ParseException {
         this.parseValues.clear();
         this.findLayer = true;
     }
 
+    @Override
     protected void parseEntity(int groupCode, DXFValue value)
         throws ParseException {
         if (this.findLayer && (groupCode == LAYER_NAME)) {

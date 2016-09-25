@@ -54,6 +54,7 @@ import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 import javax.swing.text.BadLocationException;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.dxf.DXFDocument;
 import org.kabeja.processing.AbstractPostProcessor;
 import org.kabeja.processing.ProcessorException;
@@ -69,7 +70,6 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 import de.miethxml.toolkit.ui.UIUtils;
-import org.apache.commons.lang.StringUtils;
 
 
 public class JavaScriptShell extends AbstractPostProcessor
@@ -77,15 +77,15 @@ public class JavaScriptShell extends AbstractPostProcessor
     protected final static String COMMAND_PREFIX = "js>";
     protected JFrame frame;
     protected JTextArea textArea;
-    protected HashMap actions = new HashMap();
-    protected ArrayList history = new ArrayList();
+    protected Map<String, Action> actions = new HashMap<String, Action>();
+    protected ArrayList<String> history = new ArrayList<String>();
     protected int historyPos = 0;
     protected ScriptWorker worker;
     protected String title = "JSShell";
-    protected ArrayList listeners = new ArrayList();
+    protected ArrayList<DXFDocumentChangeListener> listeners = new ArrayList<DXFDocumentChangeListener>();
     protected DXFDocument doc;
 
-    public void process(DXFDocument doc, Map context) throws ProcessorException {
+    public void process(DXFDocument doc, Map<String, Object> context) throws ProcessorException {
         worker = new ScriptWorker(doc);
         worker.start();
         this.init();
@@ -100,7 +100,8 @@ public class JavaScriptShell extends AbstractPostProcessor
         }
     }
 
-    public void setProperties(Map properties) {
+    @Override
+    public void setProperties(Map<String, Object> properties) {
     }
 
     protected void init() {
@@ -109,6 +110,7 @@ public class JavaScriptShell extends AbstractPostProcessor
         frame.getContentPane().setLayout(new BorderLayout());
 
         frame.addWindowListener(new WindowAdapter() {
+                @Override
                 public void windowClosing(WindowEvent e) {
                     // capture the second close-event and ignore
                     dispose();
@@ -118,7 +120,7 @@ public class JavaScriptShell extends AbstractPostProcessor
         frame.getContentPane().add(getView(), BorderLayout.CENTER);
 
         JPanel p = new JPanel(new FlowLayout(FlowLayout.RIGHT, 2, 2));
-        JButton button = new JButton((Action) actions.get("close"));
+        JButton button = new JButton(actions.get("close"));
         p.add(button);
         frame.getContentPane().add(p, BorderLayout.SOUTH);
 
@@ -131,20 +133,20 @@ public class JavaScriptShell extends AbstractPostProcessor
     protected JToolBar createToolbar() {
         JToolBar toolbar = new JToolBar();
 
-        JButton button = new JButton((Action) actions.get("copy"));
+        JButton button = new JButton(actions.get("copy"));
         button.setToolTipText(button.getText());
         button.setText(StringUtils.EMPTY);
         toolbar.add(button);
-        button = new JButton((Action) actions.get("paste"));
+        button = new JButton(actions.get("paste"));
         button.setToolTipText(button.getText());
         button.setText(StringUtils.EMPTY);
         toolbar.add(button);
-        button = new JButton((Action) actions.get("cut"));
+        button = new JButton(actions.get("cut"));
         button.setToolTipText(button.getText());
         button.setText(StringUtils.EMPTY);
         toolbar.add(button);
 
-        button = new JButton((Action) actions.get("reload"));
+        button = new JButton(actions.get("reload"));
         button.setToolTipText(button.getText());
         button.setText(StringUtils.EMPTY);
         toolbar.add(button);
@@ -156,14 +158,14 @@ public class JavaScriptShell extends AbstractPostProcessor
         JMenuBar menubar = new JMenuBar();
         JMenu menu = new JMenu("File");
 
-        JMenuItem item = new JMenuItem((Action) actions.get("open"));
+        JMenuItem item = new JMenuItem(actions.get("open"));
         item.setToolTipText(item.getText());
 
         menu.add(item);
-        item = new JMenuItem((Action) actions.get("save"));
+        item = new JMenuItem(actions.get("save"));
         menu.add(item);
         menu.add(new JSeparator());
-        item = new JMenuItem((Action) actions.get("close"));
+        item = new JMenuItem(actions.get("close"));
         menu.add(item);
 
         menubar.add(menu);
@@ -225,10 +227,10 @@ public class JavaScriptShell extends AbstractPostProcessor
                                 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
                                             new FileOutputStream(
                                                 fs.getSelectedFile())));
-                                Iterator i = history.iterator();
+                                Iterator<String> i = history.iterator();
 
                                 while (i.hasNext()) {
-                                    out.write((String) i.next());
+                                    out.write(i.next());
                                     out.newLine();
                                 }
 
@@ -344,7 +346,7 @@ public class JavaScriptShell extends AbstractPostProcessor
     }
 
     public void showDXFDocument(DXFDocument doc) throws UIException {
-    	
+
         this.doc = doc;
         worker = new ScriptWorker(doc);
         worker.start();
@@ -387,16 +389,18 @@ public class JavaScriptShell extends AbstractPostProcessor
 
     protected void fireDXFDocumentChangeEvent() {
         if (this.doc != null) {
-            Iterator i = ((ArrayList) this.listeners.clone()).iterator();
+            @SuppressWarnings("unchecked")
+            Iterator<DXFDocumentChangeListener> i = ((ArrayList<DXFDocumentChangeListener>) this.listeners.clone()).iterator();
 
             while (i.hasNext()) {
-                DXFDocumentChangeListener l = (DXFDocumentChangeListener) i.next();
+                DXFDocumentChangeListener l = i.next();
                 l.changed(this.doc);
             }
         }
     }
 
     public class CommandKeyListener extends KeyAdapter {
+        @Override
         public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                 evalString(getLineAtCaretPosition());
@@ -424,7 +428,7 @@ public class JavaScriptShell extends AbstractPostProcessor
 
                     int start = getStartOffsetAtCaretPosition() +
                         COMMAND_PREFIX.length();
-                    textArea.replaceRange((String) history.get(historyPos),
+                    textArea.replaceRange(history.get(historyPos),
                         start, textArea.getDocument().getLength());
                     historyPos--;
                 }
@@ -438,7 +442,7 @@ public class JavaScriptShell extends AbstractPostProcessor
 
                     int start = getStartOffsetAtCaretPosition() +
                         COMMAND_PREFIX.length();
-                    textArea.replaceRange((String) history.get(historyPos),
+                    textArea.replaceRange(history.get(historyPos),
                         start, textArea.getDocument().getLength());
                     historyPos++;
                 }
@@ -511,6 +515,7 @@ public class JavaScriptShell extends AbstractPostProcessor
             newShellLine();
         }
 
+        @Override
         public void run() {
             init();
 
@@ -569,6 +574,7 @@ public class JavaScriptShell extends AbstractPostProcessor
     protected class JTextAreaPrintWriter extends OutputStream {
         StringBuilder buf = new StringBuilder();
 
+        @Override
         public void write(int b) throws IOException {
             if (b == '\r') {
                 return;

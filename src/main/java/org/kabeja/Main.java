@@ -36,8 +36,8 @@ import org.kabeja.ui.xml.SAXServiceContainerBuilder;
 
 /**
  * @author <a href="mailto:simon.mieth@gmx.de">Simon Mieth </a>
- * 
- * 
+ *
+ *
  */
 public class Main {
 	private String encoding = DXFParser.DEFAULT_ENCODING;
@@ -198,11 +198,11 @@ public class Main {
 
 			if (this.process) {
 				if (this.directoryMode) {
-					this.processorManager.process(doc, new HashMap(),
+					this.processorManager.process(doc, new HashMap<String, Object>(),
 							this.pipeline, f.getAbsolutePath());
 				} else {
 					// user set name
-					this.processorManager.process(doc, new HashMap(),
+					this.processorManager.process(doc, new HashMap<String, Object>(),
 							this.pipeline, new FileOutputStream(output));
 				}
 			}
@@ -246,12 +246,12 @@ public class Main {
 	}
 
 	public void printPipelines() {
-		Iterator i = this.processorManager.getProcessPipelines().keySet()
+		Iterator<String> i = this.processorManager.getProcessPipelines().keySet()
 				.iterator();
 		System.out.println("\n Available pipelines:\n----------\n");
 
 		while (i.hasNext()) {
-			String pipeline = (String) i.next();
+			String pipeline = i.next();
 			ProcessPipeline pp = this.processorManager
 					.getProcessPipeline(pipeline);
 			System.out.print(" " + pipeline);

@@ -32,7 +32,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 
 public class SVGRayGenerator extends AbstractSVGSAXGenerator {
-    public void toSAX(ContentHandler handler, Map svgContext, DXFEntity entity,
+    public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         DXFRay ray = (DXFRay) entity;
         Bounds b = (Bounds) svgContext.get(SVGContext.DRAFT_BOUNDS);

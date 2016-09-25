@@ -31,17 +31,17 @@ public class DXFSplineConverter {
         p.setDXFDocument(spline.getDXFDocument());
 
         if ((spline.getDegree() > 0) && (spline.getKnots().length > 0)) {
-            Iterator pi = new NURBSFixedNTELSPointIterator(toNurbs(spline), 30);
+            Iterator<Point> pi = new NURBSFixedNTELSPointIterator(toNurbs(spline), 30);
 
             while (pi.hasNext()) {
-                p.addVertex(new DXFVertex((Point) pi.next()));
+                p.addVertex(new DXFVertex(pi.next()));
             }
         } else {
             // the curve is the controlpoint polygon
-            Iterator i = spline.getSplinePointIterator();
+            Iterator<SplinePoint> i = spline.getSplinePointIterator();
 
             while (i.hasNext()) {
-                SplinePoint sp = (SplinePoint) i.next();
+                SplinePoint sp = i.next();
 
                 if (sp.isControlPoint()) {
                     p.addVertex(new DXFVertex(sp));
@@ -57,18 +57,18 @@ public class DXFSplineConverter {
     }
 
     public static NURBS toNurbs(DXFSpline spline) {
-        Iterator i = spline.getSplinePointIterator();
-        ArrayList list = new ArrayList();
+        Iterator<SplinePoint> i = spline.getSplinePointIterator();
+        ArrayList<SplinePoint> list = new ArrayList<SplinePoint>();
 
         while (i.hasNext()) {
-            SplinePoint sp = (SplinePoint) i.next();
+            SplinePoint sp = i.next();
 
             if (sp.isControlPoint()) {
-                list.add((Point) sp);
+                list.add(sp);
             }
         }
 
-        NURBS n = new NURBS((Point[]) list.toArray(new Point[list.size()]),
+        NURBS n = new NURBS(list.toArray(new Point[list.size()]),
                 spline.getKnots(), spline.getWeights(), spline.getDegree());
         n.setClosed(spline.isClosed());
 

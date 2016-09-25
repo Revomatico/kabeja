@@ -31,7 +31,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 
 public class SVGDimensionGenerator extends AbstractSVGSAXGenerator {
-    public void toSAX(ContentHandler handler, Map svgContext, DXFEntity entity,
+    public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         DXFDimension dimension = (DXFDimension) entity;
 
@@ -62,7 +62,7 @@ public class SVGDimensionGenerator extends AbstractSVGSAXGenerator {
 
             super.setCommonAttributes(attr, svgContext, dimension);
 
-   
+
             if (svgContext.containsKey(SVGContext.LAYER_STROKE_WIDTH)) {
                 Double lw = (Double) svgContext.get(SVGContext.LAYER_STROKE_WIDTH);
                 String value = SVGUtils.formatNumberAttribute(lw.doubleValue());
@@ -74,7 +74,7 @@ public class SVGDimensionGenerator extends AbstractSVGSAXGenerator {
                     attr.setValue(index, value);
                 }
             }
-            
+
             SVGUtils.startElement(handler, SVGConstants.SVG_GROUP, attr);
             attr = new AttributesImpl();
 

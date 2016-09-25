@@ -16,8 +16,8 @@ limitations under the License.
 package org.kabeja.svg.generators;
 
 import java.util.Map;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.dxf.DXFStyle;
 import org.kabeja.svg.SVGConstants;
 import org.kabeja.svg.SVGUtils;
@@ -32,10 +32,10 @@ public class SVGStyleGenerator {
      *
      * @see de.miethxml.kabeja.svg.SVGGenerator#toSAX(org.xml.sax.ContentHandler)
      */
-    public static void toSAX(ContentHandler handler, Map svgContext,
-            DXFStyle style) throws SAXException {        
+    public static void toSAX(ContentHandler handler, Map<String, Object> svgContext,
+            DXFStyle style) throws SAXException {
         FontManager manager = FontManager.getInstance();
-        String fontID = manager.getFontDescriptionFromStyle(style);            
+        String fontID = manager.getFontDescriptionFromStyle(style);
 
         if (fontID != null) {
             generateSAXFontDescription(handler, fontID);

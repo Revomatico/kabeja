@@ -16,8 +16,8 @@
 package org.kabeja.svg.generators;
 
 import java.util.Map;
-import org.kabeja.dxf.DXFAttdef;
 
+import org.kabeja.dxf.DXFAttdef;
 import org.kabeja.dxf.DXFEntity;
 import org.kabeja.math.TransformContext;
 import org.xml.sax.ContentHandler;
@@ -31,7 +31,7 @@ public class SVGAttdefGenerator extends SVGTextGenerator {
      */
 
     @Override
-    public void toSAX(ContentHandler handler, Map svgContext, DXFEntity entity,
+    public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
             TransformContext transformContext) throws SAXException {
         DXFAttdef attrib = (DXFAttdef) entity;
 

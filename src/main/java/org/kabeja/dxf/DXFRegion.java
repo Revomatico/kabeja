@@ -24,13 +24,14 @@ import java.util.List;
  *
  */
 public class DXFRegion extends DXFEntity {
-    protected List acisData = new ArrayList();
+    protected List<String> acisData = new ArrayList<String>();
 
     /**
      *
      *
      * @return always invalid bounds
      */
+    @Override
     public Bounds getBounds() {
         Bounds bounds = new Bounds();
         bounds.setValid(false);
@@ -43,6 +44,7 @@ public class DXFRegion extends DXFEntity {
      *
      * @see org.kabeja.dxf.DXFEntity#getType()
      */
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_REGION;
     }
@@ -52,7 +54,7 @@ public class DXFRegion extends DXFEntity {
      *
      * @return the list
      */
-    public List getACISDATA() {
+    public List<String> getACISDATA() {
         return acisData;
     }
 
@@ -65,6 +67,7 @@ public class DXFRegion extends DXFEntity {
      *
      * @return always 0
      */
+    @Override
     public double getLength() {
         return 0;
     }

@@ -27,11 +27,12 @@ public class SAXSerializersTreeNode extends AbstractProcessingTreeNode {
         super(parent, LABEL);
     }
 
+    @Override
     protected void initializeChildren() {
-        Iterator i = this.manager.getSAXSerializers().keySet().iterator();
+        Iterator<String> i = this.manager.getSAXSerializers().keySet().iterator();
 
         while (i.hasNext()) {
-            String key = (String) i.next();
+            String key = i.next();
             SAXSerializerTreeNode node = new SAXSerializerTreeNode(this,
                     this.manager.getSAXSerializer(key), key);
             this.addChild(node);
@@ -39,12 +40,10 @@ public class SAXSerializersTreeNode extends AbstractProcessingTreeNode {
     }
 
     public boolean getAllowsChildren() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     public boolean isLeaf() {
-        // TODO Auto-generated method stub
         return false;
     }
 }

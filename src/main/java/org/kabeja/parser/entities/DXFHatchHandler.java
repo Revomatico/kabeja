@@ -64,9 +64,8 @@ public class DXFHatchHandler extends AbstractEntityHandler {
     public static final int GROUPCODE_SEED_POINTS_COUNT = 98;
     public static final int GROUPCODE_SOLID_FILL_FLAG = 70;
     protected DXFEntityHandler boundaryHandler;
-    protected Hashtable boundaryHandlers = new Hashtable();
+    protected Hashtable<String, DXFEntityHandler> boundaryHandlers = new Hashtable<String, DXFEntityHandler>();
     protected int count;
-    private boolean follow = false;
     private DXFHatch hatch;
     protected HatchLineFamily linePattern = new HatchLineFamily();
     protected HatchBoundaryLoop loop;
@@ -117,6 +116,7 @@ public class DXFHatchHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.DXFEntityHandler#getDXFEntityName()
      */
+    @Override
     public String getDXFEntityName() {
         return DXFConstants.ENTITY_TYPE_HATCH;
     }
@@ -183,25 +183,25 @@ public class DXFHatchHandler extends AbstractEntityHandler {
 
                 switch (value.getIntegerValue()) {
                 case 1:
-                    boundaryHandler = (DXFEntityHandler) boundaryHandlers.get(DXFConstants.ENTITY_TYPE_LINE);
+                    boundaryHandler = boundaryHandlers.get(DXFConstants.ENTITY_TYPE_LINE);
                     boundaryHandler.startDXFEntity();
 
                     break;
 
                 case 2:
-                    boundaryHandler = (DXFEntityHandler) boundaryHandlers.get(DXFConstants.ENTITY_TYPE_ARC);
+                    boundaryHandler = boundaryHandlers.get(DXFConstants.ENTITY_TYPE_ARC);
                     boundaryHandler.startDXFEntity();
 
                     break;
 
                 case 3:
-                    boundaryHandler = (DXFEntityHandler) boundaryHandlers.get(DXFConstants.ENTITY_TYPE_ELLIPSE);
+                    boundaryHandler = boundaryHandlers.get(DXFConstants.ENTITY_TYPE_ELLIPSE);
                     boundaryHandler.startDXFEntity();
 
                     break;
 
                 case 4:
-                    boundaryHandler = (DXFEntityHandler) boundaryHandlers.get(DXFConstants.ENTITY_TYPE_SPLINE);
+                    boundaryHandler = boundaryHandlers.get(DXFConstants.ENTITY_TYPE_SPLINE);
                     boundaryHandler.startDXFEntity();
 
                     break;
@@ -382,13 +382,14 @@ public class DXFHatchHandler extends AbstractEntityHandler {
      *
      * @see org.kabeja.parser.Handler#setDXFDocument(org.kabeja.dxf.DXFDocument)
      */
+    @Override
     public void setDXFDocument(DXFDocument doc) {
         super.setDXFDocument(doc);
 
-        Iterator i = this.boundaryHandlers.values().iterator();
+        Iterator<DXFEntityHandler> i = this.boundaryHandlers.values().iterator();
 
         while (i.hasNext()) {
-            DXFEntityHandler handler = (DXFEntityHandler) i.next();
+            DXFEntityHandler handler = i.next();
             handler.setDXFDocument(doc);
         }
     }

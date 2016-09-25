@@ -5,8 +5,8 @@
 package org.kabeja.dxf;
 
 import java.util.ArrayList;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.dxf.helpers.Point;
 import org.kabeja.dxf.objects.DXFImageDefObject;
 
@@ -25,7 +25,7 @@ public class DXFImage extends DXFEntity {
     protected double brightness;
     protected double contrast;
     protected double fade;
-    protected ArrayList clipBoundary = new ArrayList();
+    protected ArrayList<Point> clipBoundary = new ArrayList<Point>();
     protected boolean clipping = false;
     protected boolean rectangularClipping = false;
     protected boolean polygonalClipping = false;
@@ -35,6 +35,7 @@ public class DXFImage extends DXFEntity {
      *
      * @see de.miethxml.kabeja.dxf.DXFEntity#getBounds()
      */
+    @Override
     public Bounds getBounds() {
         Bounds b = new Bounds();
         DXFImageDefObject imageDef = (DXFImageDefObject) this.doc.getDXFObjectByID(this.getImageDefObjectID());
@@ -55,6 +56,7 @@ public class DXFImage extends DXFEntity {
      *
      * @see de.miethxml.kabeja.dxf.DXFEntity#getType()
      */
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_IMAGE;
     }
@@ -198,7 +200,7 @@ public class DXFImage extends DXFEntity {
     /**
      * @return Returns the clipBoundary.
      */
-    public ArrayList getClipBoundary() {
+    public ArrayList<Point> getClipBoundary() {
         return clipBoundary;
     }
 
@@ -238,6 +240,7 @@ public class DXFImage extends DXFEntity {
         this.polygonalClipping = !rectangularClipping;
     }
 
+    @Override
     public double getLength() {
         return 0;
     }

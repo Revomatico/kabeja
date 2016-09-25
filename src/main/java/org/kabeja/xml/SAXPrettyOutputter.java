@@ -21,10 +21,11 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPOutputStream;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
@@ -57,8 +58,8 @@ public class SAXPrettyOutputter extends AbstractSAXSerializer
     private String dtd;
     private int indent = 0;
     private boolean parent = false;
-    private ArrayList textContentList = new ArrayList();
-    protected HashMap rootxmlns = new HashMap();
+    private List<Boolean> textContentList = new ArrayList<Boolean>();
+    protected Map<String, String> rootxmlns = new HashMap<String, String>();
     protected boolean gzip = false;
 
     public SAXPrettyOutputter(OutputStream output, String encoding) {
@@ -116,7 +117,7 @@ public class SAXPrettyOutputter extends AbstractSAXSerializer
                 this.out.write("/>");
             } else {
                 // check for textNodes in this context
-                Boolean b = (Boolean) textContentList.remove(textContentList.size() -
+                Boolean b = textContentList.remove(textContentList.size() -
                         1);
 
                 if (b.booleanValue()) {
@@ -193,11 +194,11 @@ public class SAXPrettyOutputter extends AbstractSAXSerializer
             int attrCount = atts.getLength();
 
             for (int i = 0; i < attrCount; i++) {
-                //we need a white space between the 
+                //we need a white space between the
                 //attributes
                 this.indentOutput(1);
 
-                String uri = atts.getURI(i);
+                //String uri = atts.getURI(i);
                 String qname = atts.getQName(i);
 
                 // if (uri.length() > 0) {
@@ -329,7 +330,8 @@ public class SAXPrettyOutputter extends AbstractSAXSerializer
      *
      * @see org.kabeja.xml.SAXSerializer#setProperties(java.util.Map)
      */
-    public void setProperties(Map properties) {
+    @Override
+    public void setProperties(Map<String, Object> properties) {
         this.properties = properties;
 
         if (properties.containsKey(PROPERTY_ENCODING)) {

@@ -40,7 +40,7 @@ public class DXFSAXDocumentFactory extends SAXDocumentFactory {
         super(SVGDOMImplementation.getDOMImplementation(), null);
     }
 
-    public SVGDocument createDocument(DXFDocument doc, Map properties)
+    public SVGDocument createDocument(DXFDocument doc, Map<String, Object> properties)
         throws SAXException {
         String version = System.getProperty("java.version").substring(0, 3);
 
@@ -64,6 +64,7 @@ public class DXFSAXDocumentFactory extends SAXDocumentFactory {
         return (SVGDocument) res;
     }
 
+    @Override
     public void startDocument() throws SAXException {
         super.startDocument();
         // fix for java 1.5 bundled xerces

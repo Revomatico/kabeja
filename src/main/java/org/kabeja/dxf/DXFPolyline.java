@@ -19,7 +19,7 @@ import org.kabeja.math.MathUtils;
  */
 public class DXFPolyline extends DXFEntity {
     protected static final double QUARTER_CIRCLE_ANGLE = Math.tan(0.39269908169872414D);
-    protected ArrayList vertices = new ArrayList();
+    protected ArrayList<DXFVertex> vertices = new ArrayList<DXFVertex>();
     protected double startWidth = 0.0;
     protected double endWidth = 0.0;
     protected boolean constantWidth = true;
@@ -40,21 +40,22 @@ public class DXFPolyline extends DXFEntity {
      *
      * @see org.dxf2svg.dxf.DXFEntity#updateViewPort()
      */
+    @Override
     public Bounds getBounds() {
         Bounds bounds = new Bounds();
 
-        Iterator i = vertices.iterator();
+        Iterator<DXFVertex> i = vertices.iterator();
 
         if (i.hasNext()) {
             DXFVertex last;
             DXFVertex first;
             DXFVertex v = null;
 
-            last = first = (DXFVertex) i.next();
+            last = first = i.next();
             bounds.addToBounds(last.getPoint());
 
             while (i.hasNext()) {
-                v = (DXFVertex) i.next();
+                v = i.next();
                 addToBounds(last, v, bounds);
                 last = v;
             }
@@ -81,7 +82,7 @@ public class DXFPolyline extends DXFEntity {
         return this.vertices.size();
     }
 
-    public Iterator getVertexIterator() {
+    public Iterator<DXFVertex> getVertexIterator() {
         return this.vertices.iterator();
     }
 
@@ -89,10 +90,10 @@ public class DXFPolyline extends DXFEntity {
         // remove and check the constantwidth
         constantWidth = true;
 
-        Iterator i = vertices.iterator();
+        Iterator<DXFVertex> i = vertices.iterator();
 
         while (i.hasNext()) {
-            DXFVertex v = (DXFVertex) i.next();
+            DXFVertex v = i.next();
 
             if (v == vertex) {
                 i.remove();
@@ -106,7 +107,7 @@ public class DXFPolyline extends DXFEntity {
         constantWidth = true;
 
         for (int i = 0; i < vertices.size(); i++) {
-            DXFVertex v = (DXFVertex) vertices.get(i);
+            DXFVertex v = vertices.get(i);
 
             if (index == i) {
                 vertices.remove(i);
@@ -117,7 +118,7 @@ public class DXFPolyline extends DXFEntity {
     }
 
     public DXFVertex getVertex(int i) {
-        return (DXFVertex) vertices.get(i);
+        return vertices.get(i);
     }
 
     /**
@@ -154,6 +155,7 @@ public class DXFPolyline extends DXFEntity {
      *
      * @see de.miethxml.kabeja.dxf.DXFEntity#getType()
      */
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_POLYLINE;
     }
@@ -238,17 +240,17 @@ public class DXFPolyline extends DXFEntity {
     }
 
     public boolean isConstantWidth() {
-        //TODO review to see if the 
+        //TODO review to see if the
         //property is always set correct
         if (!this.constantWidth) {
             return false;
         } else {
             this.constantWidth = true;
 
-            Iterator i = vertices.iterator();
+            Iterator<DXFVertex> i = vertices.iterator();
 
             while (i.hasNext()) {
-                DXFVertex vertex = (DXFVertex) i.next();
+                DXFVertex vertex = i.next();
 
                 if (!vertex.isConstantWidth()) {
                     this.constantWidth = false;
@@ -419,11 +421,11 @@ public class DXFPolyline extends DXFEntity {
     }
 
     public DXFVertex getPolyFaceMeshVertex(int index) {
-        Iterator i = this.vertices.iterator();
+        Iterator<DXFVertex> i = this.vertices.iterator();
         int count = 1;
 
         while (i.hasNext()) {
-            DXFVertex v = (DXFVertex) i.next();
+            DXFVertex v = i.next();
 
             if (v.isPolyFaceMeshVertex()) {
                 if (count == index) {
@@ -483,6 +485,7 @@ public class DXFPolyline extends DXFEntity {
         return (this.surefaceType == 8) && ((this.flags & 4) == 4);
     }
 
+    @Override
     public double getLength() {
         double length = 0.0;
 
@@ -495,12 +498,12 @@ public class DXFPolyline extends DXFEntity {
             return getMeshLength();
         } else {
             // a normal polyline with or without bulges
-            Iterator i = this.vertices.iterator();
+            Iterator<DXFVertex> i = this.vertices.iterator();
             DXFVertex first;
-            DXFVertex last = first = (DXFVertex) i.next();
+            DXFVertex last = first = i.next();
 
             while (i.hasNext()) {
-                DXFVertex v = (DXFVertex) i.next();
+                DXFVertex v = i.next();
                 length += this.getSegmentLength(last, v);
                 last = v;
             }
@@ -532,12 +535,12 @@ public class DXFPolyline extends DXFEntity {
         double length = 0.0;
 
         // use the approximation
-        Iterator i = this.vertices.iterator();
+        Iterator<DXFVertex> i = this.vertices.iterator();
         DXFVertex first;
         DXFVertex last = first = null;
 
         while (i.hasNext()) {
-            DXFVertex v = (DXFVertex) i.next();
+            DXFVertex v = i.next();
 
             if (v.is2DSplineApproximationVertex()) {
                 if (first == null) {
@@ -558,10 +561,10 @@ public class DXFPolyline extends DXFEntity {
 
     protected double getPolyfaceLength() {
         double length = 0.0;
-        Iterator i = this.vertices.iterator();
+        Iterator<DXFVertex> i = this.vertices.iterator();
 
         while (i.hasNext()) {
-            DXFVertex v = (DXFVertex) i.next();
+            DXFVertex v = i.next();
 
             if (v.isFaceRecord()) {
                 DXFVertex v1 = getPolyFaceMeshVertex(v.getPolyFaceMeshVertex0());
@@ -602,12 +605,12 @@ public class DXFPolyline extends DXFEntity {
 
         if (isSimpleMesh()) {
             DXFVertex[][] points = new DXFVertex[this.rows][this.columns];
-            Iterator it = this.vertices.iterator();
+            Iterator<DXFVertex> it = this.vertices.iterator();
 
             // create a line for each row
             for (int i = 0; i < this.rows; i++) {
                 for (int x = 0; x < this.columns; x++) {
-                    DXFVertex v = (DXFVertex) it.next();
+                    DXFVertex v = it.next();
                     points[i][x] = v;
 
                     if (x > 0) {
@@ -638,23 +641,23 @@ public class DXFPolyline extends DXFEntity {
             }
         } else {
             DXFVertex[][] points = new DXFVertex[this.surefaceDensityRows][this.surefaceDensityColumns];
-            Iterator vi = this.vertices.iterator();
-            List appVertices = new ArrayList();
+            Iterator<DXFVertex> vi = this.vertices.iterator();
+            List<DXFVertex> appVertices = new ArrayList<DXFVertex>();
 
             while (vi.hasNext()) {
-                DXFVertex v = (DXFVertex) vi.next();
+                DXFVertex v = vi.next();
 
                 if (v.isMeshApproximationVertex()) {
                     appVertices.add(v);
                 }
             }
 
-            Iterator it = appVertices.iterator();
+            Iterator<DXFVertex> it = appVertices.iterator();
 
             // create a line for each row
             for (int i = 0; i < this.surefaceDensityRows; i++) {
                 for (int x = 0; x < this.surefaceDensityColumns; x++) {
-                    DXFVertex v = (DXFVertex) it.next();
+                    DXFVertex v = it.next();
                     points[i][x] = v;
 
                     if (x > 0) {

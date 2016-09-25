@@ -35,7 +35,7 @@ public class SAXXMLSerializer extends XMLFilterImpl implements SAXSerializer {
     public static final String MIME_TYPE = "text/xml";
     public static final String SUFFIX = "xml";
     private OutputStream out;
-    private Map properties;
+    private Map<String, Object> properties;
 
     /*
      * (non-Javadoc)
@@ -71,7 +71,7 @@ public class SAXXMLSerializer extends XMLFilterImpl implements SAXSerializer {
      *
      * @see org.kabeja.xml.SAXSerializer#setProperties(java.util.Map)
      */
-    public void setProperties(Map properties) {
+    public void setProperties(Map<String, Object> properties) {
         this.properties = properties;
     }
 
@@ -80,6 +80,7 @@ public class SAXXMLSerializer extends XMLFilterImpl implements SAXSerializer {
      *
      * @see org.xml.sax.ContentHandler#startDocument()
      */
+    @Override
     public void startDocument() throws SAXException {
         try {
             SAXTransformerFactory factory = (SAXTransformerFactory) SAXTransformerFactory.newInstance();
@@ -95,7 +96,7 @@ public class SAXXMLSerializer extends XMLFilterImpl implements SAXSerializer {
         super.startDocument();
     }
 
-    public Map getProperties() {
+    public Map<String, Object> getProperties() {
         return this.properties;
     }
 }

@@ -18,8 +18,8 @@ package org.kabeja.dxf;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.dxf.helpers.Point;
 import org.kabeja.dxf.helpers.Vector;
 import org.kabeja.math.MathUtils;
@@ -64,7 +64,7 @@ public class DXFViewport extends DXFEntity {
     private boolean grid;
     private boolean active = false;
     private int renderMode;
-    private Set frozenLayerSet = new HashSet();
+    private Set<String> frozenLayerSet = new HashSet<String>();
 
     /**
      * @return Returns the backClippingPlane.
@@ -344,6 +344,7 @@ public class DXFViewport extends DXFEntity {
         this.active = active;
     }
 
+    @Override
     public Bounds getBounds() {
         Bounds bounds = new Bounds();
 
@@ -357,11 +358,13 @@ public class DXFViewport extends DXFEntity {
         return bounds;
     }
 
+    @Override
     public double getLength() {
         // TODO Auto-generated method stub
         return 0;
     }
 
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_VIEWPORT;
     }
@@ -498,7 +501,7 @@ public class DXFViewport extends DXFEntity {
         return this.frozenLayerSet.contains(layerName);
     }
 
-    public Iterator getFrozenLayerIterator() {
+    public Iterator<String> getFrozenLayerIterator() {
         return this.frozenLayerSet.iterator();
     }
 
@@ -524,7 +527,6 @@ public class DXFViewport extends DXFEntity {
         // the half of width and height
         double modelH = (this.height / this.getZoomXPFactor()) / 2;
         double modelW = (f * modelH);
-        double wf = modelW / modelH;
         Vector directionX = null;
 
         if ((this.viewDirectionVector.getX() == 0.0) &&

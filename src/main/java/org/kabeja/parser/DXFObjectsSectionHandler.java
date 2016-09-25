@@ -28,7 +28,7 @@ public class DXFObjectsSectionHandler extends AbstractSectionHandler
     implements HandlerManager {
     private static String SECTION_KEY = "OBJECTS";
     public static final int OBJECT_START = 0;
-    private HashMap handlers = new HashMap();
+    private HashMap<String, DXFObjectHandler> handlers = new HashMap<String, DXFObjectHandler>();
     private DXFObjectHandler handler;
     private boolean parseObject = false;
 
@@ -62,7 +62,7 @@ public class DXFObjectsSectionHandler extends AbstractSectionHandler
 
             if (this.handlers.containsKey(value.getValue())) {
                 this.parseObject = true;
-                this.handler = (DXFObjectHandler) handlers.get(value.getValue());
+                this.handler = handlers.get(value.getValue());
                 this.handler.setDXFDocument(this.doc);
                 this.handler.startObject();
             } else {

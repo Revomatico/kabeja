@@ -27,6 +27,8 @@ import java.util.Map;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 
+import org.apache.batik.anim.dom.SVGDOMImplementation;
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.processing.BoundsFilter;
 import org.kabeja.svg.SVGConstants;
 import org.kabeja.svg.SVGUtils;
@@ -42,9 +44,6 @@ import org.w3c.dom.svg.SVGMatrix;
 
 import de.miethxml.toolkit.ui.UIUtils;
 
-import org.apache.batik.anim.dom.SVGDOMImplementation;
-import org.apache.commons.lang.StringUtils;
-
 
 public class SelectionAction extends AbstractAction implements SVGDocumentAction,
     EventListener, PropertiesEditor, ItemListener, CanvasUpdateRunnable,
@@ -55,8 +54,8 @@ public class SelectionAction extends AbstractAction implements SVGDocumentAction
     protected float startX = 0;
     protected float startY = 0;
     protected SVGMatrix matrix;
-    protected Map properties = new HashMap();
-    protected List listeners = new ArrayList();
+    protected Map<String, Object> properties = new HashMap<String, Object>();
+    protected List<PropertiesListener> listeners = new ArrayList<PropertiesListener>();
     float lastX;
     float lastY;
     protected boolean process = false;
@@ -130,10 +129,10 @@ public class SelectionAction extends AbstractAction implements SVGDocumentAction
     protected void changePosition(float x, float y, float endX, float endY) {
         this.selectionRectangle.setAttributeNS(null, "y", StringUtils.EMPTY + y);
 
-        float width = (float) (((matrix.getA() * endX) +
-            (matrix.getC() * endY) + matrix.getE()) - x);
-        float height = (float) (((matrix.getB() * endX) +
-            (matrix.getD() * endY) + matrix.getF()) - y);
+        float width = ((matrix.getA() * endX) +
+            (matrix.getC() * endY) + matrix.getE()) - x;
+        float height = ((matrix.getB() * endX) +
+            (matrix.getD() * endY) + matrix.getF()) - y;
 
         if (width < 0) {
             this.selectionRectangle.setAttributeNS(null, "x",
@@ -160,7 +159,6 @@ public class SelectionAction extends AbstractAction implements SVGDocumentAction
     }
 
     public void setDocument(SVGDocument doc) {
-        Element el = doc.getElementById("draft");
         String svgNS = SVGDOMImplementation.SVG_NAMESPACE_URI;
 
         // we parse the viewBox
@@ -215,7 +213,7 @@ public class SelectionAction extends AbstractAction implements SVGDocumentAction
         this.listeners.add(listener);
     }
 
-    public Map getProperties() {
+    public Map<String, Object> getProperties() {
         return this.properties;
     }
 
@@ -223,7 +221,7 @@ public class SelectionAction extends AbstractAction implements SVGDocumentAction
         this.listeners.remove(listener);
     }
 
-    public void setProperties(Map properties) {
+    public void setProperties(Map<String, Object> properties) {
     }
 
     protected void firePropertiesUpdated() {
@@ -243,10 +241,10 @@ public class SelectionAction extends AbstractAction implements SVGDocumentAction
         this.properties.put(BoundsFilter.PROPERTY_PROCESS,
             Boolean.toString(process));
 
-        Iterator i = this.listeners.iterator();
+        Iterator<PropertiesListener> i = this.listeners.iterator();
 
         while (i.hasNext()) {
-            PropertiesListener listener = (PropertiesListener) i.next();
+            PropertiesListener listener = i.next();
             listener.propertiesChanged(this.properties);
         }
     }

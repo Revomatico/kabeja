@@ -45,6 +45,7 @@ public class SAXXSLTFilter extends AbstractSAXFilter {
      *
      * @see org.xml.sax.ContentHandler#startDocument()
      */
+    @Override
     public void startDocument() throws SAXException {
         if (this.properties.containsKey(PROPERTY_XSLTSTYLESHEET)) {
             try {
@@ -74,6 +75,7 @@ public class SAXXSLTFilter extends AbstractSAXFilter {
      *
      * @see org.xml.sax.XMLReader#setContentHandler(org.xml.sax.ContentHandler)
      */
+    @Override
     public void setContentHandler(ContentHandler handler) {
         this.handler = handler;
         super.setContentHandler(handler);
@@ -81,10 +83,10 @@ public class SAXXSLTFilter extends AbstractSAXFilter {
 
     protected void setParameters(TransformerHandler h) {
         Transformer tf = h.getTransformer();
-        Iterator i = this.properties.keySet().iterator();
+        Iterator<String> i = this.properties.keySet().iterator();
 
         while (i.hasNext()) {
-            String name = (String) i.next();
+            String name = i.next();
 
             if (!PROPERTY_XSLTSTYLESHEET.equals(i)) {
                 tf.setParameter(name, this.properties.get(name));
@@ -92,7 +94,8 @@ public class SAXXSLTFilter extends AbstractSAXFilter {
         }
     }
 
-    public Map getProperties() {
+    @Override
+    public Map<String, Object> getProperties() {
         return this.properties;
     }
 }

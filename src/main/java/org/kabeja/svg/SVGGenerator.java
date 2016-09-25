@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.StringTokenizer;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.dxf.Bounds;
 import org.kabeja.dxf.DXFBlock;
 import org.kabeja.dxf.DXFColor;
@@ -84,6 +84,7 @@ public class SVGGenerator extends AbstractSAXGenerator {
     private String outputStyleName = DXFConstants.LAYOUT_DEFAULT_NAME;
     protected SVGSAXGeneratorManager manager;
 
+    @Override
     protected void generate() throws SAXException {
         this.setupProperties();
         this.generateSAX();
@@ -92,14 +93,14 @@ public class SVGGenerator extends AbstractSAXGenerator {
 
     protected void setupProperties() {
         if (this.context == null) {
-            this.context = new HashMap();
+            this.context = new HashMap<String, Object>();
         } else {
-            //copy setup from context to 
+            //copy setup from context to
             //properties
-            Iterator i = this.context.keySet().iterator();
+            Iterator<String> i = this.context.keySet().iterator();
 
             while (i.hasNext()) {
-                String key = (String) i.next();
+                String key = i.next();
                 this.properties.put(key, this.context.get(key));
             }
         }
@@ -112,7 +113,7 @@ public class SVGGenerator extends AbstractSAXGenerator {
         }
 
         if (this.properties.containsKey(PROPERTY_OVERFLOW)) {
-            this.overflow = Boolean.valueOf((String) this.properties.get(
+            this.overflow = Boolean.valueOf((Boolean) this.properties.get(
                         PROPERTY_OVERFLOW)).booleanValue();
         }
 
@@ -293,18 +294,18 @@ public class SVGGenerator extends AbstractSAXGenerator {
 
             context.put(SVGContext.DOT_LENGTH, new Double(dotLength));
 
-            Iterator i = this.doc.getDXFBlockIterator();
+            Iterator<DXFBlock> i = this.doc.getDXFBlockIterator();
 
             while (i.hasNext()) {
-                DXFBlock block = (DXFBlock) i.next();
+                DXFBlock block = i.next();
                 this.blockToSAX(block, null);
             }
 
             // maybe there is a fontdescription available from DXFStyle
-            i = this.doc.getDXFStyleIterator();
+            Iterator<DXFStyle> i2 = this.doc.getDXFStyleIterator();
 
-            while (i.hasNext()) {
-                DXFStyle style = (DXFStyle) i.next();
+            while (i2.hasNext()) {
+                DXFStyle style = i2.next();
                 SVGStyleGenerator.toSAX(handler, context, style);
             }
 
@@ -327,7 +328,7 @@ public class SVGGenerator extends AbstractSAXGenerator {
                     this.context.get(SVGContext.STROKE_WIDTH).toString());
             } else {
                 double sw = (bounds.getWidth() + bounds.getHeight()) / 2 * SVGConstants.DEFAULT_STROKE_WIDTH_PERCENT;
-                double defaultSW = ((double) DXFConstants.ENVIRONMENT_VARIABLE_LWDEFAULT) / 100.0;
+                double defaultSW = (DXFConstants.ENVIRONMENT_VARIABLE_LWDEFAULT) / 100.0;
 
                 if (sw > defaultSW) {
                     sw = defaultSW;
@@ -342,13 +343,13 @@ public class SVGGenerator extends AbstractSAXGenerator {
             SVGUtils.startElement(handler, SVGConstants.SVG_GROUP, attr);
 
             // the layers as container g-elements
-            i = this.doc.getDXFLayerIterator();
+            Iterator<DXFLayer> i3 = this.doc.getDXFLayerIterator();
 
-            while (i.hasNext()) {
-                DXFLayer layer = (DXFLayer) i.next();
+            while (i3.hasNext()) {
+                DXFLayer layer = i3.next();
 
                 if (this.boundsRule == PROPERTY_DOCUMENT_BOUNDS_RULE_PAPERSPACE) {
-                    //out put only the paper space maybe with views to 
+                    //out put only the paper space maybe with views to
                     //model space
                     this.layerToSAX(layer, false);
                 } else {
@@ -373,10 +374,10 @@ public class SVGGenerator extends AbstractSAXGenerator {
 
         SVGUtils.startElement(handler, SVGConstants.SVG_GROUP, attr);
 
-        Iterator i = block.getDXFEntitiesIterator();
+        Iterator<DXFEntity> i = block.getDXFEntitiesIterator();
 
         while (i.hasNext()) {
-            DXFEntity entity = (DXFEntity) i.next();
+            DXFEntity entity = i.next();
 
             try {
                 SVGSAXGenerator gen = manager.getSVGGenerator(entity.getType());
@@ -495,7 +496,7 @@ public class SVGGenerator extends AbstractSAXGenerator {
 
             if (!bounds.isValid() || (bounds.getWidth() == 0.0) ||
                     (bounds.getHeight() == 0.0)) {
-                //get bounds only from paper space entities 
+                //get bounds only from paper space entities
                 bounds = this.doc.getBounds(false);
             }
         } else if (this.boundsRule == PROPERTY_DOCUMENT_BOUNDS_RULE_MODELSPACE) {
@@ -618,19 +619,19 @@ public class SVGGenerator extends AbstractSAXGenerator {
 
         SVGUtils.startElement(handler, SVGConstants.SVG_GROUP, attr);
 
-        Iterator types = layer.getDXFEntityTypeIterator();
+        Iterator<String> types = layer.getDXFEntityTypeIterator();
 
         while (types.hasNext()) {
-            String type = (String) types.next();
-            ArrayList list = (ArrayList) layer.getDXFEntities(type);
+            String type = types.next();
+            ArrayList<DXFEntity> list = (ArrayList<DXFEntity>) layer.getDXFEntities(type);
 
             try {
                 SVGSAXGenerator gen = this.manager.getSVGGenerator(type);
 
-                Iterator i = list.iterator();
+                Iterator<DXFEntity> i = list.iterator();
 
                 while (i.hasNext()) {
-                    DXFEntity entity = (DXFEntity) i.next();
+                    DXFEntity entity = i.next();
                     boolean v = entity.isVisibile();
                     entity.setVisibile(!layer.isFrozen());
 

@@ -24,6 +24,7 @@ package dk.abj.svg.action;
 
 import java.awt.event.InputEvent;
 
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 
 import org.apache.batik.swing.gvt.AbstractZoomInteractor;
@@ -36,11 +37,11 @@ public class ZoomSelectionActionInterceptor
     extends ToggleInteractorActionAdapter {
     public ZoomSelectionActionInterceptor() {
         super(new AbstractZoomInteractor(), InputEvent.CTRL_MASK);
-        super.putValue(super.SMALL_ICON,
+        super.putValue(Action.SMALL_ICON,
             new ImageIcon(UIUtils.resourceToBytes(this.getClass(),
                     ("/icons/zoom1.png"))));
         super.putValue(SHORT_DESCRIPTION,
             Messages.getString("editor.action.zoom.selection"));
-        super.putValue(super.NAME, "Z");
+        super.putValue(Action.NAME, "Z");
     }
 }

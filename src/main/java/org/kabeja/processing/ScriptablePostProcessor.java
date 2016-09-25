@@ -33,7 +33,7 @@ public class ScriptablePostProcessor extends AbstractPostProcessor {
     protected ScriptEngine engine;
     protected InputStream scriptStream;
 
-    public void process(DXFDocument doc, Map context) throws ProcessorException {
+    public void process(DXFDocument doc, Map<String, Object> context) throws ProcessorException {
         ScriptEngine engine = new JavaScriptEngine();
 
         try {
@@ -43,7 +43,8 @@ public class ScriptablePostProcessor extends AbstractPostProcessor {
         }
     }
 
-    public void setProperties(Map properties) {
+    @Override
+    public void setProperties(Map<String, Object> properties) {
         try {
             if (properties.containsKey(PROPERTY_SCRIPT_SRC)) {
                 this.scriptStream = new FileInputStream((String) properties.get(

@@ -17,8 +17,8 @@ package org.kabeja.tools;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.dxf.DXFConstants;
 
 
@@ -36,9 +36,7 @@ public class CodePageParser {
         String encoding = StringUtils.EMPTY;
 
         try {
-            String line = null;
-            String code;
-            String value;
+            String line;
             boolean next = true;
             boolean codepage = false;
             boolean key = true;

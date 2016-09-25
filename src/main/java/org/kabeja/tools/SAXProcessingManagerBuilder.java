@@ -42,7 +42,7 @@ import org.xml.sax.XMLReader;
 
 /**
  * @author <a href="mailto:simon.mieth@gmx.de">Simon Mieth</a>
- * 
+ *
  */
 public class SAXProcessingManagerBuilder implements ContentHandler {
 	public static String XMLNS_KABEJA_PROCESSING = "http://kabeja.org/processing/1.0";
@@ -73,8 +73,7 @@ public class SAXProcessingManagerBuilder implements ContentHandler {
 	private PostProcessor postprocessor;
 	private SAXGenerator saxgenerator;
 	private AggregatorGenerator aggregator;
-	private Map properties;
-	private StringBuilder buf = new StringBuilder();
+	private Map<String, Object> properties;
 	private String name;
 	private ProcessPipeline pipeline;
 	private boolean config = false;
@@ -83,7 +82,7 @@ public class SAXProcessingManagerBuilder implements ContentHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.xml.sax.ContentHandler#characters(char[], int, int)
 	 */
 	public void characters(char[] ch, int start, int length)
@@ -92,7 +91,7 @@ public class SAXProcessingManagerBuilder implements ContentHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.xml.sax.ContentHandler#endDocument()
 	 */
 	public void endDocument() throws SAXException {
@@ -100,7 +99,7 @@ public class SAXProcessingManagerBuilder implements ContentHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.xml.sax.ContentHandler#endElement(java.lang.String,
 	 *      java.lang.String, java.lang.String)
 	 */
@@ -163,7 +162,7 @@ public class SAXProcessingManagerBuilder implements ContentHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.xml.sax.ContentHandler#endPrefixMapping(java.lang.String)
 	 */
 	public void endPrefixMapping(String prefix) throws SAXException {
@@ -171,7 +170,7 @@ public class SAXProcessingManagerBuilder implements ContentHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.xml.sax.ContentHandler#ignorableWhitespace(char[], int, int)
 	 */
 	public void ignorableWhitespace(char[] ch, int start, int length)
@@ -180,7 +179,7 @@ public class SAXProcessingManagerBuilder implements ContentHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.xml.sax.ContentHandler#processingInstruction(java.lang.String,
 	 *      java.lang.String)
 	 */
@@ -190,7 +189,7 @@ public class SAXProcessingManagerBuilder implements ContentHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.xml.sax.ContentHandler#setDocumentLocator(org.xml.sax.Locator)
 	 */
 	public void setDocumentLocator(Locator locator) {
@@ -198,7 +197,7 @@ public class SAXProcessingManagerBuilder implements ContentHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.xml.sax.ContentHandler#skippedEntity(java.lang.String)
 	 */
 	public void skippedEntity(String name) throws SAXException {
@@ -206,7 +205,7 @@ public class SAXProcessingManagerBuilder implements ContentHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.xml.sax.ContentHandler#startDocument()
 	 */
 	public void startDocument() throws SAXException {
@@ -215,7 +214,7 @@ public class SAXProcessingManagerBuilder implements ContentHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.xml.sax.ContentHandler#startElement(java.lang.String,
 	 *      java.lang.String, java.lang.String, org.xml.sax.Attributes)
 	 */
@@ -223,17 +222,17 @@ public class SAXProcessingManagerBuilder implements ContentHandler {
 			String qName, Attributes atts) throws SAXException {
 		if (namespaceURI.equals(XMLNS_KABEJA_PROCESSING)) {
 			if (ELEMENT_SAXFILTER.equals(localName) && this.config) {
-				this.properties = new HashMap();
+				this.properties = new HashMap<String, Object>();
 				name = atts.getValue(ATTRIBUTE_NAME);
 				saxfilter = (SAXFilter) createInstance(atts
 						.getValue(ATTRIBUTE_CLASS));
 			} else if (ELEMENT_SAXSERIALIZER.equals(localName)) {
-				this.properties = new HashMap();
+				this.properties = new HashMap<String, Object>();
 				name = atts.getValue(ATTRIBUTE_NAME);
 				saxserializer = (SAXSerializer) createInstance(atts
 						.getValue(ATTRIBUTE_CLASS));
 			} else if (ELEMENT_POSTPROCESSOR.equals(localName)) {
-				this.properties = new HashMap();
+				this.properties = new HashMap<String, Object>();
 				this.name = atts.getValue(ATTRIBUTE_NAME);
 
 				String clazz = (atts.getValue(ATTRIBUTE_CLASS));
@@ -247,27 +246,27 @@ public class SAXProcessingManagerBuilder implements ContentHandler {
 					this.pipeline.setDescription(des);
 				}
 			} else if (ELEMENT_SERIALIZE.equals(localName)) {
-				this.properties = new HashMap();
+				this.properties = new HashMap<String, Object>();
 				this.name = atts.getValue(ATTRIBUTE_NAME);
 			} else if (ELEMENT_FILTER.equals(localName)) {
-				this.properties = new HashMap();
+				this.properties = new HashMap<String, Object>();
 				name = atts.getValue(ATTRIBUTE_NAME);
 			} else if (ELEMENT_PROPERTY.equals(localName)) {
 				this.properties.put(atts.getValue(ATTRIBUTE_NAME), atts
 						.getValue(ATTRIBUTE_VALUE));
 			} else if (ELEMENT_POSTPROCESS.equals(localName)) {
-				this.properties = new HashMap();
+				this.properties = new HashMap<String, Object>();
 				name = atts.getValue(ATTRIBUTE_NAME);
 			} else if (ELEMENT_CONFIGURATION.equals(localName)) {
 				this.config = true;
 			} else if (ELEMENT_SAXGENERATOR.equals(localName)) {
-				this.properties = new HashMap();
+				this.properties = new HashMap<String, Object>();
 				this.name = atts.getValue(ATTRIBUTE_NAME);
 
 				String clazz = (atts.getValue(ATTRIBUTE_CLASS));
 				this.saxgenerator = (SAXGenerator) createInstance(clazz);
 			} else if (ELEMENT_GENERATE.equals(localName)) {
-				this.properties = new HashMap();
+				this.properties = new HashMap<String, Object>();
 				this.name = atts.getValue(ATTRIBUTE_NAME);
 			} else if (ELEMENT_AGGREGATE.equals(localName)) {
 				this.aggregate = true;
@@ -287,7 +286,7 @@ public class SAXProcessingManagerBuilder implements ContentHandler {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.xml.sax.ContentHandler#startPrefixMapping(java.lang.String,
 	 *      java.lang.String)
 	 */
@@ -301,7 +300,7 @@ public class SAXProcessingManagerBuilder implements ContentHandler {
 
 	protected Object createInstance(String clazz) {
 		try {
-			Class cl = this.getClass().getClassLoader().loadClass(clazz);
+			Class<?> cl = this.getClass().getClassLoader().loadClass(clazz);
 			Object obj = cl.newInstance();
 
 			return obj;
@@ -317,7 +316,7 @@ public class SAXProcessingManagerBuilder implements ContentHandler {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param in
 	 *            the InputStream
 	 * @return The ProcessingManager build from the XML description

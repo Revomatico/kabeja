@@ -30,7 +30,7 @@ import org.kabeja.processing.ProcessingManager;
 public abstract class AbstractProcessingTreeNode implements TreeNode {
     protected ProcessingManager manager;
     protected TreeNode parent;
-    protected List children = new ArrayList();
+    protected List<AbstractProcessingTreeNode> children = new ArrayList<AbstractProcessingTreeNode>();
     protected String label;
 
     public AbstractProcessingTreeNode(TreeNode parent, String label) {
@@ -61,29 +61,30 @@ public abstract class AbstractProcessingTreeNode implements TreeNode {
     }
 
     public TreeNode getChildAt(int childIndex) {
-        return (TreeNode) this.children.get(childIndex);
+        return this.children.get(childIndex);
     }
 
-    public Enumeration children() {
+    public Enumeration<AbstractProcessingTreeNode> children() {
         return Collections.enumeration(this.children);
     }
 
     protected abstract void initializeChildren();
 
+    @Override
     public String toString() {
         return this.getLabel();
     }
 
-    protected void propertiesToChildren(Map properties) {
+    protected void propertiesToChildren(Map<String, Object> properties) {
         if (properties == null) {
             System.out.println("huuuuuuuuu=" + getClass());
         }
 
-        Iterator i = properties.keySet().iterator();
+        Iterator<String> i = properties.keySet().iterator();
 
         while (i.hasNext()) {
             this.addChild(new PropertyTreeNode(this, properties,
-                    (String) i.next()));
+                    i.next()));
         }
     }
 

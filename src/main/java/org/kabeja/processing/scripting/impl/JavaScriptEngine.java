@@ -34,7 +34,7 @@ public class JavaScriptEngine implements ScriptEngine {
         Object jsOut = Context.javaToJS(doc, scope);
         ScriptableObject.putProperty(scope, "dxf", jsOut);
 
-        Object result = ctx.evaluateString(scope, script, "<cmd>", 1, null);
+        ctx.evaluateString(scope, script, "<cmd>", 1, null);
         Context.exit();
     }
 
@@ -46,7 +46,7 @@ public class JavaScriptEngine implements ScriptEngine {
             Object jsOut = Context.javaToJS(doc, scope);
             ScriptableObject.putProperty(scope, "dxf", jsOut);
 
-            Object result = ctx.evaluateReader(scope,
+            ctx.evaluateReader(scope,
                     new InputStreamReader(script), "<cmd>", 1, null);
 
             Context.exit();

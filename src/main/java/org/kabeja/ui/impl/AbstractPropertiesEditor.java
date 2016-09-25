@@ -25,14 +25,14 @@ import org.kabeja.ui.PropertiesListener;
 
 
 public abstract class AbstractPropertiesEditor implements PropertiesEditor {
-    protected ArrayList listeners = new ArrayList();
-    protected Map properties = new HashMap();
+    protected ArrayList<PropertiesListener> listeners = new ArrayList<PropertiesListener>();
+    protected Map<String, Object> properties = new HashMap<String, Object>();
 
     public void addPropertiesListener(PropertiesListener listener) {
         this.listeners.add(listener);
     }
 
-    public Map getProperties() {
+    public Map<String, Object> getProperties() {
         return this.properties;
     }
 
@@ -40,15 +40,16 @@ public abstract class AbstractPropertiesEditor implements PropertiesEditor {
         this.listeners.remove(listeners);
     }
 
-    public void setProperties(Map properties) {
+    public void setProperties(Map<String, Object> properties) {
         this.properties = properties;
     }
 
     protected void firePropertiesChangedEvent() {
-        Iterator i = ((ArrayList) this.listeners.clone()).iterator();
+        @SuppressWarnings("unchecked")
+        Iterator<PropertiesListener> i = ((ArrayList<PropertiesListener>) this.listeners.clone()).iterator();
 
         while (i.hasNext()) {
-            PropertiesListener l = (PropertiesListener) i.next();
+            PropertiesListener l = i.next();
             l.propertiesChanged(this.properties);
         }
     }

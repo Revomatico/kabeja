@@ -19,13 +19,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.dxf.DXFConstants;
 
 
 public class DXFMLineStyle extends DXFObject {
-    protected List lines = new ArrayList();
+    protected List<DXFMLineStyleElement> lines = new ArrayList<DXFMLineStyleElement>();
     protected String name = StringUtils.EMPTY;
     protected String descrition = StringUtils.EMPTY;
     protected int fillColor = 256;
@@ -33,6 +33,7 @@ public class DXFMLineStyle extends DXFObject {
     protected double startAngle = 0;
     protected double endAngle = 0;
 
+    @Override
     public String getObjectType() {
         return DXFConstants.OBJECT_TYPE_MLINESTYLE;
     }
@@ -42,18 +43,18 @@ public class DXFMLineStyle extends DXFObject {
     }
 
     public DXFMLineStyleElement getDXFMLineStyleLElement(int index) {
-        return (DXFMLineStyleElement) this.lines.get(index);
+        return this.lines.get(index);
     }
 
     public DXFMLineStyleElement removeDXFMLineStyleLElement(int index) {
-        return (DXFMLineStyleElement) this.lines.remove(index);
+        return this.lines.remove(index);
     }
 
     public int getDXFMLineStyleLElementCount() {
         return this.lines.size();
     }
 
-    public void sortDXFMLineStyleElements(Comparator comp) {
+    public void sortDXFMLineStyleElements(Comparator<DXFMLineStyleElement> comp) {
         Collections.sort(this.lines, comp);
     }
 

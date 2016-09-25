@@ -24,6 +24,7 @@ package dk.abj.svg.action;
 
 import java.awt.event.InputEvent;
 
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 
 import org.apache.batik.swing.gvt.AbstractRotateInteractor;
@@ -36,11 +37,11 @@ public class RotateActionInteractor extends ToggleInteractorActionAdapter {
     public RotateActionInteractor() {
         super(new AbstractRotateInteractor(), InputEvent.ALT_MASK);
 
-        super.putValue(super.SMALL_ICON,
+        super.putValue(Action.SMALL_ICON,
             new ImageIcon(UIUtils.resourceToBytes(this.getClass(),
                     "/icons/zoom5.png")));
         super.putValue(SHORT_DESCRIPTION,
             Messages.getString("editor.action.rotate"));
-        super.putValue(super.NAME, "Rotate");
+        super.putValue(Action.NAME, "Rotate");
     }
 }

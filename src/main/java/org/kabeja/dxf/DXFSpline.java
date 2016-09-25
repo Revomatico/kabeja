@@ -35,7 +35,7 @@ public class DXFSpline extends DXFEntity {
     protected int fitPointSize;
     protected double[] knots;
     protected double[] weights;
-    protected List points = new ArrayList();
+    protected List<SplinePoint> points = new ArrayList<SplinePoint>();
     protected double fitTolerance;
     protected double knotsTolerance;
     protected double controlPointTolerance;
@@ -46,6 +46,7 @@ public class DXFSpline extends DXFEntity {
      *
      * @see de.miethxml.kabeja.dxf.DXFEntity#getBounds()
      */
+    @Override
     public Bounds getBounds() {
         // simple the convex hull of the spline
         // Iterator i = points.iterator();
@@ -70,6 +71,7 @@ public class DXFSpline extends DXFEntity {
      *
      * @see de.miethxml.kabeja.dxf.DXFEntity#getType()
      */
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_SPLINE;
     }
@@ -79,7 +81,7 @@ public class DXFSpline extends DXFEntity {
         this.polyline = null;
     }
 
-    public Iterator getSplinePointIterator() {
+    public Iterator<SplinePoint> getSplinePointIterator() {
         return points.iterator();
     }
 
@@ -239,6 +241,7 @@ public class DXFSpline extends DXFEntity {
         this.knotsTolerance = knotsTolerance;
     }
 
+    @Override
     public double getLength() {
         if (this.polyline == null) {
             this.polyline = toDXFPolyline();

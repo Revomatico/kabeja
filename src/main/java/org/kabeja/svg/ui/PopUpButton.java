@@ -31,7 +31,7 @@ import javax.swing.JPopupMenu;
 
 public class PopUpButton extends JButton {
     private JPopupMenu popupmenu;
-    private int[] px = new int[3];
+    //private int[] px = new int[3];
     private int[] py = new int[3];
 
     public PopUpButton(JPopupMenu menu, String text) {
@@ -67,6 +67,7 @@ public class PopUpButton extends JButton {
         }
     }
 
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 

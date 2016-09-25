@@ -38,6 +38,7 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.processing.ProcessingManager;
 import org.kabeja.ui.Application;
 import org.kabeja.ui.ApplicationMenuBar;
@@ -49,7 +50,6 @@ import org.kabeja.ui.Startable;
 import org.kabeja.ui.ViewComponent;
 
 import de.miethxml.toolkit.ui.SelectorComponent;
-import org.apache.commons.lang.StringUtils;
 
 
 public class ProcessingUI implements Serviceable, Startable,
@@ -57,14 +57,14 @@ public class ProcessingUI implements Serviceable, Startable,
     protected ServiceManager serviceManager;
     protected ProcessingManager manager;
     protected JFrame frame;
-    protected List components = new ArrayList();
+    protected List<ViewComponent> components = new ArrayList<ViewComponent>();
     private JPanel mainPanel;
     private CardLayout mainContainer;
     private SelectorComponent selector;
     private JPanel panel;
     private JToolBar toolbar;
     private JMenuBar menubar;
-    private Map menus = new HashMap();
+    private Map<String, JMenu> menus = new HashMap<String, JMenu>();
     private Application application;
 
     public ProcessingUI() {
@@ -92,13 +92,13 @@ public class ProcessingUI implements Serviceable, Startable,
         this.menubar = new JMenuBar();
         this.frame.setJMenuBar(this.menubar);
 
-        //Help and about 
+        //Help and about
         this.menubar.add(Box.createHorizontalGlue());
         JMenu menu = new JMenu(Messages.getString("ProcessingUI.menu.help")); //$NON-NLS-1$
         menu.add(new AboutAction());
         this.menubar.add(menu);
         this.menus.put(ApplicationMenuBar.MENU_ID_HELP, menu);
-        
+
         menu = new JMenu(Messages.getString("ProcessingUI.menu.file")); //$NON-NLS-1$
         menu.add(new AbstractAction(Messages.getString(
                     "ProcessingUI.menu.file.exit")) {
@@ -111,12 +111,12 @@ public class ProcessingUI implements Serviceable, Startable,
                 }
             });
 
-       
-        
+
+
         this.setMenu(ApplicationMenuBar.MENU_ID_FILE, menu);
 
- 
-      
+
+
         this.frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
         this.frame.setSize(700,620);
         this.frame.validate();
@@ -203,7 +203,7 @@ public class ProcessingUI implements Serviceable, Startable,
 
     public void setJMenuItem(String menuID, JMenuItem item) {
         if (this.hasMenu(menuID)) {
-            JMenu menu = (JMenu) this.menus.get(menuID);
+            JMenu menu = this.menus.get(menuID);
 
             if (menuID.equals(ApplicationMenuBar.MENU_ID_FILE)) {
                 menu.add(item, 0);

@@ -33,19 +33,19 @@ import org.xml.sax.helpers.AttributesImpl;
 
 
 public class SVGLeaderGenerator extends AbstractSVGSAXGenerator {
-    public void toSAX(ContentHandler handler, Map svgContext, DXFEntity entity,
+    public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         DXFLeader leader = (DXFLeader) entity;
 
         if (!leader.isSplinePath()) {
-            Iterator i = leader.getCoordinateIterator();
+            Iterator<Point> i = leader.getCoordinateIterator();
             StringBuilder buf = new StringBuilder();
             buf.append('M');
 
             while (i.hasNext()) {
                 buf.append(' ');
 
-                Point p = (Point) i.next();
+                Point p = i.next();
                 buf.append(p.getX());
                 buf.append(' ');
                 buf.append(p.getY());

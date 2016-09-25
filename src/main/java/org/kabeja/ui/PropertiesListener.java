@@ -18,7 +18,7 @@ package org.kabeja.ui;
 import java.util.Map;
 
 /**
- * 
+ *
  * @author <a href="mailto:simon.mieth@gmx.de">Simon Mieth</a>
  *
  */
@@ -27,5 +27,5 @@ public interface PropertiesListener {
 	 * Will be called every time the properties have changed
 	 * @param properties changed Properties
 	 */
-    public void propertiesChanged(Map properties);
+    public void propertiesChanged(Map<String, Object> properties);
 }

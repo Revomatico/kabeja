@@ -27,11 +27,12 @@ public class PostProcessorsTreeNode extends AbstractProcessingTreeNode {
         super(parent, LABEL);
     }
 
+    @Override
     protected void initializeChildren() {
-        Iterator i = this.manager.getPostProcessors().keySet().iterator();
+        Iterator<String> i = this.manager.getPostProcessors().keySet().iterator();
 
         while (i.hasNext()) {
-            String key = (String) i.next();
+            String key = i.next();
             PostProcessorTreeNode node = new PostProcessorTreeNode(this,
                     this.manager.getPostProcessor(key), key);
             this.addChild(node);

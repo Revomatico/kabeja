@@ -17,6 +17,7 @@ package org.kabeja.dxf;
 
 import java.util.Hashtable;
 import java.util.Iterator;
+
 import org.apache.commons.lang.StringUtils;
 
 
@@ -27,7 +28,7 @@ import org.apache.commons.lang.StringUtils;
  *
  */
 public class DXFVariable {
-    private Hashtable values = new Hashtable();
+    private Hashtable<String, String> values = new Hashtable<String, String>();
     private String name = StringUtils.EMPTY;
 
     public DXFVariable(String name) {
@@ -43,15 +44,15 @@ public class DXFVariable {
     }
 
     public String getValue(String name) {
-        return (String) values.get(name);
+        return values.get(name);
     }
 
     public int getIntegerValue(String name) {
-        return Integer.parseInt((String) values.get(name));
+        return Integer.parseInt(values.get(name));
     }
 
     public double getDoubleValue(String name) {
-        return Double.parseDouble((String) values.get(name));
+        return Double.parseDouble(values.get(name));
     }
 
     public void setValue(String name, String value) {
@@ -62,7 +63,7 @@ public class DXFVariable {
      *
      * @return a iterator over all keys of this DXFValue
      */
-    public Iterator getValueKeyIterator() {
+    public Iterator<String> getValueKeyIterator() {
         return values.keySet().iterator();
     }
 }

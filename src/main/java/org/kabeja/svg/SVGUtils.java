@@ -9,8 +9,8 @@ import java.net.MalformedURLException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Iterator;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.dxf.DXFLineType;
 import org.kabeja.dxf.helpers.StyledTextParagraph;
 import org.kabeja.dxf.helpers.TextDocument;
@@ -64,7 +64,7 @@ public class SVGUtils {
 
     public static void addAttribute(AttributesImpl attr, String name,
         double value) {
-        attr.addAttribute(StringUtils.EMPTY, name, name, DEFAUL_ATTRIBUTE_TYPE, 
+        attr.addAttribute(StringUtils.EMPTY, name, name, DEFAUL_ATTRIBUTE_TYPE,
                 Double.toString(value));
     }
 
@@ -218,10 +218,10 @@ public class SVGUtils {
 
     public static void textDocumentToSAX(ContentHandler handler,
         TextDocument doc) throws SAXException {
-        Iterator i = doc.getStyledParagraphIterator();
+        Iterator<StyledTextParagraph> i = doc.getStyledParagraphIterator();
 
         while (i.hasNext()) {
-            StyledTextParagraph para = (StyledTextParagraph) i.next();
+            StyledTextParagraph para = i.next();
             styledTextToSAX(handler, para);
         }
     }
@@ -311,7 +311,7 @@ public class SVGUtils {
         try {
             buf.append("file://");
 
-            char[] c = file.toURL().toExternalForm().toCharArray();
+            char[] c = file.toURI().toURL().toExternalForm().toCharArray();
 
             for (int i = 5; i < c.length; i++) {
                 if (Character.isWhitespace(c[i])) {
@@ -354,7 +354,7 @@ public class SVGUtils {
     }
 
     public static String lineWeightToStrokeWidth(int lineWeight) {
-        double w = (double) lineWeight / 100.0;
+        double w = lineWeight / 100.0;
 
         return StringUtils.EMPTY + w + "mm";
     }

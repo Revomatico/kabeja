@@ -32,7 +32,7 @@ public class DXFEntitiesSectionHandler extends AbstractSectionHandler
     implements DXFSectionHandler, HandlerManager {
     private static String SECTION_KEY = "ENTITIES";
     public static final int ENTITY_START = 0;
-    protected Hashtable handlers = new Hashtable();
+    protected Hashtable<String, DXFEntityHandler> handlers = new Hashtable<String, DXFEntityHandler>();
     protected DXFEntityHandler handler = null;
     protected boolean parseEntity = false;
 
@@ -68,7 +68,7 @@ public class DXFEntitiesSectionHandler extends AbstractSectionHandler
 
             if (handlers.containsKey(value.getValue())) {
                 //get handler for the new entity
-                handler = (DXFEntityHandler) handlers.get(value.getValue());
+                handler = handlers.get(value.getValue());
                 handler.setDXFDocument(this.doc);
                 handler.startDXFEntity();
                 parseEntity = true;
@@ -86,6 +86,7 @@ public class DXFEntitiesSectionHandler extends AbstractSectionHandler
      *
      * @see org.dxf2svg.parser.SectionHandler#setDXFDocument(org.dxf2svg.xml.DXFDocument)
      */
+    @Override
     public void setDXFDocument(DXFDocument doc) {
         this.doc = doc;
     }
@@ -127,15 +128,15 @@ public class DXFEntitiesSectionHandler extends AbstractSectionHandler
     }
 
     /* (non-Javadoc)
-         * @see de.miethxml.kabeja.parser.Handler#releaseDXFDocument()
-         */
+     * @see de.miethxml.kabeja.parser.Handler#releaseDXFDocument()
+     */
     public void releaseDXFDocument() {
         this.doc = null;
 
-        Iterator i = handlers.values().iterator();
+        Iterator<DXFEntityHandler> i = handlers.values().iterator();
 
         while (i.hasNext()) {
-            Handler handler = (Handler) i.next();
+            Handler handler = i.next();
             handler.releaseDXFDocument();
         }
     }

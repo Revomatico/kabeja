@@ -17,8 +17,8 @@ package org.kabeja.dxf;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.dxf.helpers.DXFMLineSegment;
 import org.kabeja.dxf.helpers.MLineConverter;
 import org.kabeja.dxf.helpers.Point;
@@ -34,7 +34,7 @@ public class DXFMLine extends DXFEntity {
     public final static int JUSTIFICATION_BOTTOM = 2;
     protected double scale = 1.0;
     protected Point startPoint = new Point();
-    protected List mlineSegments = new ArrayList();
+    protected List<DXFMLineSegment> mlineSegments = new ArrayList<DXFMLineSegment>();
     protected int lineCount = 0;
     protected int justification = 0;
     protected String mLineStyleID = StringUtils.EMPTY;
@@ -45,6 +45,7 @@ public class DXFMLine extends DXFEntity {
      *
      * @see de.miethxml.kabeja.dxf.DXFEntity#getBounds()
      */
+    @Override
     public Bounds getBounds() {
         Bounds b = new Bounds();
         DXFPolyline[] pl = this.toDXFPolylines();
@@ -62,10 +63,12 @@ public class DXFMLine extends DXFEntity {
      *
      * @see de.miethxml.kabeja.dxf.DXFEntity#getType()
      */
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_MLINE;
     }
 
+    @Override
     public double getLength() {
         //TODO convert  mline -> polyline only  after changes
         DXFPolyline[] pl = toDXFPolylines();
@@ -87,7 +90,7 @@ public class DXFMLine extends DXFEntity {
     }
 
     public DXFMLineSegment getDXFMLineSegment(int index) {
-        return (DXFMLineSegment) this.mlineSegments.get(index);
+        return this.mlineSegments.get(index);
     }
 
     public double getScale() {

@@ -18,8 +18,8 @@ package org.kabeja.svg;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.dxf.DXFDocument;
 import org.kabeja.parser.DXFParser;
 import org.kabeja.parser.ParseException;
@@ -96,6 +96,7 @@ public class DXF2SVGReader extends XMLFilterImpl {
      *
      * @see org.xml.sax.XMLReader#parse(java.lang.String)
      */
+    @Override
     public void parse(String systemId) throws IOException, SAXException {
         this.initialize();
 
@@ -107,7 +108,7 @@ public class DXF2SVGReader extends XMLFilterImpl {
             // the xmlConsumer the next component in
             // the pipeline from parent class
             SAXGenerator generator = new SVGGenerator();
-            generator.setProperties(new HashMap());
+            generator.setProperties(new HashMap<String, Object>());
             generator.generate(doc, this.getContentHandler(), null);
 
             // a little help for the GC
@@ -123,6 +124,7 @@ public class DXF2SVGReader extends XMLFilterImpl {
      *
      * @see org.xml.sax.XMLReader#getFeature(java.lang.String)
      */
+    @Override
     public boolean getFeature(String name)
         throws SAXNotRecognizedException, SAXNotSupportedException {
         // throw new SAXNotSupportedException("no feature: " + name);
@@ -146,6 +148,7 @@ public class DXF2SVGReader extends XMLFilterImpl {
      *
      * @see org.xml.sax.XMLReader#setFeature(java.lang.String, boolean)
      */
+    @Override
     public void setFeature(String name, boolean value)
         throws SAXNotRecognizedException, SAXNotSupportedException {
         if (FEATURE_NAMESPACES.equals(name)) {
@@ -166,6 +169,7 @@ public class DXF2SVGReader extends XMLFilterImpl {
      *
      * @see org.xml.sax.XMLReader#getContentHandler()
      */
+    @Override
     public ContentHandler getContentHandler() {
         return super.getContentHandler();
     }
@@ -175,6 +179,7 @@ public class DXF2SVGReader extends XMLFilterImpl {
      *
      * @see org.xml.sax.XMLReader#setContentHandler(org.xml.sax.ContentHandler)
      */
+    @Override
     public void setContentHandler(ContentHandler handler) {
         super.setContentHandler(handler);
     }
@@ -184,6 +189,7 @@ public class DXF2SVGReader extends XMLFilterImpl {
      *
      * @see org.xml.sax.XMLReader#getDTDHandler()
      */
+    @Override
     public DTDHandler getDTDHandler() {
         return this.dtdhandler;
     }
@@ -193,6 +199,7 @@ public class DXF2SVGReader extends XMLFilterImpl {
      *
      * @see org.xml.sax.XMLReader#setDTDHandler(org.xml.sax.DTDHandler)
      */
+    @Override
     public void setDTDHandler(DTDHandler handler) {
         this.dtdhandler = handler;
     }
@@ -202,6 +209,7 @@ public class DXF2SVGReader extends XMLFilterImpl {
      *
      * @see org.xml.sax.XMLReader#getEntityResolver()
      */
+    @Override
     public EntityResolver getEntityResolver() {
         return this.resolver;
     }
@@ -211,6 +219,7 @@ public class DXF2SVGReader extends XMLFilterImpl {
      *
      * @see org.xml.sax.XMLReader#setEntityResolver(org.xml.sax.EntityResolver)
      */
+    @Override
     public void setEntityResolver(EntityResolver resolver) {
         this.resolver = resolver;
     }
@@ -220,6 +229,7 @@ public class DXF2SVGReader extends XMLFilterImpl {
      *
      * @see org.xml.sax.XMLReader#getErrorHandler()
      */
+    @Override
     public ErrorHandler getErrorHandler() {
         return this.errorhandler;
     }
@@ -229,6 +239,7 @@ public class DXF2SVGReader extends XMLFilterImpl {
      *
      * @see org.xml.sax.XMLReader#setErrorHandler(org.xml.sax.ErrorHandler)
      */
+    @Override
     public void setErrorHandler(ErrorHandler handler) {
         this.errorhandler = handler;
     }
@@ -238,6 +249,7 @@ public class DXF2SVGReader extends XMLFilterImpl {
      *
      * @see org.xml.sax.XMLReader#parse(org.xml.sax.InputSource)
      */
+    @Override
     public void parse(InputSource input) throws IOException, SAXException {
         this.initialize();
 
@@ -257,7 +269,7 @@ public class DXF2SVGReader extends XMLFilterImpl {
             // the xmlConsumer the next component in
             // the pipeline from parent class
             SAXGenerator generator = new SVGGenerator();
-            generator.setProperties(new HashMap());
+            generator.setProperties(new HashMap<String, Object>());
             generator.generate(doc, this.getContentHandler(), null);
 
             // a little help for the GC
@@ -276,14 +288,15 @@ public class DXF2SVGReader extends XMLFilterImpl {
      *
      * @see org.xml.sax.XMLReader#getProperty(java.lang.String)
      */
+    @Override
     public Object getProperty(String name)
         throws SAXNotRecognizedException, SAXNotSupportedException {
         if (PROPERTY_DXF_ENCODING.equals(name)) {
-            return (Object) this.encoding;
+            return this.encoding;
         } else if (PROPERTY_PARSER_CONFIGURATION_INPUTSTREAM.equals(name)) {
             return null;
         } else if (PROPERTY_PARSER_CONFIGURATION_FILENAME.equals(name)) {
-            return (Object) this.configURL;
+            return this.configURL;
         } else if (PROPERTY_SAX_XML_DOCUMENT_VERSION.equals(name)) {
             return "1.0";
         }
@@ -299,6 +312,7 @@ public class DXF2SVGReader extends XMLFilterImpl {
      * @see org.xml.sax.XMLReader#setProperty(java.lang.String,
      *      java.lang.Object)
      */
+    @Override
     public void setProperty(String name, Object value)
         throws SAXNotRecognizedException, SAXNotSupportedException {
         if (PROPERTY_DXF_ENCODING.equals(name)) {
@@ -337,6 +351,7 @@ public class DXF2SVGReader extends XMLFilterImpl {
      * @see org.xml.sax.ContentHandler#startElement(java.lang.String,
      *      java.lang.String, java.lang.String, org.xml.sax.Attributes)
      */
+    @Override
     public void startElement(String uri, String localName, String qName,
         Attributes atts) throws SAXException {
         if (this.namespacesPrefix) {

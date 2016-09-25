@@ -21,20 +21,22 @@ import javax.swing.tree.TreeNode;
 
 
 public class PropertyTreeNode extends AbstractProcessingTreeNode {
-    protected Map properties;
+    protected Map<String, Object> properties;
     protected String propertyKey;
 
-    public PropertyTreeNode(TreeNode parent, Map properties, String propertyKey) {
+    public PropertyTreeNode(TreeNode parent, Map<String, Object> properties, String propertyKey) {
         super(parent, propertyKey + "=" + properties.get(propertyKey));
 
         this.properties = properties;
         this.propertyKey = propertyKey;
     }
 
+    @Override
     protected String getLabel() {
         return this.propertyKey + "=" + this.properties.get(this.propertyKey);
     }
 
+    @Override
     protected void initializeChildren() {
     }
 

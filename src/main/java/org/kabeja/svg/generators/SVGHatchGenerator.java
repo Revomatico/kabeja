@@ -39,7 +39,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 
 public class SVGHatchGenerator extends AbstractSVGSAXGenerator {
-    public void toSAX(ContentHandler handler, Map svgContext, DXFEntity entity,
+    public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         DXFHatch hatch = (DXFHatch) entity;
         SVGSAXGeneratorManager manager = (SVGSAXGeneratorManager) svgContext.get(SVGContext.SVGSAXGENERATOR_MANAGER);
@@ -56,10 +56,10 @@ public class SVGHatchGenerator extends AbstractSVGSAXGenerator {
                 SVGUtils.addAttribute(attr, "fill", "currentColor");
                 SVGUtils.startElement(handler, SVGConstants.SVG_GROUP, attr);
 
-                Iterator i = hatch.getBoundaryLoops();
+                Iterator<HatchBoundaryLoop> i = hatch.getBoundaryLoops();
 
                 while (i.hasNext()) {
-                    HatchBoundaryLoop loop = (HatchBoundaryLoop) i.next();
+                    HatchBoundaryLoop loop = i.next();
                     this.loopToSVGPath(handler, loop, manager);
                 }
 
@@ -88,10 +88,10 @@ public class SVGHatchGenerator extends AbstractSVGSAXGenerator {
                 if (clipClipPath) {
                     this.outermostToSVGPath(handler, hatch, manager);
                 } else {
-                    Iterator i = hatch.getBoundaryLoops();
+                    Iterator<HatchBoundaryLoop> i = hatch.getBoundaryLoops();
 
                     while (i.hasNext()) {
-                        HatchBoundaryLoop loop = (HatchBoundaryLoop) i.next();
+                        HatchBoundaryLoop loop = i.next();
                         this.loopToSVGPath(handler, loop, manager);
                     }
                 }
@@ -128,10 +128,10 @@ public class SVGHatchGenerator extends AbstractSVGSAXGenerator {
         // boundary path as clip-path
 
         // first the clip-path
-        Iterator i = hatch.getBoundaryLoops();
+        Iterator<HatchBoundaryLoop> i = hatch.getBoundaryLoops();
 
         while (i.hasNext()) {
-            HatchBoundaryLoop loop = (HatchBoundaryLoop) i.next();
+            HatchBoundaryLoop loop = i.next();
 
             if (!loop.isOutermost()) {
                 loopToSVGPath(handler, loop, manager);
@@ -143,10 +143,10 @@ public class SVGHatchGenerator extends AbstractSVGSAXGenerator {
 
     protected void outermostToSVGPath(ContentHandler handler, DXFHatch hatch,
         SVGSAXGeneratorManager manager) throws SAXException {
-        Iterator i = hatch.getBoundaryLoops();
+        Iterator<HatchBoundaryLoop> i = hatch.getBoundaryLoops();
 
         while (i.hasNext()) {
-            HatchBoundaryLoop loop = (HatchBoundaryLoop) i.next();
+            HatchBoundaryLoop loop = i.next();
 
             if (loop.isOutermost()) {
                 loopToSVGPath(handler, loop, manager);
@@ -158,10 +158,10 @@ public class SVGHatchGenerator extends AbstractSVGSAXGenerator {
         HatchBoundaryLoop loop, SVGSAXGeneratorManager manager)
         throws SAXException {
         StringBuilder buf = new StringBuilder();
-        Iterator i = loop.getBoundaryEdgesIterator();
+        Iterator<DXFEntity> i = loop.getBoundaryEdgesIterator();
 
         if (i.hasNext()) {
-            DXFEntity entity = (DXFEntity) i.next();
+            DXFEntity entity = i.next();
             buf.append(' ');
 
             String d = manager.getSVGPathBoundaryGenerator(entity.getType())
@@ -175,7 +175,7 @@ public class SVGHatchGenerator extends AbstractSVGSAXGenerator {
             buf.append(' ');
 
             while (i.hasNext()) {
-                entity = (DXFEntity) i.next();
+                entity = i.next();
 
                 SVGPathBoundaryGenerator part = manager.getSVGPathBoundaryGenerator(entity.getType());
                 buf.append(' ');
@@ -224,7 +224,7 @@ public class SVGHatchGenerator extends AbstractSVGSAXGenerator {
      * @see org.kabeja.svg.SVGGenerator#toSAX(org.xml.sax.ContentHandler,
      *      java.util.Map)
      */
-    public void convertHatchPatternToSAX(ContentHandler handler, Map context,
+    public void convertHatchPatternToSAX(ContentHandler handler, Map<String, Object> context,
         Bounds hatchBounds, DXFHatch hatch, TransformContext transformContext,
         DXFHatchPattern p) throws SAXException {
         // we have to create a tile with all lines
@@ -232,11 +232,11 @@ public class SVGHatchGenerator extends AbstractSVGSAXGenerator {
 
         AttributesImpl attr = new AttributesImpl();
 
-        Iterator i = p.getLineFamilyIterator();
+        Iterator<HatchLineFamily> i = p.getLineFamilyIterator();
 
         // patterns.iterator();
         while (i.hasNext()) {
-            HatchLineFamily pattern = (HatchLineFamily) i.next();
+            HatchLineFamily pattern = i.next();
 
             attr = new AttributesImpl();
 
@@ -269,10 +269,10 @@ public class SVGHatchGenerator extends AbstractSVGSAXGenerator {
         HatchLineFamily pattern, double dotlength) {
         StringBuilder buf = new StringBuilder();
 
-        Iterator li = new HatchLineIterator(hatch, pattern);
+        Iterator<HatchLineSegment> li = new HatchLineIterator(hatch, pattern);
 
         while (li.hasNext()) {
-            HatchLineSegment segment = (HatchLineSegment) li.next();
+            HatchLineSegment segment = li.next();
 
             // double angle = Math.toRadians(pattern.getRotationAngle());
             Point startPoint = segment.getStartPoint();

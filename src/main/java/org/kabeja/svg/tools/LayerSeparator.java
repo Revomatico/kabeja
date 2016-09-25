@@ -19,8 +19,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.dxf.Bounds;
 import org.kabeja.dxf.DXFDocument;
 import org.kabeja.dxf.DXFHeader;
@@ -69,15 +69,15 @@ public class LayerSeparator {
     }
 
     public void splitLayers(DXFDocument doc, String basename) {
-        Iterator i = doc.getDXFLayerIterator();
+        Iterator<DXFLayer> i = doc.getDXFLayerIterator();
 
-        ArrayList layers = new ArrayList();
+        ArrayList<DXFLayer> layers = new ArrayList<DXFLayer>();
 
         // remove all layers from the doc
         Bounds b = doc.getBounds();
 
         while (i.hasNext()) {
-            DXFLayer l = (DXFLayer) i.next();
+            DXFLayer l = i.next();
             layers.add(l);
             i.remove();
         }
@@ -100,7 +100,7 @@ public class LayerSeparator {
         int count = 0;
 
         while (i.hasNext()) {
-            DXFLayer l = (DXFLayer) i.next();
+            DXFLayer l = i.next();
             doc.addDXFLayer(l);
             count++;
             System.out.println("Generate:" + basename + count + ".svg");

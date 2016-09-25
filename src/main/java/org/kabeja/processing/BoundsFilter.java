@@ -31,9 +31,9 @@ public class BoundsFilter extends AbstractPostProcessor {
     public final static String PROPERTY_HEIGHT = "boundsfilter.height";
     public final static String PROPERTY_PROCESS = "boundsfilter.process";
 
-    public void process(DXFDocument doc, Map context) throws ProcessorException {
+    public void process(DXFDocument doc, Map<String, Object> context) throws ProcessorException {
         if (this.properties.containsKey(PROPERTY_PROCESS) &&
-                Boolean.valueOf((String) this.properties.get(PROPERTY_PROCESS))
+                Boolean.valueOf((Boolean) this.properties.get(PROPERTY_PROCESS))
                            .booleanValue()) {
             Bounds bounds = new Bounds();
 
@@ -62,24 +62,24 @@ public class BoundsFilter extends AbstractPostProcessor {
             // the bounds should be setup now
             // we remove all entities which are
             // not inside our bounds
-            Iterator i = doc.getDXFLayerIterator();
+            Iterator<DXFLayer> i = doc.getDXFLayerIterator();
 
             while (i.hasNext()) {
-                DXFLayer layer = (DXFLayer) i.next();
+                DXFLayer layer = i.next();
                 filterLayer(layer, bounds);
             }
         }
     }
 
     protected void filterLayer(DXFLayer layer, Bounds bounds) {
-        Iterator i = layer.getDXFEntityTypeIterator();
+        Iterator<String> i = layer.getDXFEntityTypeIterator();
 
         while (i.hasNext()) {
-            String type = (String) i.next();
-            Iterator entities = layer.getDXFEntities(type).iterator();
+            String type = i.next();
+            Iterator<DXFEntity> entities = layer.getDXFEntities(type).iterator();
 
             while (entities.hasNext()) {
-                DXFEntity entity = (DXFEntity) entities.next();
+                DXFEntity entity = entities.next();
 
                 if (!bounds.enclose(entity.getBounds())) {
                     // the bounds not contains this entity

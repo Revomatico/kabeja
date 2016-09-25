@@ -37,6 +37,7 @@ public class DXFFileTransferHandler extends TransferHandler {
         this.c = c;
     }
 
+    @Override
     public boolean canImport(JComponent c, DataFlavor[] flavors) {
         for (int i = 0; i < flavors.length; i++) {
             if (flavors[i].isFlavorJavaFileListType()) {
@@ -54,19 +55,20 @@ public class DXFFileTransferHandler extends TransferHandler {
         return false;
     }
 
+    @Override
     public int getSourceActions(JComponent c) {
         return TransferHandler.COPY;
     }
 
-    private List getFileList(Transferable t) {
-        ArrayList files = new ArrayList();
+    private List<File> getFileList(Transferable t) {
+        ArrayList<File> files = new ArrayList<File>();
 
         if (t.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
             try {
-                List list = (List) t.getTransferData(DataFlavor.javaFileListFlavor);
+                List<?> list = (List<?>) t.getTransferData(DataFlavor.javaFileListFlavor);
 
                 if (list.size() > 0) {
-                    Iterator i = list.iterator();
+                    Iterator<?> i = list.iterator();
 
                     while (i.hasNext()) {
                         File file = (File) i.next();
@@ -112,12 +114,13 @@ public class DXFFileTransferHandler extends TransferHandler {
         return files;
     }
 
+    @Override
     public boolean importData(JComponent c, Transferable t) {
-        List files = getFileList(t);
+        List<File> files = getFileList(t);
 
         if (files.size() > 0) {
             //we take the first one
-            File f = (File) files.get(0);
+            File f = files.get(0);
 
             if (f.getAbsolutePath().toLowerCase().endsWith(".dxf")) {
                 this.c.processInput(f);

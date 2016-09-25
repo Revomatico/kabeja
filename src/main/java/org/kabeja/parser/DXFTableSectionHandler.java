@@ -17,8 +17,8 @@ package org.kabeja.parser;
 
 import java.util.Hashtable;
 import java.util.Iterator;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.parser.table.DXFTableHandler;
 
 
@@ -34,7 +34,7 @@ public class DXFTableSectionHandler extends AbstractSectionHandler
     public final int TABLE_CODE = 0;
     private String table = StringUtils.EMPTY;
     private DXFTableHandler handler;
-    private Hashtable handlers = new Hashtable();
+    private Hashtable<String, DXFTableHandler> handlers = new Hashtable<String, DXFTableHandler>();
     private boolean parse = false;
 
     public DXFTableSectionHandler() {
@@ -73,7 +73,7 @@ public class DXFTableSectionHandler extends AbstractSectionHandler
                 table = value.getValue();
 
                 if (handlers.containsKey(table)) {
-                    handler = (DXFTableHandler) handlers.get(table);
+                    handler = handlers.get(table);
                     handler.setDXFDocument(this.doc);
                     handler.startParsing();
                     parse = true;
@@ -119,10 +119,10 @@ public class DXFTableSectionHandler extends AbstractSectionHandler
     public void releaseDXFDocument() {
         this.doc = null;
 
-        Iterator i = handlers.values().iterator();
+        Iterator<DXFTableHandler> i = handlers.values().iterator();
 
         while (i.hasNext()) {
-            Handler handler = (Handler) i.next();
+            Handler handler = i.next();
             handler.releaseDXFDocument();
         }
     }

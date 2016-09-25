@@ -32,6 +32,7 @@ public class DXFEllipse extends DXFEntity {
         center = new Point();
     }
 
+    @Override
     public Bounds getBounds() {
         double alpha = this.getRotationAngle();
         Bounds bounds = new Bounds();
@@ -54,8 +55,8 @@ public class DXFEllipse extends DXFEntity {
             double h = (this.endParameter - this.startParameter) / n;
 
             double start = this.startParameter;
-            double major = this.getHalfMajorAxisLength();
-            double minor = major * this.ratio;
+            //double major = this.getHalfMajorAxisLength();
+            //double minor = major * this.ratio;
 
             Vector minorAxis = MathUtils.crossProduct(this.getExtrusion()
                                                           .getNormal(),
@@ -136,6 +137,7 @@ public class DXFEllipse extends DXFEntity {
         }
     }
 
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_ELLIPSE;
     }
@@ -203,6 +205,7 @@ public class DXFEllipse extends DXFEntity {
             majorAxisDirection);
     }
 
+    @Override
     public double getLength() {
         int n = INTEGRATION_STEPS;
         double h = (this.endParameter - this.startParameter) / n;

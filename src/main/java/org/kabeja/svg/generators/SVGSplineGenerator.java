@@ -39,7 +39,7 @@ import org.xml.sax.SAXException;
 
 public class SVGSplineGenerator extends AbstractSVGSAXGenerator
     implements SVGPathBoundaryGenerator {
-    public void toSAX(ContentHandler handler, Map svgContext, DXFEntity entity,
+    public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         DXFSpline spline = (DXFSpline) entity;
         DXFPolyline pline = DXFSplineConverter.toDXFPolyline(spline);
@@ -56,7 +56,7 @@ public class SVGSplineGenerator extends AbstractSVGSAXGenerator
     }
 
     public String getSVGPath(DXFEntity entity) {
-        //use Polyline for now 
+        //use Polyline for now
         DXFSpline spline = (DXFSpline) entity;
         DXFPolyline pline = DXFSplineConverter.toDXFPolyline(spline);
         StringBuilder d = new StringBuilder();
@@ -64,8 +64,8 @@ public class SVGSplineGenerator extends AbstractSVGSAXGenerator
         DXFVertex last;
         DXFVertex first;
 
-        Iterator i = pline.getVertexIterator();
-        first = last = (DXFVertex) i.next();
+        Iterator<DXFVertex> i = pline.getVertexIterator();
+        first = last = i.next();
         d.append("M ");
         d.append(last.getX());
         d.append(SVGConstants.SVG_ATTRIBUTE_PATH_PLACEHOLDER);
@@ -73,7 +73,7 @@ public class SVGSplineGenerator extends AbstractSVGSAXGenerator
         d.append(SVGConstants.SVG_ATTRIBUTE_PATH_PLACEHOLDER);
 
         while (i.hasNext()) {
-            DXFVertex end = (DXFVertex) i.next();
+            DXFVertex end = i.next();
             d.append(getVertexPath(last, end, pline));
             last = end;
         }
@@ -101,7 +101,7 @@ public class SVGSplineGenerator extends AbstractSVGSAXGenerator
             // do nothing if the points are the same
             if (l > 0.0) {
                 double r = pline.getRadius(Math.abs(start.getBulge()), l);
-                double h = (start.getBulge() * l) / 2;
+                // double h = (start.getBulge() * l) / 2;
 
                 // converting to an elipse with the same rx=ry
                 d.append("A ");

@@ -81,7 +81,7 @@ public class ProcessingRunViewComponent implements ViewComponent, Serviceable,
     protected JPanel pipelinePanel;
     protected boolean locked = false;
     protected boolean initialized = false;
-    protected List viewComponents = new ArrayList();
+    protected List<ViewControl> viewComponents = new ArrayList<ViewControl>();
     protected String processingPipeline;
     protected JTextArea logView;
     protected ProcessingManager manager;
@@ -89,8 +89,8 @@ public class ProcessingRunViewComponent implements ViewComponent, Serviceable,
     protected File sourceFile;
     protected DXFDocument doc;
     protected boolean autogenerateOutput = false;
-    protected Map properties = new HashMap();
-    protected ArrayList listeners = new ArrayList();
+    protected Map<String, Object> properties = new HashMap<String, Object>();
+    protected ArrayList<DXFDocumentChangeListener> listeners = new ArrayList<DXFDocumentChangeListener>();
 
     public String getTitle() {
         return "Run Processing";
@@ -150,10 +150,10 @@ public class ProcessingRunViewComponent implements ViewComponent, Serviceable,
         // setup the pipelines
         pipelinePanel.removeAll();
 
-        Iterator i = manager.getProcessPipelines().keySet().iterator();
+        Iterator<String> i = manager.getProcessPipelines().keySet().iterator();
 
         while (i.hasNext()) {
-            String pipelineName = (String) i.next();
+            String pipelineName = i.next();
             ProcessPipeline p = manager.getProcessPipeline(pipelineName);
             JButton button = new JButton(pipelineName);
             button.setActionCommand(pipelineName);
@@ -343,10 +343,10 @@ public class ProcessingRunViewComponent implements ViewComponent, Serviceable,
 
     protected void propagateDXFDocument(DXFDocument doc)
         throws Exception {
-        Iterator i = this.viewComponents.iterator();
+        Iterator<ViewControl> i = this.viewComponents.iterator();
 
         while (i.hasNext()) {
-            ViewControl c = (ViewControl) i.next();
+            ViewControl c = i.next();
 
             if (c.isEnabled()) {
                 c.getDXFDocumentViewComponent().showDXFDocument(doc);
@@ -365,12 +365,12 @@ public class ProcessingRunViewComponent implements ViewComponent, Serviceable,
         this.logView.setCaretPosition(this.logView.getDocument().getLength());
     }
 
-    public void propertiesChanged(Map props) {
+    public void propertiesChanged(Map<String, Object> props) {
         // copy changed properties to my properties
-        Iterator i = props.keySet().iterator();
+        Iterator<String> i = props.keySet().iterator();
 
         while (i.hasNext()) {
-            String key = (String) i.next();
+            String key = i.next();
             this.properties.put(key, props.get(key));
         }
     }
@@ -385,10 +385,11 @@ public class ProcessingRunViewComponent implements ViewComponent, Serviceable,
     }
 
     protected void fireDXFDocumentChangeEvent() throws Exception {
-        Iterator i = ((ArrayList) this.listeners.clone()).iterator();
+        @SuppressWarnings("unchecked")
+        Iterator<DXFDocumentChangeListener> i = ((ArrayList<DXFDocumentChangeListener>) this.listeners.clone()).iterator();
 
         while (i.hasNext()) {
-            DXFDocumentChangeListener l = (DXFDocumentChangeListener) i.next();
+            DXFDocumentChangeListener l = i.next();
 
             if (!(l instanceof DXFDocumentViewComponent)) {
                 // avoid double event
@@ -413,7 +414,6 @@ public class ProcessingRunViewComponent implements ViewComponent, Serviceable,
 
     private class ViewControl implements ItemListener {
         private JComponent view;
-        private String title;
         private DXFDocumentViewComponent component;
         private int index;
 

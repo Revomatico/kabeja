@@ -26,8 +26,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.dxf.DXFDocument;
 import org.kabeja.parser.dxf.DXFHandler;
 import org.kabeja.parser.dxf.filter.DXFStreamFilter;
@@ -44,14 +44,14 @@ public class DXFParser implements HandlerManager, Handler, Parser, DXFHandler {
     public final static String EXTENSION = "dxf";
     private final static String SECTION_START = "SECTION";
     private final static String SECTION_END = "ENDSEC";
-    private final static String END_STREAM = "EOF";
+    //private final static String END_STREAM = "EOF";
     private final static int COMMAND_CODE = 0;
     public static final String DEFAULT_ENCODING = StringUtils.EMPTY;
     protected DXFDocument doc;
-    protected Hashtable handlers = new Hashtable();
+    protected Hashtable<String, DXFSectionHandler> handlers = new Hashtable<String, DXFSectionHandler>();
     protected DXFSectionHandler currentHandler;
     private String line;
-    protected List streamFilters = new ArrayList();
+    protected List<DXFStreamFilter> streamFilters = new ArrayList<DXFStreamFilter>();
     protected DXFHandler filter;
 
     // some parse flags
@@ -98,7 +98,7 @@ public class DXFParser implements HandlerManager, Handler, Parser, DXFHandler {
         linecount = 0;
         parse = false;
 
-        //initialize 
+        //initialize
         doc = new DXFDocument();
         doc.setProperty(DXFDocument.PROPERTY_ENCODING, encoding);
         //the StreamFilters
@@ -169,7 +169,7 @@ public class DXFParser implements HandlerManager, Handler, Parser, DXFHandler {
                 sectionstarts = false;
 
                 if (handlers.containsKey(value.getValue())) {
-                    currentHandler = (DXFSectionHandler) handlers.get(value.getValue());
+                    currentHandler = handlers.get(value.getValue());
                     parse = true;
                     currentHandler.setDXFDocument(doc);
                     currentHandler.startSection();
@@ -240,10 +240,10 @@ public class DXFParser implements HandlerManager, Handler, Parser, DXFHandler {
     public void releaseDXFDocument() {
         this.doc = null;
 
-        Iterator i = handlers.values().iterator();
+        Iterator<DXFSectionHandler> i = handlers.values().iterator();
 
         while (i.hasNext()) {
-            Handler handler = (Handler) i.next();
+            Handler handler = i.next();
             handler.releaseDXFDocument();
         }
     }
@@ -282,7 +282,7 @@ public class DXFParser implements HandlerManager, Handler, Parser, DXFHandler {
         DXFHandler handler = this;
 
         for (int i = this.streamFilters.size() - 1; i >= 0; i--) {
-            DXFStreamFilter f = (DXFStreamFilter) this.streamFilters.get(i);
+            DXFStreamFilter f = this.streamFilters.get(i);
             f.setDXFHandler(handler);
             handler = f;
         }

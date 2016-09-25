@@ -8,7 +8,7 @@
     <groupId>org.kabeja</groupId>
     <artifactId>kabeja</artifactId>
     <name>kabeja</name>
-    <version>0.4.7</version>
+    <version>0.5.0</version>
     <packaging>jar</packaging>
     <description>Kabeja is a java library for parsing DXF and converting to SVG
 (dxf2svg). The library supports the SAX-api and can integrated
@@ -59,6 +59,8 @@ to jpeg, tiff, png and pdf are included.
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.5</maven.compiler.source>
+        <maven.compiler.target>1.5</maven.compiler.target>
     </properties>
 
     <licenses>

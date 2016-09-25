@@ -27,11 +27,12 @@ public class PipelinesTreeNode extends AbstractProcessingTreeNode {
         super(parent, LABEL);
     }
 
+    @Override
     protected void initializeChildren() {
-        Iterator i = this.manager.getProcessPipelines().keySet().iterator();
+        Iterator<String> i = this.manager.getProcessPipelines().keySet().iterator();
 
         while (i.hasNext()) {
-            String key = (String) i.next();
+            String key = i.next();
             PipelineTreeNode node = new PipelineTreeNode(this,
                     this.manager.getProcessPipeline(key), key);
             this.addChild(node);

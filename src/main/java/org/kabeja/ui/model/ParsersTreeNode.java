@@ -37,11 +37,12 @@ public class ParsersTreeNode extends AbstractProcessingTreeNode {
         return false;
     }
 
+    @Override
     protected void initializeChildren() {
-        Iterator i = this.manager.getParsers().iterator();
+        Iterator<Parser> i = this.manager.getParsers().iterator();
 
         while (i.hasNext()) {
-            ParserTreeNode ptn = new ParserTreeNode(this, (Parser) i.next());
+            ParserTreeNode ptn = new ParserTreeNode(this, i.next());
             this.addChild(ptn);
         }
     }

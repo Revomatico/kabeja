@@ -18,8 +18,8 @@ package org.kabeja.dxf;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.dxf.helpers.Point;
 
 
@@ -34,7 +34,7 @@ public class DXFLeader extends DXFEntity {
     protected double scaleFactor;
     protected double textWidth;
     protected double textHeight;
-    protected List coordinates = new ArrayList();
+    protected List<Point> coordinates = new ArrayList<Point>();
     protected int pathType = 0;
     protected int creationType = 0;
     protected int hooklineDirecton = 0;
@@ -65,6 +65,7 @@ public class DXFLeader extends DXFEntity {
      *
      * @see org.kabeja.dxf.DXFEntity#getBounds()
      */
+    @Override
     public Bounds getBounds() {
         Bounds bounds = new Bounds();
         bounds.setValid(false);
@@ -77,6 +78,7 @@ public class DXFLeader extends DXFEntity {
      *
      * @see org.kabeja.dxf.DXFEntity#getType()
      */
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_LEADER;
     }
@@ -285,10 +287,10 @@ public class DXFLeader extends DXFEntity {
     }
 
     public Point getCoordinateAt(int index) {
-        return (Point) this.coordinates.get(index);
+        return this.coordinates.get(index);
     }
 
-    public Iterator getCoordinateIterator() {
+    public Iterator<Point> getCoordinateIterator() {
         return this.coordinates.iterator();
     }
 
@@ -311,6 +313,7 @@ public class DXFLeader extends DXFEntity {
         return this.pathType == 1;
     }
 
+    @Override
     public double getLength() {
         // TODO Auto-generated method stub
         return 0;

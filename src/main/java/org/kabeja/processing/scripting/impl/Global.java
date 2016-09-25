@@ -59,7 +59,6 @@ public class Global extends ImporterTopLevel {
     public static void alert(Context cx, Scriptable thisObj, Object[] args,
         Function funObj) {
         int length = args.length;
-        Global g = (Global) thisObj;
 
         if (length >= 1) {
             String message = (String) Context.jsToJava(args[0], String.class);

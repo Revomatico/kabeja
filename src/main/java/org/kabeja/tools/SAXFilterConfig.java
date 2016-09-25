@@ -24,18 +24,18 @@ import java.util.Map;
  *
  */
 public class SAXFilterConfig {
-    private Map properties;
+    private Map<String, Object> properties;
     private String filterName;
 
-    public SAXFilterConfig(Map properties) {
+    public SAXFilterConfig(Map<String, Object> properties) {
         this.properties = properties;
     }
 
     public SAXFilterConfig() {
-        this(new HashMap());
+        this(new HashMap<String, Object>());
     }
 
-    public Map getProperties() {
+    public Map<String, Object> getProperties() {
         return this.properties;
     }
 

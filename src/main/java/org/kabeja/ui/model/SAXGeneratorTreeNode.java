@@ -32,15 +32,16 @@ public class SAXGeneratorTreeNode extends AbstractProcessingTreeNode {
         this.generator = generator;
     }
 
+    @Override
     protected void initializeChildren() {
         this.propertiesToChildren(this.generator.getProperties());
     }
 
     protected String findLabel() {
-        Iterator i = manager.getSAXGenerators().keySet().iterator();
+        Iterator<String> i = manager.getSAXGenerators().keySet().iterator();
 
         while (i.hasNext()) {
-            String key = (String) i.next();
+            String key = i.next();
 
             if (this.manager.getSAXGenerator(key) == this.generator) {
                 return key;
@@ -51,7 +52,6 @@ public class SAXGeneratorTreeNode extends AbstractProcessingTreeNode {
     }
 
     public boolean getAllowsChildren() {
-        // TODO Auto-generated method stub
         return false;
     }
 

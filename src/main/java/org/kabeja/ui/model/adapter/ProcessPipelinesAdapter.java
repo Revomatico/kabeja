@@ -25,22 +25,22 @@ import javax.swing.tree.TreeNode;
 
 
 public class ProcessPipelinesAdapter implements TreeNode {
-    private Map pipelines;
+    private Map<String, ?> pipelines;
     private TreeNode[] nodes;
 
-    public ProcessPipelinesAdapter(Map pipelines) {
+    public ProcessPipelinesAdapter(Map<String, ?> pipelines) {
         this.pipelines = pipelines;
     }
 
     protected void buildNodeList() {
         nodes = new TreeNode[this.pipelines.size()];
 
-        List list = new ArrayList(this.pipelines.keySet());
-        Iterator i = list.iterator();
+        List<String> list = new ArrayList<String>(this.pipelines.keySet());
+        Iterator<String> i = list.iterator();
         int count = 0;
 
         while (i.hasNext()) {
-            String name = (String) i.next();
+            String name = i.next();
             nodes[count] = new DefaultLeafAdapter(name, this);
         }
     }
@@ -49,7 +49,7 @@ public class ProcessPipelinesAdapter implements TreeNode {
         return this.pipelines.size();
     }
 
-    public Enumeration children() {
+    public Enumeration<?> children() {
         return null;
     }
 
@@ -58,7 +58,6 @@ public class ProcessPipelinesAdapter implements TreeNode {
     }
 
     public TreeNode getChildAt(int childIndex) {
-        // TODO Auto-generated method stub
         return nodes[childIndex];
     }
 
@@ -71,7 +70,6 @@ public class ProcessPipelinesAdapter implements TreeNode {
     }
 
     public boolean isLeaf() {
-        // TODO Auto-generated method stub
         return false;
     }
 }

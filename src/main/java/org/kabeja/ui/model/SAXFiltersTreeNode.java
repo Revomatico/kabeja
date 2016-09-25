@@ -27,11 +27,12 @@ public class SAXFiltersTreeNode extends AbstractProcessingTreeNode {
         super(parent, LABEL);
     }
 
+    @Override
     protected void initializeChildren() {
-        Iterator i = this.manager.getSAXFilters().keySet().iterator();
+        Iterator<String> i = this.manager.getSAXFilters().keySet().iterator();
 
         while (i.hasNext()) {
-            String key = (String) i.next();
+            String key = i.next();
             this.addChild(new SAXFilterTreeNode(this,
                     this.manager.getSAXFilter(key), key));
         }

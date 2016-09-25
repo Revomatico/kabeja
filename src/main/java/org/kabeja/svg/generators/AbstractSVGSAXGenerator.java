@@ -28,7 +28,7 @@ import org.kabeja.svg.SVGUtils;
 import org.xml.sax.helpers.AttributesImpl;
 
 public abstract class AbstractSVGSAXGenerator implements SVGSAXGenerator {
-	public void setCommonAttributes(AttributesImpl atts, Map context,
+	public void setCommonAttributes(AttributesImpl atts, Map<String, Object> context,
 			DXFEntity entity) {
 		// a negative color indicates the layer is off
 		if (!entity.isVisibile()) {
@@ -60,7 +60,7 @@ public abstract class AbstractSVGSAXGenerator implements SVGSAXGenerator {
 			SVGUtils.addAttribute(atts,
 					SVGConstants.SVG_ATTRIBUTE_STROKE_WITDH, SVGUtils
 							.lineWeightToStrokeWidth(entity.getLineWeight()));
-		} 
+		}
 
 		DXFDocument doc = entity.getDXFDocument();
 

@@ -27,11 +27,12 @@ public class SAXGeneratorsTreeNode extends AbstractProcessingTreeNode {
         super(parent, LABEL);
     }
 
+    @Override
     protected void initializeChildren() {
-        Iterator i = this.manager.getSAXGenerators().keySet().iterator();
+        Iterator<String> i = this.manager.getSAXGenerators().keySet().iterator();
 
         while (i.hasNext()) {
-            String key = (String) i.next();
+            String key = i.next();
             SAXGeneratorTreeNode node = new SAXGeneratorTreeNode(this,
                     this.manager.getSAXGenerator(key), key);
             this.addChild(node);

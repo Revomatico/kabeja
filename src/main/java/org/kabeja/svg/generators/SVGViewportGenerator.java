@@ -43,11 +43,11 @@ import org.xml.sax.helpers.AttributesImpl;
 public class SVGViewportGenerator extends AbstractSVGSAXGenerator {
     private SVGSAXGeneratorManager manager;
 
-    public void toSAX(ContentHandler handler, Map svgContext, DXFEntity entity,
+    public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         DXFViewport viewport = (DXFViewport) entity;
         // make a copy of the context
-        svgContext = new HashMap(svgContext);
+        svgContext = new HashMap<String, Object>(svgContext);
 
         if (viewport.getViewportStatus() > 0) {
             Point center = viewport.getCenterPoint();
@@ -160,7 +160,7 @@ public class SVGViewportGenerator extends AbstractSVGSAXGenerator {
                 } else {
                     width = (viewBounds.getWidth() + viewBounds.getHeight()) / 2 * SVGConstants.DEFAULT_STROKE_WIDTH_PERCENT;
 
-                    double defaultSW = ((double) DXFConstants.ENVIRONMENT_VARIABLE_LWDEFAULT) / 100.0;
+                    double defaultSW = (DXFConstants.ENVIRONMENT_VARIABLE_LWDEFAULT) / 100.0;
 
                     if (width > defaultSW) {
                         width = defaultSW;
@@ -180,10 +180,10 @@ public class SVGViewportGenerator extends AbstractSVGSAXGenerator {
 
                 SVGUtils.startElement(handler, SVGConstants.SVG_GROUP, attr);
 
-                Iterator i = viewport.getDXFDocument().getDXFLayerIterator();
+                Iterator<DXFLayer> i = viewport.getDXFDocument().getDXFLayerIterator();
 
                 while (i.hasNext()) {
-                    DXFLayer layer = (DXFLayer) i.next();
+                    DXFLayer layer = i.next();
 
                     if (!viewport.isFrozenLayer(layer.getName())) {
                         this.layerToSAX(handler, layer, svgContext, viewBounds,
@@ -197,7 +197,7 @@ public class SVGViewportGenerator extends AbstractSVGSAXGenerator {
     }
 
     protected void layerToSAX(ContentHandler handler, DXFLayer layer,
-        Map context, Bounds viewBounds, DXFViewport viewport)
+        Map<String, Object> context, Bounds viewBounds, DXFViewport viewport)
         throws SAXException {
         AttributesImpl attr = new AttributesImpl();
 
@@ -247,19 +247,19 @@ public class SVGViewportGenerator extends AbstractSVGSAXGenerator {
 
         SVGUtils.startElement(handler, SVGConstants.SVG_GROUP, attr);
 
-        Iterator types = layer.getDXFEntityTypeIterator();
+        Iterator<String> types = layer.getDXFEntityTypeIterator();
 
         while (types.hasNext()) {
-            String type = (String) types.next();
-            ArrayList list = (ArrayList) layer.getDXFEntities(type);
+            String type = types.next();
+            ArrayList<DXFEntity> list = (ArrayList<DXFEntity>) layer.getDXFEntities(type);
 
-            Iterator i = list.iterator();
+            Iterator<DXFEntity> i = list.iterator();
 
             try {
                 SVGSAXGenerator gen = this.manager.getSVGGenerator(type);
 
                 while (i.hasNext()) {
-                    DXFEntity entity = (DXFEntity) i.next();
+                    DXFEntity entity = i.next();
                     Bounds b = entity.getBounds();
 
                     // TODO only output the modelspace entities which are inside

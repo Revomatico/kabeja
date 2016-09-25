@@ -36,7 +36,7 @@ public class LinearDimensionOutputter extends AbstractDimensionOutputter {
         super(dim);
     }
 
-    public void output(ContentHandler handler, Map svgContext)
+    public void output(ContentHandler handler, Map<String, Object> svgContext)
         throws SAXException {
         if (dim.getDimensionBlock().length() > 0) {
             AttributesImpl attr = new AttributesImpl();
@@ -66,7 +66,7 @@ public class LinearDimensionOutputter extends AbstractDimensionOutputter {
         }
     }
 
-    public void toSAX(ContentHandler handler, Map svgContext, DXFEntity entity,
+    public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         output(handler, svgContext);
     }

@@ -71,8 +71,6 @@ public abstract class DXFEntity {
         this.layerID = id;
     }
 
-    //    public abstract void toSAX(ContentHandler handler, Map svgContext)
-    //        throws SAXException;
     public abstract Bounds getBounds();
 
     /**

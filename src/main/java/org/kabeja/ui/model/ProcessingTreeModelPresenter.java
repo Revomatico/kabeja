@@ -27,7 +27,7 @@ import org.kabeja.processing.ProcessingManager;
 
 public class ProcessingTreeModelPresenter extends AbstractProcessingTreeNode
     implements TreeModel {
-    protected List listeners = new ArrayList();
+    protected List<TreeModelListener> listeners = new ArrayList<TreeModelListener>();
 
     public ProcessingTreeModelPresenter(ProcessingManager manager) {
         super(null, "ProcessManager");
@@ -38,6 +38,7 @@ public class ProcessingTreeModelPresenter extends AbstractProcessingTreeNode
         return false;
     }
 
+    @Override
     protected void initializeChildren() {
         AbstractProcessingTreeNode node = new ParsersTreeNode(this);
         addChild(node);

@@ -31,7 +31,7 @@ import org.kabeja.dxf.helpers.Point;
 
 
 public class PolylineQueue {
-    private List elements = new ArrayList();
+    private List<DXFEntity> elements = new ArrayList<DXFEntity>();
     private Point startPoint;
     private Point endPoint;
     private double radius = DXFConstants.POINT_CONNECTION_RADIUS;
@@ -93,7 +93,7 @@ public class PolylineQueue {
         return this.endPoint;
     }
 
-    public Iterator getElementIterator() {
+    public Iterator<DXFEntity> getElementIterator() {
         return this.elements.iterator();
     }
 
@@ -130,10 +130,10 @@ public class PolylineQueue {
         DXFVertex first = new DXFVertex(this.startPoint);
         pline.addVertex(first);
 
-        Iterator i = this.elements.iterator();
+        Iterator<DXFEntity> i = this.elements.iterator();
 
         while (i.hasNext()) {
-            DXFEntity e = (DXFEntity) i.next();
+            DXFEntity e = i.next();
 
             if (DXFConstants.ENTITY_TYPE_LINE.equals(e.getType())) {
                 DXFLine line = (DXFLine) e;
@@ -208,11 +208,11 @@ public class PolylineQueue {
         int last = this.elements.size() - 1;
 
         for (int i = 0; i < (last + 1); i++) {
-            DXFEntity first = (DXFEntity) this.elements.get(i);
+            DXFEntity first = this.elements.get(i);
             this.reverse(first);
 
             if (i < last) {
-                DXFEntity e = (DXFEntity) this.elements.set(last, first);
+                DXFEntity e = this.elements.set(last, first);
                 this.reverse(e);
                 this.elements.set(i, e);
                 last--;
@@ -228,11 +228,11 @@ public class PolylineQueue {
     public void insertBefore(PolylineQueue queue) {
         this.startPoint = queue.getStartPoint();
 
-        Iterator i = queue.getElementIterator();
+        Iterator<DXFEntity> i = queue.getElementIterator();
         int x = 0;
 
         while (i.hasNext()) {
-            DXFEntity e = (DXFEntity) i.next();
+            DXFEntity e = i.next();
             this.elements.add(x, e);
             x++;
         }
@@ -246,10 +246,10 @@ public class PolylineQueue {
     public void add(PolylineQueue queue) {
         this.endPoint = queue.getEndPoint();
 
-        Iterator i = queue.getElementIterator();
+        Iterator<DXFEntity> i = queue.getElementIterator();
 
         while (i.hasNext()) {
-            DXFEntity e = (DXFEntity) i.next();
+            DXFEntity e = i.next();
             this.elements.add(e);
         }
     }

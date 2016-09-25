@@ -17,8 +17,8 @@ package org.kabeja.dxf.helpers;
 
 import java.util.Stack;
 import java.util.StringTokenizer;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.dxf.DXFMText;
 import org.kabeja.dxf.DXFText;
 
@@ -92,7 +92,7 @@ public class DXFTextParser {
         boolean formatting = false;
         boolean keyfollow = false;
         boolean complete = true;
-        Stack paras = new Stack();
+        Stack<StyledTextParagraph> paras = new Stack<StyledTextParagraph>();
         int linecount = 0;
         String str = text.getText();
         char key = ' ';
@@ -165,7 +165,7 @@ public class DXFTextParser {
                         p = createParagraphFromParent(p);
 
                         if (paras.size() > 0) {
-                            p = (StyledTextParagraph) paras.pop();
+                            p = paras.pop();
                         }
                     }
                 }
@@ -639,7 +639,7 @@ public class DXFTextParser {
                                 i += 2;
                             } catch (NumberFormatException e) {
                                 // TODO sometimes there is only one
-                                // digit, so what should be the 
+                                // digit, so what should be the
                                 //replacement???
                                 buf.append('?');
                                 i++;
