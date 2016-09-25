@@ -1,3 +1,5 @@
+https://travis-ci.org/don-vip/kabeja.svg?branch=master
+
 Kabeja is a small library for parsing DXF-Files and converting
 this to SVG. It is licensed under the Apache Software License 2.0.
 
