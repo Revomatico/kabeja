@@ -1,0 +1,2 @@
+./install-legacy-lib.sh
+mvn clean install
