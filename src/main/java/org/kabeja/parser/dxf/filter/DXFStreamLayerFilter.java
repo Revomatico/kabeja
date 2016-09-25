@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kabeja.parser.DXFValue;
 import org.kabeja.parser.ParseException;
 

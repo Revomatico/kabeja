@@ -50,7 +50,7 @@ import org.apache.batik.swing.svg.GVTTreeBuilderAdapter;
 import org.apache.batik.swing.svg.GVTTreeBuilderEvent;
 import org.apache.batik.swing.svg.SVGDocumentLoaderAdapter;
 import org.apache.batik.swing.svg.SVGDocumentLoaderEvent;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kabeja.dxf.DXFDocument;
 import org.kabeja.svg.SVGGenerator;
 import org.kabeja.svg.action.CanvasUpdateRunnable;

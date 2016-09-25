@@ -17,7 +17,7 @@ package org.kabeja.svg;
 
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kabeja.xml.AbstractSAXFilter;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

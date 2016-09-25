@@ -18,7 +18,7 @@ package org.kabeja.parser;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kabeja.parser.table.DXFTableHandler;
 
 

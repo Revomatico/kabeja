@@ -18,7 +18,7 @@ package org.kabeja.dxf.helpers;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kabeja.dxf.DXFMText;
 import org.kabeja.dxf.DXFText;
 

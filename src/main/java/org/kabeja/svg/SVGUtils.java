@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Iterator;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kabeja.dxf.DXFLineType;
 import org.kabeja.dxf.helpers.StyledTextParagraph;
 import org.kabeja.dxf.helpers.TextDocument;

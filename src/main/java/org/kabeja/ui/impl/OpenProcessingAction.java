@@ -23,7 +23,7 @@ import java.io.FileNotFoundException;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kabeja.processing.ProcessingManager;
 import org.kabeja.tools.SAXProcessingManagerBuilder;
 

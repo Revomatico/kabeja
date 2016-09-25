@@ -18,7 +18,7 @@ package org.kabeja.dxf;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kabeja.dxf.helpers.Point;
 
 

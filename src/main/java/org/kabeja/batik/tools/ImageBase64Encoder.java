@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.batik.util.Base64EncoderStream;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kabeja.xml.SAXFilter;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

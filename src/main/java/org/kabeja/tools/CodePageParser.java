@@ -18,7 +18,7 @@ package org.kabeja.tools;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kabeja.dxf.DXFConstants;
 
 

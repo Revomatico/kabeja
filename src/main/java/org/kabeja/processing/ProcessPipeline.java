@@ -22,7 +22,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kabeja.dxf.DXFDocument;
 import org.kabeja.processing.helper.MergeMap;
 import org.kabeja.tools.SAXFilterConfig;

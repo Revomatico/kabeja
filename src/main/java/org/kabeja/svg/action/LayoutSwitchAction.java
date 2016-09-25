@@ -25,7 +25,7 @@ import javax.swing.JComponent;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kabeja.dxf.DXFDocument;
 import org.kabeja.svg.SVGGenerator;
 import org.kabeja.svg.ui.PopUpButton;

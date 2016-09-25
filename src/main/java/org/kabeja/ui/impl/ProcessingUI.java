@@ -38,7 +38,7 @@ import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kabeja.processing.ProcessingManager;
 import org.kabeja.ui.Application;
 import org.kabeja.ui.ApplicationMenuBar;

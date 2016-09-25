@@ -28,7 +28,7 @@ import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 
 import org.apache.batik.anim.dom.SVGDOMImplementation;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kabeja.processing.BoundsFilter;
 import org.kabeja.svg.SVGConstants;
 import org.kabeja.svg.SVGUtils;

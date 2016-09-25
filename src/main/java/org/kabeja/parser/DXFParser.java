@@ -27,7 +27,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kabeja.dxf.DXFDocument;
 import org.kabeja.parser.dxf.DXFHandler;
 import org.kabeja.parser.dxf.filter.DXFStreamFilter;

@@ -15,7 +15,7 @@
  */
 package org.kabeja.parser.entities;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kabeja.dxf.DXFAttdef;
 import org.kabeja.dxf.DXFConstants;
 import org.kabeja.parser.DXFValue;
