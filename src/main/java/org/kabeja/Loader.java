@@ -16,7 +16,6 @@
 package org.kabeja;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -67,7 +66,6 @@ public class Loader {
             Method method = clazz.getDeclaredMethod("main",
                     new Class[] { args.getClass() });
             method.invoke(obj, new Object[] { args });
-            cl.close();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
@@ -82,8 +80,6 @@ public class Loader {
             e1.printStackTrace();
         } catch (InvocationTargetException e1) {
             e1.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
