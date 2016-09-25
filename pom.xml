@@ -24,6 +24,14 @@ to jpeg, tiff, png and pdf are included.
         </url>
     </issueManagement>
 
+	<repositories>
+		<repository>
+		    <id>in-project</id>
+		    <name>In Project Repo</name>
+		    <url>file://${project.basedir}/legacy-lib</url>
+		</repository>
+	</repositories>
+
     <inceptionYear>2005</inceptionYear>
  
     <developers>

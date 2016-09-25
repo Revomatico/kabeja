@@ -1,7 +1,4 @@
 language: java
-script:
- - ./install-legacy-lib.sh
- - mvn clean install
 jdk:
   - oraclejdk8
   - oraclejdk7
