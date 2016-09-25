@@ -45,7 +45,7 @@ public class FixedStrokeWidthFilter extends AbstractSAXFilter {
         } else if (this.replace) {
             String strokeWidth = atts.getValue(SVGConstants.SVG_ATTRIBUTE_STROKE_WITDH);
 
-            if ((strokeWidth != null) && (strokeWidth.length() > 0)) {
+            if ((strokeWidth != null) && !strokeWidth.isEmpty()) {
                 // we replace the stroke width with a fixed value
                 attsImpl.setValue(attsImpl.getIndex(
                         SVGConstants.SVG_ATTRIBUTE_STROKE_WITDH),

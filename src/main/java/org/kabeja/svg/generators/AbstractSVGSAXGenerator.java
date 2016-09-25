@@ -50,7 +50,7 @@ public abstract class AbstractSVGSAXGenerator implements SVGSAXGenerator {
                     SVGConstants.SVG_ATTRIBUTE_STROKE_VALUE_CURRENTCOLOR);
         }
 
-        if (entity.getID().length() > 0) {
+        if (!entity.getID().isEmpty()) {
             SVGUtils.addAttribute(atts, SVGConstants.XML_ID, SVGUtils
                     .validateID(entity.getID()));
         }
@@ -68,7 +68,7 @@ public abstract class AbstractSVGSAXGenerator implements SVGSAXGenerator {
 
         String lineType = entity.getLineType();
 
-        if ((lineType.length() > 0) && !"CONTINUOUS".equals(lineType)
+        if (!lineType.isEmpty() && !"CONTINUOUS".equals(lineType)
                 && !"BYBLOCK".equals(lineType) && !"BYLAYER".equals(lineType)
                 && !entity.isOmitLineType()) {
             DXFLineType ltype = doc.getDXFLineType(lineType);

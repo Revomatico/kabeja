@@ -121,7 +121,7 @@ public class SVGUtils {
      * @return a id which should be valid, but may be not unique.
      */
     public static String validateID(String id) {
-        if (id.length() > 0) {
+        if (!id.isEmpty()) {
             StringBuilder buf = new StringBuilder();
             char first = id.charAt(0);
 
@@ -159,7 +159,7 @@ public class SVGUtils {
      * @return
      */
     public static String reverseID(String id) {
-        if (id.length() > 0) {
+        if (!id.isEmpty()) {
             StringBuilder buf = new StringBuilder();
             boolean marker = false;
             boolean start = false;
@@ -246,7 +246,7 @@ public class SVGUtils {
             decoration += "overline ";
         }
 
-        if (decoration.length() > 0) {
+        if (!decoration.isEmpty()) {
             SVGUtils.addAttribute(atts,
                 SVGConstants.SVG_ATTRIBUTE_TEXT_DECORATION, decoration);
         }
@@ -286,7 +286,7 @@ public class SVGUtils {
                 "italic");
         }
 
-        if (para.getFont().length() > 0) {
+        if (!para.getFont().isEmpty()) {
             SVGUtils.addAttribute(atts, SVGConstants.SVG_ATTRIBUTE_FONT_FAMILY,
                 para.getFont());
         }

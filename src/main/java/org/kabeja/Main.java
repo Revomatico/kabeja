@@ -255,7 +255,7 @@ public class Main {
             ProcessPipeline pp = this.processorManager
                     .getProcessPipeline(pipeline);
             System.out.print(" " + pipeline);
-            if (pp.getDescription().length() > 0) {
+            if (!pp.getDescription().isEmpty()) {
                 System.out.print("\t" + pp.getDescription());
 
             }

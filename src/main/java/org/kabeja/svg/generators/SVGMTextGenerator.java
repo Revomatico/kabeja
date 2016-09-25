@@ -48,7 +48,7 @@ public class SVGMTextGenerator extends AbstractSVGSAXGenerator {
         // boolean bottom=false;
         DXFStyle style = null;
 
-        if ((mText.getTextStyle().length() > 0) &&
+        if (!mText.getTextStyle().isEmpty() &&
                 ((style = mText.getDXFDocument()
                                    .getDXFStyle(mText.getTextStyle())) != null)) {
             if (style.isBackward()) {

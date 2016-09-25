@@ -38,7 +38,7 @@ public class LinearDimensionOutputter extends AbstractDimensionOutputter {
 
     public void output(ContentHandler handler, Map<String, Object> svgContext)
         throws SAXException {
-        if (dim.getDimensionBlock().length() > 0) {
+        if (!dim.getDimensionBlock().isEmpty()) {
             AttributesImpl attr = new AttributesImpl();
             StringBuilder buf = new StringBuilder();
 

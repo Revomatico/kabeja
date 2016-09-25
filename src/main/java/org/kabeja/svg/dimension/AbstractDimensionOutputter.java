@@ -38,7 +38,7 @@ public abstract class AbstractDimensionOutputter extends AbstractSVGSAXGenerator
     }
 
     protected void outputText(ContentHandler handler) throws SAXException {
-        if ((dim.getDimensionText().length() > 0) &&
+        if (!dim.getDimensionText().isEmpty() &&
                 (dim.getDimensionText().indexOf("<>") < 0)) {
             System.out.println("Textdim:" + dim.getDimensionText());
 

@@ -220,7 +220,7 @@ public class SVGViewportGenerator extends AbstractSVGSAXGenerator {
 
         String lt = layer.getLineType();
 
-        if (lt.length() > 0) {
+        if (!lt.isEmpty()) {
             DXFLineType ltype = layer.getDXFDocument().getDXFLineType(lt);
             SVGUtils.addStrokeDashArrayAttribute(attr, ltype);
         }

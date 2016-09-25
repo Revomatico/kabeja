@@ -591,7 +591,7 @@ public class SVGGenerator extends AbstractSAXGenerator {
 
         String lt = layer.getLineType();
 
-        if (lt.length() > 0) {
+        if (!lt.isEmpty()) {
             DXFLineType ltype = doc.getDXFLineType(lt);
             SVGUtils.addStrokeDashArrayAttribute(attr, ltype);
         }

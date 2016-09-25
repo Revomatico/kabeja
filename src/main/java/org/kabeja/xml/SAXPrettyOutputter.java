@@ -211,7 +211,7 @@ public class SAXPrettyOutputter extends AbstractSAXSerializer
                 //String uri = atts.getURI(i);
                 String qname = atts.getQName(i);
 
-                // if (uri.length() > 0) {
+                // if (!uri.isEmpty()) {
                 // String prefix = qname.substring(0, qname.indexOf(':'));
                 // out
                 // .write(" xmlns:" + prefix + "=\"" + uri

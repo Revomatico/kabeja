@@ -168,7 +168,7 @@ public class SVGHatchGenerator extends AbstractSVGSAXGenerator {
             String d = manager.getSVGPathBoundaryGenerator(entity.getType())
                               .getSVGPath(entity);
 
-            if (d.length() == 0) {
+            if (d.isEmpty()) {
                 return;
             }
 
@@ -187,7 +187,7 @@ public class SVGHatchGenerator extends AbstractSVGSAXGenerator {
             }
 
             // every loop as single path
-            if (d.length() > 0) {
+            if (!d.isEmpty()) {
                 AttributesImpl attr = new AttributesImpl();
                 SVGUtils.addAttribute(attr, SVGConstants.SVG_ATTRIBUTE_PATH, buf.toString());
                 SVGUtils.emptyElement(handler, SVGConstants.SVG_PATH, attr);
@@ -196,7 +196,7 @@ public class SVGHatchGenerator extends AbstractSVGSAXGenerator {
     }
 
     protected String removeStartPoint(String svgPath) {
-        if ((svgPath.length() > 0) && (svgPath.charAt(0) == 'M')) {
+        if (!svgPath.isEmpty() && (svgPath.charAt(0) == 'M')) {
             boolean separator = false;
             int delemiterCount = 0;
 
