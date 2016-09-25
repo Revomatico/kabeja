@@ -31,6 +31,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 
 public class SVGInsertGenerator extends AbstractSVGSAXGenerator {
+    @Override
     public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         DXFInsert insert = (DXFInsert) entity;

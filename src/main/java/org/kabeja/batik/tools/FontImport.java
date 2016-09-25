@@ -58,6 +58,7 @@ public class FontImport {
         }
 
         File[] files = in.listFiles(new FileFilter() {
+                    @Override
                     public boolean accept(File f) {
                         if (f.getName().toLowerCase().endsWith(".ttf")) {
                             return true;

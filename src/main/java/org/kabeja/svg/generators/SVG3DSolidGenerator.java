@@ -24,6 +24,7 @@ import org.xml.sax.SAXException;
 
 
 public class SVG3DSolidGenerator extends AbstractSVGSAXGenerator {
+    @Override
     public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         // DXF3DSolid solid = (DXF3DSolid)entity;

@@ -42,6 +42,7 @@ public class PopUpButton extends JButton {
         // this.setBorder(new SmallTriangleBorder());
         this.setOpaque(false);
         this.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     Component c = (Component) e.getSource();
                     popupmenu.show(c, 0, c.getHeight());
@@ -49,6 +50,7 @@ public class PopUpButton extends JButton {
             });
 
         ItemListener l = new ItemListener() {
+                @Override
                 public void itemStateChanged(ItemEvent e) {
                     if (e.getStateChange() == ItemEvent.SELECTED) {
                         JCheckBoxMenuItem item = (JCheckBoxMenuItem) e.getItem();

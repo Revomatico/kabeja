@@ -27,6 +27,7 @@ public class SAXPNGSerializer extends AbstractSAXSerializer {
     /* (non-Javadoc)
      * @see org.kabeja.batik.tools.AbstractSAXSerializer#createTranscoder()
      */
+    @Override
     protected Transcoder createTranscoder() {
         return new PNGTranscoder();
     }
@@ -34,16 +35,16 @@ public class SAXPNGSerializer extends AbstractSAXSerializer {
     /* (non-Javadoc)
      * @see org.kabeja.xml.SAXSerializer#getMimeType()
      */
+    @Override
     public String getMimeType() {
-        // TODO Auto-generated method stub
         return MIME_TYPE_PNG;
     }
 
     /* (non-Javadoc)
      * @see org.kabeja.xml.SAXSerializer#getSuffix()
      */
+    @Override
     public String getSuffix() {
-        // TODO Auto-generated method stub
         return SUFFIX_PNG;
     }
 }

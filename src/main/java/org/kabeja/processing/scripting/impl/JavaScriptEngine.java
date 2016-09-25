@@ -28,6 +28,7 @@ import org.mozilla.javascript.ScriptableObject;
 
 
 public class JavaScriptEngine implements ScriptEngine {
+    @Override
     public void eval(DXFDocument doc, String script) throws ScriptException {
         Context ctx = Context.enter();
         Scriptable scope = ctx.initStandardObjects();
@@ -38,6 +39,7 @@ public class JavaScriptEngine implements ScriptEngine {
         Context.exit();
     }
 
+    @Override
     public void eval(DXFDocument doc, InputStream script)
         throws ScriptException {
         try {

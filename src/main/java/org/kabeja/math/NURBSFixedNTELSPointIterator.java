@@ -73,6 +73,7 @@ public class NURBSFixedNTELSPointIterator implements Iterator<Point> {
         }
     }
 
+    @Override
     public boolean hasNext() {
         if (this.t < this.nurbs.getKnots()[this.interval]) {
             return true;
@@ -85,15 +86,17 @@ public class NURBSFixedNTELSPointIterator implements Iterator<Point> {
         return false;
     }
 
+    @Override
     public Point next() {
         Point p = this.nurbs.getPointAt(this.interval - 1, t);
-        //		System.out.println("t="+t);
-        //		Point p = this.nurbs.getPointAt(t);
+        //        System.out.println("t="+t);
+        //        Point p = this.nurbs.getPointAt(t);
         this.t += this.dt;
 
         return p;
     }
 
+    @Override
     public void remove() {
         //nothing todo here
     }

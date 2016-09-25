@@ -24,6 +24,7 @@ public class DXFBody extends DXFRegion {
     /* (non-Javadoc)
      * @see de.miethxml.kabeja.dxf.DXFEntity#getType()
      */
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_BODY;
     }

@@ -27,6 +27,7 @@ public class DXFXLineHandler extends DXFRayHandler {
     /* (non-Javadoc)
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#getDXFEntityName()
      */
+    @Override
     public String getDXFEntityName() {
         return DXFConstants.ENTITY_TYPE_XLINE;
     }
@@ -34,6 +35,7 @@ public class DXFXLineHandler extends DXFRayHandler {
     /* (non-Javadoc)
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#startDXFEntity()
      */
+    @Override
     public void startDXFEntity() {
         this.ray = new DXFXLine();
     }

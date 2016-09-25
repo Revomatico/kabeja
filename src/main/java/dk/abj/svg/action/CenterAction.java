@@ -30,7 +30,6 @@ import javax.swing.ImageIcon;
 import org.apache.batik.swing.JSVGCanvas;
 import org.kabeja.svg.action.JSVGCanvasAction;
 
-
 import de.miethxml.toolkit.ui.UIUtils;
 
 
@@ -44,10 +43,12 @@ public class CenterAction extends AbstractAction implements JSVGCanvasAction {
         putValue(SHORT_DESCRIPTION, Messages.getString("editor.action.zoom.all"));
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         this.canvas.resetRenderingTransform();
     }
 
+    @Override
     public void setJSVGCanvas(JSVGCanvas canvas) {
         this.canvas = canvas;
     }

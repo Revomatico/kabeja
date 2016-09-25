@@ -53,6 +53,7 @@ public class DXFImageHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#getDXFEntityName()
      */
+    @Override
     public String getDXFEntityName() {
         return DXFConstants.ENTITY_TYPE_IMAGE;
     }
@@ -62,6 +63,7 @@ public class DXFImageHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#endDXFEntity()
      */
+    @Override
     public void endDXFEntity() {
     }
 
@@ -70,6 +72,7 @@ public class DXFImageHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#getDXFEntity()
      */
+    @Override
     public DXFEntity getDXFEntity() {
         // TODO Auto-generated method stub
         return image;
@@ -80,6 +83,7 @@ public class DXFImageHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#isFollowSequence()
      */
+    @Override
     public boolean isFollowSequence() {
         return false;
     }
@@ -90,6 +94,7 @@ public class DXFImageHandler extends AbstractEntityHandler {
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#parseGroup(int,
      *      de.miethxml.kabeja.parser.DXFValue)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         switch (groupCode) {
         case GROUPCODE_START_X:
@@ -204,6 +209,7 @@ public class DXFImageHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#startDXFEntity()
      */
+    @Override
     public void startDXFEntity() {
         image = new DXFImage();
         image.setDXFDocument(doc);

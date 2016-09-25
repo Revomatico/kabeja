@@ -67,6 +67,7 @@ public final class DXFValue {
         return (getIntegerValue() == 0) ? true : false;
     }
 
+    @Override
     public String toString() {
         return value;
     }

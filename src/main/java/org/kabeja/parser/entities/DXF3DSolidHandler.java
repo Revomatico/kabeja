@@ -29,8 +29,8 @@ public class DXF3DSolidHandler extends DXFRegionHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.AbstractEntityHandler#getDXFEntityName()
      */
+    @Override
     public String getDXFEntityName() {
-        // TODO Auto-generated method stub
         return DXFConstants.ENTITY_TYPE_3DSOLID;
     }
 
@@ -39,6 +39,7 @@ public class DXF3DSolidHandler extends DXFRegionHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#startDXFEntity()
      */
+    @Override
     public void startDXFEntity() {
         region = new DXF3DSolid();
     }

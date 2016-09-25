@@ -34,24 +34,29 @@ public class DXFEllipseHandler extends AbstractEntityHandler {
     public static final int COUNTERCLOCKWISE = 73;
     private DXFEllipse ellipse;
 
+    @Override
     public void endDXFEntity() {
     }
 
+    @Override
     public DXFEntity getDXFEntity() {
         return ellipse;
     }
 
+    @Override
     public String getDXFEntityName() {
         return ENTITY_NAME;
     }
 
+    @Override
     public boolean isFollowSequence() {
         return false;
     }
 
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
-        //    	System.out.println(" "+groupCode);
-        //    	System.out.println(value.getValue());
+        //        System.out.println(" "+groupCode);
+        //        System.out.println(value.getValue());
         switch (groupCode) {
         case GROUPCODE_START_X:
             ellipse.getCenterPoint().setX(value.getDoubleValue());
@@ -110,6 +115,7 @@ public class DXFEllipseHandler extends AbstractEntityHandler {
         }
     }
 
+    @Override
     public void startDXFEntity() {
         //System.out.println("0\nELLIPSE");
         ellipse = new DXFEllipse();

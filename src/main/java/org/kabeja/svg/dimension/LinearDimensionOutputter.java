@@ -66,6 +66,7 @@ public class LinearDimensionOutputter extends AbstractDimensionOutputter {
         }
     }
 
+    @Override
     public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         output(handler, svgContext);

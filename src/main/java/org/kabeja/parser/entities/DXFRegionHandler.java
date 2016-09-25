@@ -36,8 +36,8 @@ public class DXFRegionHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.AbstractEntityHandler#getDXFEntityName()
      */
+    @Override
     public String getDXFEntityName() {
-        // TODO Auto-generated method stub
         return DXFConstants.ENTITY_TYPE_REGION;
     }
 
@@ -46,6 +46,7 @@ public class DXFRegionHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#startDXFEntity()
      */
+    @Override
     public void startDXFEntity() {
         region = new DXFRegion();
     }
@@ -56,6 +57,7 @@ public class DXFRegionHandler extends AbstractEntityHandler {
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#parseGroup(int,
      *      de.miethxml.kabeja.parser.DXFValue)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         switch (groupCode) {
         case DATA:
@@ -77,6 +79,7 @@ public class DXFRegionHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#getDXFEntity()
      */
+    @Override
     public DXFEntity getDXFEntity() {
         return region;
     }
@@ -86,6 +89,7 @@ public class DXFRegionHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#endDXFEntity()
      */
+    @Override
     public void endDXFEntity() {
         checkBuffer();
     }
@@ -95,6 +99,7 @@ public class DXFRegionHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#isFollowSequence()
      */
+    @Override
     public boolean isFollowSequence() {
         return false;
     }
@@ -107,7 +112,7 @@ public class DXFRegionHandler extends AbstractEntityHandler {
             if (Character.isWhitespace(c[i])) {
                 buf.append(' ');
             } else {
-                int code = Math.abs(((int) c[i]) - 159);
+                int code = Math.abs((c[i]) - 159);
                 buf.append((char) code);
             }
         }

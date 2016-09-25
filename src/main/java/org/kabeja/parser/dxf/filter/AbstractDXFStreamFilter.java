@@ -24,10 +24,12 @@ public abstract class AbstractDXFStreamFilter implements DXFStreamFilter {
     protected Map<String, Object> properties;
     protected DXFHandler handler;
 
+    @Override
     public void setProperties(Map<String, Object> properties) {
         this.properties = properties;
     }
 
+    @Override
     public void setDXFHandler(DXFHandler handler) {
         this.handler = handler;
     }

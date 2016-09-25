@@ -27,6 +27,7 @@ public class SAXTIFFSerializer extends AbstractSAXSerializer {
     /* (non-Javadoc)
      * @see org.kabeja.batik.tools.AbstractSAXSerializer#createTranscoder()
      */
+    @Override
     protected Transcoder createTranscoder() {
         return new TIFFTranscoder();
     }
@@ -34,6 +35,7 @@ public class SAXTIFFSerializer extends AbstractSAXSerializer {
     /* (non-Javadoc)
      * @see org.kabeja.xml.SAXSerializer#getMimeType()
      */
+    @Override
     public String getMimeType() {
         return MIME_TYPE_TIFF;
     }
@@ -41,6 +43,7 @@ public class SAXTIFFSerializer extends AbstractSAXSerializer {
     /* (non-Javadoc)
      * @see org.kabeja.xml.SAXSerializer#getSuffix()
      */
+    @Override
     public String getSuffix() {
         return SUFFIX_TIFF;
     }

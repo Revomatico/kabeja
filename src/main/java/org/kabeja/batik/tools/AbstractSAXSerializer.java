@@ -132,6 +132,7 @@ public abstract class AbstractSAXSerializer extends AbstractSAXFilter
      *
      * @see org.kabeja.xml.SAXSerializer#setOutput(java.io.OutputStream)
      */
+    @Override
     public void setOutput(OutputStream out) {
         this.out = out;
     }

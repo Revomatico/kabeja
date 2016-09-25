@@ -22,10 +22,12 @@ import java.util.Map;
 public abstract class AbstractConfigurable implements Configurable {
     protected Map<String, Object> properties = new HashMap<String, Object>();
 
+    @Override
     public void setProperties(Map<String, Object> properties) {
         this.properties = properties;
     }
 
+    @Override
     public Map<String, Object> getProperties() {
         return this.properties;
     }

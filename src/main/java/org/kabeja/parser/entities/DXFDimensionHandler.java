@@ -59,6 +59,7 @@ public class DXFDimensionHandler extends AbstractEntityHandler {
     protected String ENTITY_NAME = "DIMENSION";
     protected DXFDimension dimension;
 
+    @Override
     public void endDXFEntity() {
     }
 
@@ -67,6 +68,7 @@ public class DXFDimensionHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#getDXFEntity()
      */
+    @Override
     public DXFEntity getDXFEntity() {
         return dimension;
     }
@@ -76,8 +78,8 @@ public class DXFDimensionHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#getDXFEntityName()
      */
+    @Override
     public String getDXFEntityName() {
-        // TODO Auto-generated method stub
         return ENTITY_NAME;
     }
 
@@ -86,8 +88,8 @@ public class DXFDimensionHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#isFollowSequence()
      */
+    @Override
     public boolean isFollowSequence() {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -97,6 +99,7 @@ public class DXFDimensionHandler extends AbstractEntityHandler {
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#parseGroup(int,
      *      de.miethxml.kabeja.parser.DXFValue)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         switch (groupCode) {
         case GROUPCODE_TEXT_POINT_X:
@@ -264,6 +267,7 @@ public class DXFDimensionHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#startDXFEntity()
      */
+    @Override
     public void startDXFEntity() {
         dimension = new DXFDimension();
     }

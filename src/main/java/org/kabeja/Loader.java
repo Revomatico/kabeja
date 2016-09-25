@@ -43,12 +43,12 @@ public class Loader {
     private Set<String> classpathEntries = new HashSet<String>();
 
     public Loader() {
-		this.classpathEntries.add("lib");
-		this.classpathEntries.add("classes");
+        this.classpathEntries.add("lib");
+        this.classpathEntries.add("classes");
 
-	}
+    }
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
         Loader l = new Loader();
         l.launch(args);
     }
@@ -120,11 +120,11 @@ public class Loader {
                 i++;
                 this.mainClass = args[i];
             }else if(OPTION_LIB_FOLDER.equals(args[i])){
-            	i++;
-            	this.addPathEntries(args[i]);
+                i++;
+                this.addPathEntries(args[i]);
             }else if(OPTION_CLASSES_FOLDER.equals(args[i])){
-            	i++;
-            	this.addPathEntries(args[i]);
+                i++;
+                this.addPathEntries(args[i]);
             }else {
                 list.add(args[i]);
             }
@@ -134,11 +134,11 @@ public class Loader {
     }
 
     protected void addPathEntries(String path){
-    	StringTokenizer st = new StringTokenizer(path,":");
+        StringTokenizer st = new StringTokenizer(path,":");
 
-    	while(st.hasMoreElements()){
-    		String el = (String)st.nextElement();
-    		this.classpathEntries.add(el);
-    	}
+        while(st.hasMoreElements()){
+            String el = (String)st.nextElement();
+            this.classpathEntries.add(el);
+        }
     }
 }

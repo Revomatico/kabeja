@@ -10,6 +10,7 @@ package org.kabeja.dxf;
  *
  */
 public class DXFXLine extends DXFRay {
+    @Override
     public Bounds getBounds() {
         //the xline is a infinite straight line
         //so we omit the bounds
@@ -19,6 +20,7 @@ public class DXFXLine extends DXFRay {
         return bounds;
     }
 
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_XLINE;
     }

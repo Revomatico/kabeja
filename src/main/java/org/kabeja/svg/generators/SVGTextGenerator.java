@@ -33,6 +33,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 public class SVGTextGenerator extends AbstractSVGSAXGenerator {
 
+    @Override
     public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
             TransformContext transformContext) throws SAXException {
         DXFText text = (DXFText) entity;

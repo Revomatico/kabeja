@@ -69,6 +69,7 @@ public class SelectionAction extends AbstractAction implements SVGDocumentAction
         putValue(SHORT_DESCRIPTION, Messages.getString("editor.action.cut.area"));
     }
 
+    @Override
     public void handleEvent(Event evt) {
         if (this.state) {
             MouseEvent event = (MouseEvent) evt;
@@ -158,6 +159,7 @@ public class SelectionAction extends AbstractAction implements SVGDocumentAction
         }
     }
 
+    @Override
     public void setDocument(SVGDocument doc) {
         String svgNS = SVGDOMImplementation.SVG_NAMESPACE_URI;
 
@@ -209,18 +211,22 @@ public class SelectionAction extends AbstractAction implements SVGDocumentAction
         doc.getDocumentElement().insertBefore(this.selectionRectangle, rectangle);
     }
 
+    @Override
     public void addPropertiesListener(PropertiesListener listener) {
         this.listeners.add(listener);
     }
 
+    @Override
     public Map<String, Object> getProperties() {
         return this.properties;
     }
 
+    @Override
     public void removePropertiesListener(PropertiesListener listener) {
         this.listeners.remove(listener);
     }
 
+    @Override
     public void setProperties(Map<String, Object> properties) {
     }
 
@@ -249,9 +255,11 @@ public class SelectionAction extends AbstractAction implements SVGDocumentAction
         }
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
     }
 
+    @Override
     public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
             this.state = true;
@@ -262,6 +270,7 @@ public class SelectionAction extends AbstractAction implements SVGDocumentAction
         }
     }
 
+    @Override
     public void setCanvasUpdateManager(CanvasUpdateManager manager) {
         this.updateManager = manager;
     }

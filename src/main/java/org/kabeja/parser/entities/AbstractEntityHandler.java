@@ -58,6 +58,7 @@ public abstract class AbstractEntityHandler implements DXFEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#setDXFDocument(org.dxf2svg.xml.DXFDocument)
      */
+    @Override
     public void setDXFDocument(DXFDocument doc) {
         this.doc = doc;
     }
@@ -143,6 +144,7 @@ public abstract class AbstractEntityHandler implements DXFEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#getEntityName()
      */
+    @Override
     public abstract String getDXFEntityName();
 
     /*
@@ -150,6 +152,7 @@ public abstract class AbstractEntityHandler implements DXFEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.Handler#releaseDXFDocument()
      */
+    @Override
     public void releaseDXFDocument() {
         this.doc = null;
     }

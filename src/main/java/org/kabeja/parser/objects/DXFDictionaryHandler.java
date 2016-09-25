@@ -28,17 +28,21 @@ public class DXFDictionaryHandler extends AbstractDXFObjectHandler {
     protected String objectName;
     protected boolean rootDictionaryParsed = false;
 
+    @Override
     public void endObject() {
     }
 
+    @Override
     public DXFObject getDXFObject() {
         return dictionary;
     }
 
+    @Override
     public String getObjectType() {
         return DXFConstants.OBJECT_TYPE_DICTIONARY;
     }
 
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         switch (groupCode) {
         case GROUPCODE_RECORD_NAME:
@@ -57,6 +61,7 @@ public class DXFDictionaryHandler extends AbstractDXFObjectHandler {
         }
     }
 
+    @Override
     public void startObject() {
         if (this.rootDictionaryParsed) {
             this.dictionary = new DXFDictionary();

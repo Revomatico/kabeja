@@ -83,6 +83,7 @@ public class LayerSelectionAction extends AbstractAction
             Messages.getString("editor.action.layer.selection"));
     }
 
+    @Override
     public void setDocument(SVGDocument doc) {
         Element el = doc.getElementById("draft");
         NodeList list = el.getElementsByTagName("g");
@@ -97,8 +98,10 @@ public class LayerSelectionAction extends AbstractAction
         }
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         Thread t = new Thread(new Runnable() {
+                    @Override
                     public void run() {
                         Frame[] frames = Frame.getFrames();
 
@@ -129,6 +132,7 @@ public class LayerSelectionAction extends AbstractAction
                         box = new JCheckBox();
 
                         box.addActionListener(new ActionListener() {
+                                @Override
                                 public void actionPerformed(ActionEvent e) {
                                     properties.put(LayerFilter.PROPERTY_MERGE_LAYERS,
                                         Boolean.toString(box.isSelected()));
@@ -152,6 +156,7 @@ public class LayerSelectionAction extends AbstractAction
                         JButton button = new JButton(Messages.getString(
                                     "button.close"));
                         button.addActionListener(new ActionListener() {
+                                @Override
                                 public void actionPerformed(ActionEvent e) {
                                     dialog.setVisible(false);
                                     dialog.dispose();
@@ -168,18 +173,22 @@ public class LayerSelectionAction extends AbstractAction
         t.start();
     }
 
+    @Override
     public void addPropertiesListener(PropertiesListener listener) {
         this.listeners.add(listener);
     }
 
+    @Override
     public Map<String, Object> getProperties() {
         return this.properties;
     }
 
+    @Override
     public void removePropertiesListener(PropertiesListener listener) {
         this.listeners.remove(listener);
     }
 
+    @Override
     public void setProperties(Map<String, Object> props) {
         Iterator<String> i = props.keySet().iterator();
 
@@ -199,6 +208,7 @@ public class LayerSelectionAction extends AbstractAction
         }
     }
 
+    @Override
     public void setCanvasUpdateManager(CanvasUpdateManager manager) {
         this.updateManager = manager;
     }
@@ -236,14 +246,17 @@ public class LayerSelectionAction extends AbstractAction
             }
         }
 
+        @Override
         public int getColumnCount() {
             return 2;
         }
 
+        @Override
         public int getRowCount() {
             return layers.size();
         }
 
+        @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
             Node node = layers.get(rowIndex);
 
@@ -342,6 +355,7 @@ public class LayerSelectionAction extends AbstractAction
             this.model = model;
         }
 
+        @Override
         public void run() {
             Node node = layers.get(nodeIndex);
 

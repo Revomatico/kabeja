@@ -93,6 +93,7 @@ public class HatchLineIterator implements Iterator<HatchLineSegment> {
         this.initialize();
     }
 
+    @Override
     public boolean hasNext() {
         return this.currentWalkingStep <= this.walkingLength;
     }
@@ -211,6 +212,7 @@ public class HatchLineIterator implements Iterator<HatchLineSegment> {
         return v;
     }
 
+    @Override
     public HatchLineSegment next() {
         Point p = this.patternLine.getPointAt(this.currentWalkingStep);
         ParametricLine line = new ParametricLine(p, this.v);
@@ -259,6 +261,7 @@ public class HatchLineIterator implements Iterator<HatchLineSegment> {
         return segment;
     }
 
+    @Override
     public void remove() {
         // we do nothing here
     }

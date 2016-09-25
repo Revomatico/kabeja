@@ -29,9 +29,11 @@ public class MergeMap<K, V> implements Map<K, V> {
         this.override = override;
     }
 
+    @Override
     public void clear() {
     }
 
+    @Override
     public boolean containsKey(Object key) {
         if (this.override.containsKey(key)) {
             return true;
@@ -40,6 +42,7 @@ public class MergeMap<K, V> implements Map<K, V> {
         }
     }
 
+    @Override
     public boolean containsValue(Object value) {
         if (this.override.containsValue(value)) {
             return true;
@@ -48,10 +51,12 @@ public class MergeMap<K, V> implements Map<K, V> {
         }
     }
 
+    @Override
     public Set<Map.Entry<K, V>> entrySet() {
         return null;
     }
 
+    @Override
     public V get(Object key) {
         V obj = this.override.get(key);
 
@@ -62,6 +67,7 @@ public class MergeMap<K, V> implements Map<K, V> {
         return obj;
     }
 
+    @Override
     public boolean isEmpty() {
         if (this.override.isEmpty()) {
             return true;
@@ -70,25 +76,31 @@ public class MergeMap<K, V> implements Map<K, V> {
         }
     }
 
+    @Override
     public Set<K> keySet() {
         return null;
     }
 
+    @Override
     public V put(K key, V value) {
         return null;
     }
 
+    @Override
     public void putAll(Map<? extends K, ? extends V> arg0) {
     }
 
+    @Override
     public V remove(Object key) {
         return null;
     }
 
+    @Override
     public int size() {
         return this.base.size();
     }
 
+    @Override
     public Collection<V> values() {
         return null;
     }

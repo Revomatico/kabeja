@@ -45,30 +45,37 @@ public class ProcessPipelinesAdapter implements TreeNode {
         }
     }
 
+    @Override
     public int getChildCount() {
         return this.pipelines.size();
     }
 
+    @Override
     public Enumeration<?> children() {
         return null;
     }
 
+    @Override
     public boolean getAllowsChildren() {
         return true;
     }
 
+    @Override
     public TreeNode getChildAt(int childIndex) {
         return nodes[childIndex];
     }
 
+    @Override
     public int getIndex(TreeNode node) {
         return 0;
     }
 
+    @Override
     public TreeNode getParent() {
         return null;
     }
 
+    @Override
     public boolean isLeaf() {
         return false;
     }

@@ -41,12 +41,15 @@ public class PrintAction extends AbstractAction implements SVGDocumentAction {
             Messages.getString("editor.action.print"));
     }
 
+    @Override
     public void setDocument(SVGDocument doc) {
         this.doc = doc;
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         SwingUtilities.invokeLater(new Runnable() {
+                @Override
                 public void run() {
                     print();
                 }

@@ -26,6 +26,7 @@ abstract class DXFStreamEntityFilter extends DXFStreamSectionFilter {
     protected boolean parseEntity = false;
     protected boolean parseHeader = false;
 
+    @Override
     protected void parseSection(int groupCode, DXFValue value)
         throws ParseException {
         if (parseHeader) {
@@ -52,12 +53,14 @@ abstract class DXFStreamEntityFilter extends DXFStreamSectionFilter {
         handler.parseGroup(groupCode, value);
     }
 
+    @Override
     protected void sectionEnd(String Section) throws ParseException {
         if (section.equals(SECTION_KEY)) {
             this.entitySection = false;
         }
     }
 
+    @Override
     protected void sectionStart(String Section) throws ParseException {
         if (section.equals(SECTION_KEY)) {
             this.parseHeader = true;

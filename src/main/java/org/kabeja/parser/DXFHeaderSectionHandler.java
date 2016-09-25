@@ -34,6 +34,7 @@ public class DXFHeaderSectionHandler implements DXFSectionHandler {
     /* (non-Javadoc)
      * @see org.dxf2svg.parser.SectionHandler#getSectionKey()
      */
+    @Override
     public String getSectionKey() {
         return sectionKey;
     }
@@ -41,6 +42,7 @@ public class DXFHeaderSectionHandler implements DXFSectionHandler {
     /* (non-Javadoc)
      * @see org.dxf2svg.parser.SectionHandler#setDXFDocument(org.dxf2svg.xml.DXFDocument)
      */
+    @Override
     public void setDXFDocument(DXFDocument doc) {
         this.doc = doc;
     }
@@ -48,6 +50,7 @@ public class DXFHeaderSectionHandler implements DXFSectionHandler {
     /* (non-Javadoc)
      * @see org.dxf2svg.parser.SectionHandler#parseGroup(int, java.lang.String)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         if (groupCode == VARIABLE_CODE) {
             variable = new DXFVariable(value.getValue());
@@ -65,12 +68,14 @@ public class DXFHeaderSectionHandler implements DXFSectionHandler {
     /* (non-Javadoc)
      * @see org.dxf2svg.parser.SectionHandler#endParsing()
      */
+    @Override
     public void endSection() {
     }
 
     /* (non-Javadoc)
      * @see org.dxf2svg.parser.SectionHandler#startParsing()
      */
+    @Override
     public void startSection() {
         doc.setDXFHeader(new DXFHeader());
     }
@@ -78,6 +83,7 @@ public class DXFHeaderSectionHandler implements DXFSectionHandler {
     /* (non-Javadoc)
      * @see de.miethxml.kabeja.parser.Handler#releaseDXFDocument()
      */
+    @Override
     public void releaseDXFDocument() {
         this.doc = null;
     }

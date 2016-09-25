@@ -49,6 +49,7 @@ public class DXFLineHandler extends AbstractEntityHandler {
      * @see org.dxf2svg.parser.entities.EntityHandler#parseGroup(int,
      *      java.lang.String)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         switch (groupCode) {
         case GROUPCODE_START_X:
@@ -90,6 +91,7 @@ public class DXFLineHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#getEntity()
      */
+    @Override
     public DXFEntity getDXFEntity() {
         return line;
     }
@@ -99,6 +101,7 @@ public class DXFLineHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#startParsing()
      */
+    @Override
     public void startDXFEntity() {
         line = new DXFLine();
         line.setStartPoint(new Point());
@@ -110,6 +113,7 @@ public class DXFLineHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#endParsing()
      */
+    @Override
     public void endDXFEntity() {
     }
 
@@ -126,6 +130,7 @@ public class DXFLineHandler extends AbstractEntityHandler {
     /* (non-Javadoc)
      * @see org.dxf2svg.parser.entities.EntityHandler#isFollowSequence()
      */
+    @Override
     public boolean isFollowSequence() {
         return false;
     }

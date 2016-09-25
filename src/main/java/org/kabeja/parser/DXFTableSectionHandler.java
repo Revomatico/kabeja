@@ -45,6 +45,7 @@ public class DXFTableSectionHandler extends AbstractSectionHandler
      *
      * @see org.dxf2svg.parser.SectionHandler#getSectionKey()
      */
+    @Override
     public String getSectionKey() {
         return sectionKey;
     }
@@ -54,6 +55,7 @@ public class DXFTableSectionHandler extends AbstractSectionHandler
      *
      * @see org.dxf2svg.parser.SectionHandler#parseGroup(int, java.lang.String)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         if (groupCode == TABLE_CODE) {
             //switch table
@@ -93,6 +95,7 @@ public class DXFTableSectionHandler extends AbstractSectionHandler
      *
      * @see org.dxf2svg.parser.SectionHandler#endParsing()
      */
+    @Override
     public void endSection() {
     }
 
@@ -101,10 +104,12 @@ public class DXFTableSectionHandler extends AbstractSectionHandler
      *
      * @see org.dxf2svg.parser.SectionHandler#startParsing()
      */
+    @Override
     public void startSection() {
         parse = false;
     }
 
+    @Override
     public void addHandler(Handler handler) {
         addDXFTableHandler((DXFTableHandler) handler);
     }
@@ -116,6 +121,7 @@ public class DXFTableSectionHandler extends AbstractSectionHandler
     /* (non-Javadoc)
      * @see de.miethxml.kabeja.parser.Handler#releaseDXFDocument()
      */
+    @Override
     public void releaseDXFDocument() {
         this.doc = null;
 

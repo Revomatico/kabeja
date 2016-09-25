@@ -43,6 +43,7 @@ public abstract class AbstractProcessingTreeNode implements TreeNode {
         this.initializeChildren();
     }
 
+    @Override
     public TreeNode getParent() {
         return parent;
     }
@@ -52,18 +53,22 @@ public abstract class AbstractProcessingTreeNode implements TreeNode {
         this.children.add(child);
     }
 
+    @Override
     public int getChildCount() {
         return this.children.size();
     }
 
+    @Override
     public int getIndex(TreeNode node) {
         return this.children.indexOf(node);
     }
 
+    @Override
     public TreeNode getChildAt(int childIndex) {
         return this.children.get(childIndex);
     }
 
+    @Override
     public Enumeration<AbstractProcessingTreeNode> children() {
         return Collections.enumeration(this.children);
     }

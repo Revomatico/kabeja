@@ -37,6 +37,7 @@ public class DXFShapeHandler extends AbstractEntityHandler {
      *
      * @see org.kabeja.parser.entities.DXFEntityHandler#getDXFEntityName()
      */
+    @Override
     public String getDXFEntityName() {
         return DXFConstants.ENTITY_TYPE_SHAPE;
     }
@@ -46,6 +47,7 @@ public class DXFShapeHandler extends AbstractEntityHandler {
      *
      * @see org.kabeja.parser.entities.DXFEntityHandler#endDXFEntity()
      */
+    @Override
     public void endDXFEntity() {
     }
 
@@ -54,6 +56,7 @@ public class DXFShapeHandler extends AbstractEntityHandler {
      *
      * @see org.kabeja.parser.entities.DXFEntityHandler#getDXFEntity()
      */
+    @Override
     public DXFEntity getDXFEntity() {
         return shape;
     }
@@ -63,6 +66,7 @@ public class DXFShapeHandler extends AbstractEntityHandler {
      *
      * @see org.kabeja.parser.entities.DXFEntityHandler#isFollowSequence()
      */
+    @Override
     public boolean isFollowSequence() {
         // TODO Auto-generated method stub
         return false;
@@ -74,6 +78,7 @@ public class DXFShapeHandler extends AbstractEntityHandler {
      * @see org.kabeja.parser.entities.DXFEntityHandler#parseGroup(int,
      *      org.kabeja.parser.DXFValue)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         switch (groupCode) {
         case GROUPCODE_START_X:
@@ -121,6 +126,7 @@ public class DXFShapeHandler extends AbstractEntityHandler {
      *
      * @see org.kabeja.parser.entities.DXFEntityHandler#startDXFEntity()
      */
+    @Override
     public void startDXFEntity() {
         shape = new DXFShape();
     }

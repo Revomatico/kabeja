@@ -29,18 +29,22 @@ public class ParserTreeNode extends AbstractProcessingTreeNode {
         this.parser = parser;
     }
 
+    @Override
     protected String getLabel() {
         // TODO Auto-generated method stub
         return parser.getName();
     }
 
+    @Override
     protected void initializeChildren() {
     }
 
+    @Override
     public boolean getAllowsChildren() {
         return false;
     }
 
+    @Override
     public boolean isLeaf() {
         return true;
     }

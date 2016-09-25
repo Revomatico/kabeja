@@ -33,6 +33,7 @@ public class AggregatorGenerator extends AbstractSAXFilter
     protected List<SAXGenerator> generators = new ArrayList<SAXGenerator>();
     protected DXFDocument doc;
 
+    @Override
     public void generate(DXFDocument doc, ContentHandler handler, Map<String, Object> context)
         throws SAXException {
         this.setContentHandler(handler);

@@ -37,6 +37,7 @@ public class PolylineConverter extends AbstractPostProcessor {
     private List<PolylineQueue> queues;
     private double radius = DXFConstants.POINT_CONNECTION_RADIUS;
 
+    @Override
     public void process(DXFDocument doc, Map<String, Object> context) throws ProcessorException {
         Iterator<DXFLayer> i = doc.getDXFLayerIterator();
 

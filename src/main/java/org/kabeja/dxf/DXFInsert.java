@@ -46,6 +46,7 @@ public class DXFInsert extends DXFEntity {
      *
      * @see org.dxf2svg.dxf.DXFEntity#getBounds()
      */
+    @Override
     public Bounds getBounds() {
         Bounds bounds = new Bounds();
 
@@ -272,10 +273,12 @@ public class DXFInsert extends DXFEntity {
         return point;
     }
 
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_INSERT;
     }
 
+    @Override
     public double getLength() {
         return this.doc.getDXFBlock(this.blockID).getLength();
     }

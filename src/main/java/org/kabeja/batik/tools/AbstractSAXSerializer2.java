@@ -73,6 +73,7 @@ public abstract class AbstractSAXSerializer2 extends SAXSVGDocumentFactory
      *
      * @see org.kabeja.xml.SAXSerializer#setOutput(java.io.OutputStream)
      */
+    @Override
     public void setOutput(OutputStream out) {
         this.out = out;
     }
@@ -82,6 +83,7 @@ public abstract class AbstractSAXSerializer2 extends SAXSVGDocumentFactory
      *
      * @see org.kabeja.xml.SAXSerializer#setProperties(java.util.Map)
      */
+    @Override
     public void setProperties(Map<String, Object> properties) {
         if (properties.containsKey(PROPERTY_WIDTH)) {
             this.width = Float.parseFloat((String) properties.get(

@@ -31,6 +31,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 
 public class SVGDimensionGenerator extends AbstractSVGSAXGenerator {
+    @Override
     public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         DXFDimension dimension = (DXFDimension) entity;

@@ -49,6 +49,7 @@ public class DXFInsertHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.DXFEntityHandler#endDXFEntity()
      */
+    @Override
     public void endDXFEntity() {
     }
 
@@ -57,6 +58,7 @@ public class DXFInsertHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.DXFEntityHandler#getDXFEntity()
      */
+    @Override
     public DXFEntity getDXFEntity() {
         return insert;
     }
@@ -66,6 +68,7 @@ public class DXFInsertHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.DXFEntityHandler#getDXFEntityName()
      */
+    @Override
     public String getDXFEntityName() {
         return DXFConstants.ENTITY_TYPE_INSERT;
     }
@@ -75,6 +78,7 @@ public class DXFInsertHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.DXFEntityHandler#isFollowSequence()
      */
+    @Override
     public boolean isFollowSequence() {
         return false;
     }
@@ -85,6 +89,7 @@ public class DXFInsertHandler extends AbstractEntityHandler {
      * @see org.dxf2svg.parser.entities.DXFEntityHandler#parseGroup(int,
      *      org.dxf2svg.parser.DXFValue)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         switch (groupCode) {
         case GROUPCODE_START_X:
@@ -157,6 +162,7 @@ public class DXFInsertHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.DXFEntityHandler#startDXFEntity()
      */
+    @Override
     public void startDXFEntity() {
         insert = new DXFInsert();
     }

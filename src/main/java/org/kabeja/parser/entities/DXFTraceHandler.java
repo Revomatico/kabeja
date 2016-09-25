@@ -24,6 +24,7 @@ import org.kabeja.dxf.DXFTrace;
  *
  */
 public class DXFTraceHandler extends DXFSolidHandler {
+    @Override
     public String getDXFEntityName() {
         return DXFConstants.ENTITY_TYPE_TRACE;
     }
@@ -31,6 +32,7 @@ public class DXFTraceHandler extends DXFSolidHandler {
     /* (non-Javadoc)
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#startDXFEntity()
      */
+    @Override
     public void startDXFEntity() {
         solid = new DXFTrace();
     }

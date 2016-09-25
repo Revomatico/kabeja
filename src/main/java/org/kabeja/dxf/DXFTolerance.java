@@ -33,6 +33,7 @@ public class DXFTolerance extends DXFEntity {
     /* (non-Javadoc)
      * @see org.kabeja.dxf.DXFEntity#getBounds()
      */
+    @Override
     public Bounds getBounds() {
         Bounds bounds = new Bounds();
         bounds.setValid(false);
@@ -43,6 +44,7 @@ public class DXFTolerance extends DXFEntity {
     /* (non-Javadoc)
      * @see org.kabeja.dxf.DXFEntity#getType()
      */
+    @Override
     public String getType() {
         // TODO Auto-generated method stub
         return DXFConstants.ENTITY_TYPE_TOLERANCE;
@@ -104,6 +106,7 @@ public class DXFTolerance extends DXFEntity {
         this.xaxisDirection = xaxisDirection;
     }
 
+    @Override
     public double getLength() {
         return 0;
     }

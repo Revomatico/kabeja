@@ -36,6 +36,7 @@ import org.kabeja.parser.dxf.DXFHandler;
 public interface DXFSectionHandler extends Handler, DXFHandler {
     public String getSectionKey();
 
+    @Override
     public void setDXFDocument(DXFDocument doc);
 
     public void startSection();

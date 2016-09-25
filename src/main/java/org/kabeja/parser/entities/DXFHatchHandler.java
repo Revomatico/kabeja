@@ -95,6 +95,7 @@ public class DXFHatchHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#endDXFEntity()
      */
+    @Override
     public void endDXFEntity() {
         // this.linePattern.setPattern(this.parameters);
         if (this.pattern != null) {
@@ -107,6 +108,7 @@ public class DXFHatchHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#getDXFEntity()
      */
+    @Override
     public DXFEntity getDXFEntity() {
         return hatch;
     }
@@ -140,6 +142,7 @@ public class DXFHatchHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#isFollowSequence()
      */
+    @Override
     public boolean isFollowSequence() {
         return false;
     }
@@ -159,6 +162,7 @@ public class DXFHatchHandler extends AbstractEntityHandler {
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#parseGroup(int,
      *      de.miethxml.kabeja.parser.DXFValue)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         switch (groupCode) {
         case GROUPCODE_BOUNDARY_LOOP_COUNT:
@@ -399,6 +403,7 @@ public class DXFHatchHandler extends AbstractEntityHandler {
      *
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#startDXFEntity()
      */
+    @Override
     public void startDXFEntity() {
         this.hatch = new DXFHatch();
         this.pattern = new DXFHatchPattern();

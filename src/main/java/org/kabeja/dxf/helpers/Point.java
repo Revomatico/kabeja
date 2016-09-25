@@ -83,11 +83,12 @@ public class Point {
         this.z = z;
     }
 
+    @Override
     public String toString() {
-        return super.toString() + "[" + this.x + "," + this.y + "," + this.z +
-        "]";
+        return super.toString() + "[" + this.x + "," + this.y + "," + this.z + "]";
     }
 
+    @Override
     public boolean equals(Object obj) {
         if (obj instanceof Point) {
             Point p = (Point) obj;

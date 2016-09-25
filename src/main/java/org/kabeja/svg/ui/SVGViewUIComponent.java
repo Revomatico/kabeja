@@ -97,10 +97,12 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
     protected JLabel mousePosition;
     private DecimalFormat format;
 
+    @Override
     public String getTitle() {
         return title;
     }
 
+    @Override
     public JComponent getView() {
         if (!this.initialized) {
             DecimalFormatSymbols symbols = new DecimalFormatSymbols();
@@ -227,6 +229,7 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
         return this.parentPanel;
     }
 
+    @Override
     public void showDXFDocument(DXFDocument doc) throws UIException {
         this.doc = doc;
         this.properties.clear();
@@ -278,6 +281,7 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
         }
     }
 
+    @Override
     public void setServiceManager(ServiceManager manager) {
         Object[] obj = manager.getServiceComponents(DXFDocumentChangeEventProvider.SERVICE);
 
@@ -295,6 +299,7 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
         this.registerActions();
     }
 
+    @Override
     public void changed(DXFDocument doc) {
         try {
             this.updateView(doc);
@@ -303,10 +308,12 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
         }
     }
 
+    @Override
     public void invokeAndWait(Runnable r) throws InterruptedException {
         this.canvas.getUpdateManager().getUpdateRunnableQueue().invokeAndWait(r);
     }
 
+    @Override
     public void invokeLater(Runnable r) throws InterruptedException {
         this.canvas.getUpdateManager().getUpdateRunnableQueue().invokeLater(r);
     }
@@ -319,10 +326,10 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
         JToggleButtonGroup group = new JToggleButtonGroup();
 
         //
-        //		this.canvas.setEnableImageZoomInteractor(false);
-        //		this.canvas.setEnablePanInteractor(false);
-        //		this.canvas.setEnableRotateInteractor(false);
-        //		this.canvas.setEnableZoomInteractor(false);
+        //        this.canvas.setEnableImageZoomInteractor(false);
+        //        this.canvas.setEnablePanInteractor(false);
+        //        this.canvas.setEnableRotateInteractor(false);
+        //        this.canvas.setEnableZoomInteractor(false);
         while (i.hasNext()) {
             ViewerAction action = i.next();
 
@@ -388,6 +395,7 @@ public class SVGViewUIComponent implements DXFDocumentViewComponent,
         this.actions.add(action);
     }
 
+    @Override
     public void propertiesChanged(Map<String, Object> properties) {
         if (properties.containsKey(SVGGenerator.PROPERTY_DOCUMENT_BOUNDS_RULE) &&
                 (this.doc != null)) {

@@ -83,6 +83,7 @@ public class DXFPoint extends DXFEntity {
         this.p.setZ(z);
     }
 
+    @Override
     public Bounds getBounds() {
         Bounds bounds = new Bounds();
         bounds.addToBounds(p);
@@ -90,6 +91,7 @@ public class DXFPoint extends DXFEntity {
         return bounds;
     }
 
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_POINT;
     }
@@ -102,6 +104,7 @@ public class DXFPoint extends DXFEntity {
         this.p = p;
     }
 
+    @Override
     public double getLength() {
         // a point has no length
         return 0;

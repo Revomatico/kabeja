@@ -24,6 +24,7 @@ import org.xml.sax.SAXException;
 
 
 public class SVGToleranceGenerator extends AbstractSVGSAXGenerator {
+    @Override
     public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         //TODO implement the SVG tolerance generator

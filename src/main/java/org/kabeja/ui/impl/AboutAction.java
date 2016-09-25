@@ -45,8 +45,10 @@ public class AboutAction extends AbstractAction {
         super.putValue(SHORT_DESCRIPTION, Messages.getString("menuitem.about"));
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         SwingUtilities.invokeLater(new Runnable() {
+                @Override
                 public void run() {
                     showDialog();
                 }
@@ -60,6 +62,7 @@ public class AboutAction extends AbstractAction {
         JLabel l = new JLabel(Messages.getString("AboutDialog.title")) {
                 private static final long serialVersionUID = 1L;
 
+                @Override
                 protected void paintComponent(Graphics g) {
                     Graphics2D g2 = (Graphics2D) g;
                     g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -97,6 +100,7 @@ public class AboutAction extends AbstractAction {
         dialog.add(p2, "South");
 
         close.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent evt) {
                     dialog.setVisible(false);
                     dialog.dispose();
@@ -116,20 +120,23 @@ public class AboutAction extends AbstractAction {
 
     public class BottomLineBorder implements Border {
         private Insets i = new Insets(10, 10, 10, 1);
-   
 
 
- 
+
+
+        @Override
         public boolean isBorderOpaque() {
             return false;
         }
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y,
             int width, int height) {
             g.setColor(Color.DARK_GRAY);
             g.drawLine(x, (y + height) - 1, x + width, (y + height) - 1);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) {
             return i;
         }

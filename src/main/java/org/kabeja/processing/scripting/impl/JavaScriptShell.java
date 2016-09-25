@@ -85,6 +85,7 @@ public class JavaScriptShell extends AbstractPostProcessor
     protected ArrayList<DXFDocumentChangeListener> listeners = new ArrayList<DXFDocumentChangeListener>();
     protected DXFDocument doc;
 
+    @Override
     public void process(DXFDocument doc, Map<String, Object> context) throws ProcessorException {
         worker = new ScriptWorker(doc);
         worker.start();
@@ -185,6 +186,7 @@ public class JavaScriptShell extends AbstractPostProcessor
         Action action = new AbstractAction("Cut",
                 new ImageIcon(UIUtils.resourceToBytes(this.getClass(),
                         "/icons/cut_edit.gif"))) {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     textArea.cut();
                 }
@@ -195,6 +197,7 @@ public class JavaScriptShell extends AbstractPostProcessor
         action = new AbstractAction("Paste",
                 new ImageIcon(UIUtils.resourceToBytes(this.getClass(),
                         "/icons/paste_edit.gif"))) {
+                    @Override
                     public void actionPerformed(ActionEvent e) {
                         textArea.paste();
                     }
@@ -204,6 +207,7 @@ public class JavaScriptShell extends AbstractPostProcessor
         action = new AbstractAction("Copy",
                 new ImageIcon(UIUtils.resourceToBytes(this.getClass(),
                         "/icons/copy_edit.gif"))) {
+                    @Override
                     public void actionPerformed(ActionEvent e) {
                         textArea.copy();
                     }
@@ -211,6 +215,7 @@ public class JavaScriptShell extends AbstractPostProcessor
         actions.put("copy", action);
 
         action = new AbstractAction("Close") {
+                    @Override
                     public void actionPerformed(ActionEvent e) {
                         dispose();
                     }
@@ -218,6 +223,7 @@ public class JavaScriptShell extends AbstractPostProcessor
         actions.put("close", action);
 
         action = new AbstractAction("Save") {
+                    @Override
                     public void actionPerformed(ActionEvent e) {
                         JFileChooser fs = new JFileChooser();
                         int r = fs.showSaveDialog(frame);
@@ -245,6 +251,7 @@ public class JavaScriptShell extends AbstractPostProcessor
         actions.put("save", action);
 
         action = new AbstractAction("Open") {
+                    @Override
                     public void actionPerformed(ActionEvent e) {
                         textArea.setText(COMMAND_PREFIX);
                         history.clear();
@@ -275,6 +282,7 @@ public class JavaScriptShell extends AbstractPostProcessor
         action = new AbstractAction("Update views",
                 new ImageIcon(UIUtils.resourceToBytes(this.getClass(),
                         "/icons/reload.gif"))) {
+                    @Override
                     public void actionPerformed(ActionEvent e) {
                         fireDXFDocumentChangeEvent();
                     }
@@ -345,6 +353,7 @@ public class JavaScriptShell extends AbstractPostProcessor
         worker.dispose();
     }
 
+    @Override
     public void showDXFDocument(DXFDocument doc) throws UIException {
 
         this.doc = doc;
@@ -352,10 +361,12 @@ public class JavaScriptShell extends AbstractPostProcessor
         worker.start();
     }
 
+    @Override
     public String getTitle() {
         return this.title;
     }
 
+    @Override
     public JComponent getView() {
         textArea = new JTextArea();
 
@@ -378,10 +389,12 @@ public class JavaScriptShell extends AbstractPostProcessor
         return panel;
     }
 
+    @Override
     public void addDXFDocumentChangeListener(DXFDocumentChangeListener listener) {
         this.listeners.add(listener);
     }
 
+    @Override
     public void removeDXFDocumentChangeListener(
         DXFDocumentChangeListener listener) {
         this.listeners.remove(listener);
@@ -471,7 +484,7 @@ public class JavaScriptShell extends AbstractPostProcessor
             // this.ctx = ContextFactory.getGlobal().enter();
             ContextFactory f = new ContextFactory();
 
-            this.ctx = f.enter();
+            this.ctx = f.enterContext();
             err = System.err;
             out = System.out;
             // System.setOut(output);
@@ -488,11 +501,13 @@ public class JavaScriptShell extends AbstractPostProcessor
             this.scope = new Global();
             Global.setOutput(output);
             ctx.setErrorReporter(new ErrorReporter() {
+                    @Override
                     public void error(String arg0, String arg1, int arg2,
                         String arg3, int arg4) {
                         textArea.append(arg0 + " from line:" + arg3 + "\n");
                     }
 
+                    @Override
                     public EvaluatorException runtimeError(String arg0,
                         String arg1, int arg2, String arg3, int arg4) {
                         textArea.append(arg0 + " from line:" + arg3 + "\n");
@@ -500,6 +515,7 @@ public class JavaScriptShell extends AbstractPostProcessor
                         return new EvaluatorException(arg0);
                     }
 
+                    @Override
                     public void warning(String arg0, String arg1, int arg2,
                         String arg3, int arg4) {
                         textArea.append(arg0 + " from line:" + arg3 + "\n");

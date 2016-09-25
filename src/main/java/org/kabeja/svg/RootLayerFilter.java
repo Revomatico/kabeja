@@ -34,6 +34,7 @@ public class RootLayerFilter extends AbstractSAXFilter {
     private String transformValue = StringUtils.EMPTY;
     private String strokeWidth = StringUtils.EMPTY;
 
+    @Override
     public void endElement(String uri, String localName, String qName)
         throws SAXException {
         if (this.inDraftSection) {
@@ -53,16 +54,17 @@ public class RootLayerFilter extends AbstractSAXFilter {
         super.endElement(uri, localName, qName);
     }
 
+    @Override
     public void startElement(String uri, String localName, String qName,
         Attributes atts) throws SAXException {
-  
+
         if (uri.equals(SVGConstants.SVG_NAMESPACE) &&
                 localName.equals(SVGConstants.SVG_GROUP)) {
             String id = atts.getValue(SVGConstants.XML_ID);
 
             if (((id != null) && id.equals("draft")) || this.inDraftSection) {
-      
-            	switch (groupDepth) {
+
+                switch (groupDepth) {
                 case 0:
                     // the root group
                     this.transformValue = atts.getValue(SVGConstants.SVG_ATTRIBUTE_TRANSFORM);

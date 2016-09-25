@@ -12,10 +12,12 @@ import org.kabeja.math.MathUtils;
  *
  */
 public class DXF3DFace extends DXFSolid {
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_3DFACE;
     }
 
+    @Override
     public double getLength() {
         double length = 0.0;
         int flag = this.getFlags();

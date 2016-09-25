@@ -32,10 +32,12 @@ public abstract class AbstractSAXFilter extends XMLFilterImpl
     /* (non-Javadoc)
      * @see org.kabeja.xml.SAXFilter#setProperties(java.util.Map)
      */
+    @Override
     public void setProperties(Map<String, Object> properties) {
         this.properties = properties;
     }
 
+    @Override
     public Map<String, Object> getProperties() {
         return this.properties;
     }

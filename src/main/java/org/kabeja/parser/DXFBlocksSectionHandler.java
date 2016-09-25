@@ -52,6 +52,7 @@ public class DXFBlocksSectionHandler extends DXFEntitiesSectionHandler {
      *
      * @see org.dxf2svg.parser.DXFSectionHandler#getSectionKey()
      */
+    @Override
     public String getSectionKey() {
         return SECTION_KEY;
     }
@@ -62,6 +63,7 @@ public class DXFBlocksSectionHandler extends DXFEntitiesSectionHandler {
      * @see org.dxf2svg.parser.DXFSectionHandler#parseGroup(int,
      *      org.dxf2svg.parser.DXFValue)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         switch (groupCode) {
         case BLOCK:
@@ -163,6 +165,7 @@ public class DXFBlocksSectionHandler extends DXFEntitiesSectionHandler {
      *
      * @see org.dxf2svg.parser.DXFSectionHandler#setDXFDocument(org.dxf2svg.dxf.DXFDocument)
      */
+    @Override
     public void setDXFDocument(DXFDocument doc) {
         super.setDXFDocument(doc);
     }
@@ -172,6 +175,7 @@ public class DXFBlocksSectionHandler extends DXFEntitiesSectionHandler {
      *
      * @see org.dxf2svg.parser.DXFSectionHandler#startSection()
      */
+    @Override
     public void startSection() {
         parseEntity = false;
     }
@@ -181,10 +185,12 @@ public class DXFBlocksSectionHandler extends DXFEntitiesSectionHandler {
      *
      * @see org.dxf2svg.parser.DXFSectionHandler#endSection()
      */
+    @Override
     public void endSection() {
         // endEntity();
     }
 
+    @Override
     protected void endEntity() {
         if (parseEntity) {
             handler.endDXFEntity();

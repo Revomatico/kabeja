@@ -307,6 +307,7 @@ public class DXFDimension extends DXFEntity {
         this.dimensionArea = dimensionArea;
     }
 
+    @Override
     public Bounds getBounds() {
         // TODO add real bounds
         Bounds bounds = new Bounds();
@@ -345,10 +346,12 @@ public class DXFDimension extends DXFEntity {
         return doc.getDXFDimensionStyle(getDimensionStyleID());
     }
 
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_DIMENSION;
     }
 
+    @Override
     public double getLength() {
         return 0;
     }

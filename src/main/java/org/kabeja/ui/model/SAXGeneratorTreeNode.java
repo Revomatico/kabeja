@@ -51,10 +51,12 @@ public class SAXGeneratorTreeNode extends AbstractProcessingTreeNode {
         return null;
     }
 
+    @Override
     public boolean getAllowsChildren() {
         return false;
     }
 
+    @Override
     public boolean isLeaf() {
         // TODO Auto-generated method stub
         return false;

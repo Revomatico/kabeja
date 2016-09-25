@@ -40,230 +40,230 @@ import org.kabeja.ui.xml.SAXServiceContainerBuilder;
  *
  */
 public class Main {
-	private String encoding = DXFParser.DEFAULT_ENCODING;
-	private String sourceFile;
-	private String destinationFile;
-	private Parser parser;
-	private boolean process = false;
-	private boolean directoryMode = true;
-	private ProcessingManager processorManager;
-	private String pipeline;
-	private boolean nogui = false;
+    private String encoding = DXFParser.DEFAULT_ENCODING;
+    private String sourceFile;
+    private String destinationFile;
+    private Parser parser;
+    private boolean process = false;
+    private boolean directoryMode = true;
+    private ProcessingManager processorManager;
+    private String pipeline;
+    private boolean nogui = false;
 
-	public Main() {
-	}
+    public Main() {
+    }
 
-	public static void main(String[] args) {
-		Main main = new Main();
-		int i = 0;
-		boolean source = true;
-		boolean help = false;
+    public static void main(String[] args) {
+        Main main = new Main();
+        int i = 0;
+        boolean source = true;
+        boolean help = false;
 
-		while (i < args.length) {
-			if (args[i].equals("-pp")) {
-				try {
-					main.setProcessConfig(new FileInputStream(args[i + 1]));
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
+        while (i < args.length) {
+            if (args[i].equals("-pp")) {
+                try {
+                    main.setProcessConfig(new FileInputStream(args[i + 1]));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
 
-				i += 2;
-			} else if (args[i].equals("-pipeline")) {
-				main.setPipeline(args[i + 1]);
-				i += 2;
-			} else if (args[i].equals("--help")) {
-				i++;
-				help = true;
-			} else if (args[i].equals("-nogui")) {
-				main.omitUI(true);
-				i++;
-			} else if (source) {
-				main.setSourceFile(args[i]);
-				source = false;
-				i++;
-			} else {
-				main.setDestinationFile(args[i]);
-				i++;
-			}
-		}
+                i += 2;
+            } else if (args[i].equals("-pipeline")) {
+                main.setPipeline(args[i + 1]);
+                i += 2;
+            } else if (args[i].equals("--help")) {
+                i++;
+                help = true;
+            } else if (args[i].equals("-nogui")) {
+                main.omitUI(true);
+                i++;
+            } else if (source) {
+                main.setSourceFile(args[i]);
+                source = false;
+                i++;
+            } else {
+                main.setDestinationFile(args[i]);
+                i++;
+            }
+        }
 
-		main.initialize();
+        main.initialize();
 
-		if (help || (args.length == 1 && main.isNogui())) {
-			printUsage();
-			main.printPipelines();
-		} else {
-			main.process();
-		}
+        if (help || (args.length == 1 && main.isNogui())) {
+            printUsage();
+            main.printPipelines();
+        } else {
+            main.process();
+        }
 
-	}
+    }
 
-	private static void printUsage() {
-		System.out
-				.println("\n Use: java -jar kabeja.jar <Options> sourcefile  <outputfile>"
-						+ "\n\nOptions:\n"
-						+ "  --help shows this and exit\n"
-						+ "  -nogui run only the cli, omit the user interface\n"
-						+ "  -pp process.xml set processing file to use\n"
-						+ "  -pipeline name  process the given pipeline\n\n"
-						+ "If the source is a directory,"
-						+ " all containing files will be converted.\n");
-	}
+    private static void printUsage() {
+        System.out
+                .println("\n Use: java -jar kabeja.jar <Options> sourcefile  <outputfile>"
+                        + "\n\nOptions:\n"
+                        + "  --help shows this and exit\n"
+                        + "  -nogui run only the cli, omit the user interface\n"
+                        + "  -pp process.xml set processing file to use\n"
+                        + "  -pipeline name  process the given pipeline\n\n"
+                        + "If the source is a directory,"
+                        + " all containing files will be converted.\n");
+    }
 
-	public void initialize() {
-		if (this.processorManager == null) {
-			this.setProcessConfig(this.getClass().getResourceAsStream(
-					"/conf/process.xml"));
-		}
-	}
+    public void initialize() {
+        if (this.processorManager == null) {
+            this.setProcessConfig(this.getClass().getResourceAsStream(
+                    "/conf/process.xml"));
+        }
+    }
 
-	public void process() {
-		if (parser == null) {
-			parser = ParserBuilder.createDefaultParser();
-		}
+    public void process() {
+        if (parser == null) {
+            parser = ParserBuilder.createDefaultParser();
+        }
 
-		if (this.nogui) {
-			File f = new File(this.sourceFile);
+        if (this.nogui) {
+            File f = new File(this.sourceFile);
 
-			if (f.exists() && f.isFile()) {
-				parseFile(f, this.destinationFile);
-			} else if (f.isDirectory()) {
-				File[] files = f.listFiles();
+            if (f.exists() && f.isFile()) {
+                parseFile(f, this.destinationFile);
+            } else if (f.isDirectory()) {
+                File[] files = f.listFiles();
 
-				for (int i = 0; i < files.length; i++) {
-					if (files[i].getName().toLowerCase().endsWith(".dxf")) {
-						try {
-							String source = files[i].getCanonicalPath();
-							String extension = null;
+                for (int i = 0; i < files.length; i++) {
+                    if (files[i].getName().toLowerCase().endsWith(".dxf")) {
+                        try {
+                            String source = files[i].getCanonicalPath();
+                            String extension = null;
 
-							String result = source.substring(0, source
-									.toLowerCase().lastIndexOf(".dxf"))
-									+ extension;
-							System.out.println("convert file:" + source);
-							parseFile(files[i], result);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			} else {
-				System.err.println("Cannot open " + this.sourceFile);
-			}
-		} else {
-			// ServiceContainer sc = SAXServiceContainerBuilder
-			// .buildFromStream(this.getClass().getResourceAsStream(
-			// "/conf/ui.xml"));
-			try {
-				ServiceContainer sc = SAXServiceContainerBuilder
-						.buildFromStream(new FileInputStream("conf/ui.xml"));
-				sc.setProcessingManager(this.processorManager);
-				sc.start();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
+                            String result = source.substring(0, source
+                                    .toLowerCase().lastIndexOf(".dxf"))
+                                    + extension;
+                            System.out.println("convert file:" + source);
+                            parseFile(files[i], result);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            } else {
+                System.err.println("Cannot open " + this.sourceFile);
+            }
+        } else {
+            // ServiceContainer sc = SAXServiceContainerBuilder
+            // .buildFromStream(this.getClass().getResourceAsStream(
+            // "/conf/ui.xml"));
+            try {
+                ServiceContainer sc = SAXServiceContainerBuilder
+                        .buildFromStream(new FileInputStream("conf/ui.xml"));
+                sc.setProcessingManager(this.processorManager);
+                sc.start();
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
 
-	public String getEncoding() {
-		return encoding;
-	}
+    public String getEncoding() {
+        return encoding;
+    }
 
-	public void setEncoding(String encoding) {
-		this.encoding = encoding;
-	}
+    public void setEncoding(String encoding) {
+        this.encoding = encoding;
+    }
 
-	public String getSourceFile() {
-		return sourceFile;
-	}
+    public String getSourceFile() {
+        return sourceFile;
+    }
 
-	public void setSourceFile(String sourceFile) {
-		this.sourceFile = sourceFile;
-	}
+    public void setSourceFile(String sourceFile) {
+        this.sourceFile = sourceFile;
+    }
 
-	public String getDestinationFile() {
-		return destinationFile;
-	}
+    public String getDestinationFile() {
+        return destinationFile;
+    }
 
-	public void setDestinationFile(String destinationFile) {
-		this.destinationFile = destinationFile;
-		this.directoryMode = false;
-	}
+    public void setDestinationFile(String destinationFile) {
+        this.destinationFile = destinationFile;
+        this.directoryMode = false;
+    }
 
-	private void parseFile(File f, String output) {
-		try {
-			this.parser.parse(new FileInputStream(f), encoding);
+    private void parseFile(File f, String output) {
+        try {
+            this.parser.parse(new FileInputStream(f), encoding);
 
-			DXFDocument doc = parser.getDocument();
+            DXFDocument doc = parser.getDocument();
 
-			if (this.process) {
-				if (this.directoryMode) {
-					this.processorManager.process(doc, new HashMap<String, Object>(),
-							this.pipeline, f.getAbsolutePath());
-				} else {
-					// user set name
-					this.processorManager.process(doc, new HashMap<String, Object>(),
-							this.pipeline, new FileOutputStream(output));
-				}
-			}
+            if (this.process) {
+                if (this.directoryMode) {
+                    this.processorManager.process(doc, new HashMap<String, Object>(),
+                            this.pipeline, f.getAbsolutePath());
+                } else {
+                    // user set name
+                    this.processorManager.process(doc, new HashMap<String, Object>(),
+                            this.pipeline, new FileOutputStream(output));
+                }
+            }
 
-			// TODO move this into the svg block + gzip
-			// else {
-			// OutputStream out = null;
-			//
-			// out = new FileOutputStream(output);
-			//
-			// SAXPrettyOutputter writer = new SAXPrettyOutputter(out,
-			// SAXPrettyOutputter.DEFAULT_ENCODING);
+            // TODO move this into the svg block + gzip
+            // else {
+            // OutputStream out = null;
+            //
+            // out = new FileOutputStream(output);
+            //
+            // SAXPrettyOutputter writer = new SAXPrettyOutputter(out,
+            // SAXPrettyOutputter.DEFAULT_ENCODING);
 
-			// if (this.outputDTD) {
-			// writer.setDTD(SVGConstants.SVG_DTD_1_0);
-			// }
-			// SAXGenerator gen = new SVGGenerator();
-			// gen.setProperties(new HashMap());
-			// gen.generate(doc, writer);
-			// }
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+            // if (this.outputDTD) {
+            // writer.setDTD(SVGConstants.SVG_DTD_1_0);
+            // }
+            // SAXGenerator gen = new SVGGenerator();
+            // gen.setProperties(new HashMap());
+            // gen.generate(doc, writer);
+            // }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	public void setParserConfigFile(String file) {
-		parser = ParserBuilder.buildFromXML(file);
-	}
+    public void setParserConfigFile(String file) {
+        parser = ParserBuilder.buildFromXML(file);
+    }
 
-	public void setProcessConfig(InputStream in) {
-		this.processorManager = SAXProcessingManagerBuilder.buildFromStream(in);
-	}
+    public void setProcessConfig(InputStream in) {
+        this.processorManager = SAXProcessingManagerBuilder.buildFromStream(in);
+    }
 
-	public void setPipeline(String name) {
-		this.pipeline = name;
-		this.process = true;
-	}
+    public void setPipeline(String name) {
+        this.pipeline = name;
+        this.process = true;
+    }
 
-	public void omitUI(boolean b) {
-		this.nogui = b;
-	}
+    public void omitUI(boolean b) {
+        this.nogui = b;
+    }
 
-	public void printPipelines() {
-		Iterator<String> i = this.processorManager.getProcessPipelines().keySet()
-				.iterator();
-		System.out.println("\n Available pipelines:\n----------\n");
+    public void printPipelines() {
+        Iterator<String> i = this.processorManager.getProcessPipelines().keySet()
+                .iterator();
+        System.out.println("\n Available pipelines:\n----------\n");
 
-		while (i.hasNext()) {
-			String pipeline = i.next();
-			ProcessPipeline pp = this.processorManager
-					.getProcessPipeline(pipeline);
-			System.out.print(" " + pipeline);
-			if (pp.getDescription().length() > 0) {
-				System.out.print("\t" + pp.getDescription());
+        while (i.hasNext()) {
+            String pipeline = i.next();
+            ProcessPipeline pp = this.processorManager
+                    .getProcessPipeline(pipeline);
+            System.out.print(" " + pipeline);
+            if (pp.getDescription().length() > 0) {
+                System.out.print("\t" + pp.getDescription());
 
-			}
-			System.out.println();
-		}
-	}
+            }
+            System.out.println();
+        }
+    }
 
-	public boolean isNogui() {
-		return nogui;
-	}
+    public boolean isNogui() {
+        return nogui;
+    }
 }

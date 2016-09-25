@@ -35,8 +35,6 @@ public class DXFCircleHandler extends AbstractEntityHandler {
      */
     public DXFCircleHandler() {
         super();
-
-        // TODO Auto-generated constructor stub
     }
 
     /*
@@ -44,6 +42,7 @@ public class DXFCircleHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#endParsing()
      */
+    @Override
     public void endDXFEntity() {
     }
 
@@ -52,6 +51,7 @@ public class DXFCircleHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#getEntity()
      */
+    @Override
     public DXFEntity getDXFEntity() {
         return circle;
     }
@@ -61,6 +61,7 @@ public class DXFCircleHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#getEntityName()
      */
+    @Override
     public String getDXFEntityName() {
         // TODO Auto-generated method stub
         return ENTITY_NAME;
@@ -72,6 +73,7 @@ public class DXFCircleHandler extends AbstractEntityHandler {
      * @see org.dxf2svg.parser.entities.EntityHandler#parseGroup(int,
      *      org.dxf2svg.parser.DXFValue)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         switch (groupCode) {
         case GROUPCODE_START_X:
@@ -101,6 +103,7 @@ public class DXFCircleHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#startParsing()
      */
+    @Override
     public void startDXFEntity() {
         circle = new DXFCircle();
         circle.setCenterPoint(new Point());
@@ -110,6 +113,7 @@ public class DXFCircleHandler extends AbstractEntityHandler {
     /* (non-Javadoc)
      * @see org.dxf2svg.parser.entities.EntityHandler#isFollowSequence()
      */
+    @Override
     public boolean isFollowSequence() {
         return false;
     }

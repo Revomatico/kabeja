@@ -102,8 +102,10 @@ public class ProcessingUI implements Serviceable, Startable,
         menu = new JMenu(Messages.getString("ProcessingUI.menu.file")); //$NON-NLS-1$
         menu.add(new AbstractAction(Messages.getString(
                     "ProcessingUI.menu.file.exit")) {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     SwingUtilities.invokeLater(new Runnable() {
+                            @Override
                             public void run() {
                                 shutdown();
                             }
@@ -151,6 +153,7 @@ public class ProcessingUI implements Serviceable, Startable,
         selector.addAction(action);
     }
 
+    @Override
     public void setServiceManager(ServiceManager manager) {
         this.serviceManager = manager;
 
@@ -166,18 +169,22 @@ public class ProcessingUI implements Serviceable, Startable,
         }
     }
 
+    @Override
     public void setProcessingManager(ProcessingManager manager) {
         this.manager = manager;
     }
 
+    @Override
     public void start() {
         this.frame.setVisible(true);
     }
 
+    @Override
     public void stop() {
         this.frame.setVisible(false);
     }
 
+    @Override
     public void addAction(Action action) {
         JButton button = new JButton(action);
         button.setToolTipText(button.getText());
@@ -185,6 +192,7 @@ public class ProcessingUI implements Serviceable, Startable,
         this.addAction(button);
     }
 
+    @Override
     public void addAction(Component component) {
         if (this.toolbar.getComponentCount() > 1) {
             this.toolbar.add(component, this.toolbar.getComponentCount() - 2);
@@ -193,14 +201,17 @@ public class ProcessingUI implements Serviceable, Startable,
         }
     }
 
+    @Override
     public boolean hasMenu(String id) {
         return this.menus.containsKey(id);
     }
 
+    @Override
     public void setAction(String menuID, Action action) {
         this.setJMenuItem(menuID, new JMenuItem(action));
     }
 
+    @Override
     public void setJMenuItem(String menuID, JMenuItem item) {
         if (this.hasMenu(menuID)) {
             JMenu menu = this.menus.get(menuID);
@@ -213,6 +224,7 @@ public class ProcessingUI implements Serviceable, Startable,
         }
     }
 
+    @Override
     public void setMenu(String menuID, JMenu menu) {
         if (!this.hasMenu(menuID)) {
             this.menus.put(menuID, menu);
@@ -233,6 +245,7 @@ public class ProcessingUI implements Serviceable, Startable,
             this.index = index;
         }
 
+        @Override
         public void actionPerformed(ActionEvent e) {
             mainContainer.show(mainPanel, StringUtils.EMPTY + this.index); //$NON-NLS-1$
         }

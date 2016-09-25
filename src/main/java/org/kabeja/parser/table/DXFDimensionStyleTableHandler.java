@@ -35,6 +35,7 @@ public class DXFDimensionStyleTableHandler extends AbstractTableHandler {
      *
      * @see de.miethxml.kabeja.parser.table.DXFTableHandler#endParsing()
      */
+    @Override
     public void endParsing() {
         doc.addDXFDimensionStyle(style);
     }
@@ -44,6 +45,7 @@ public class DXFDimensionStyleTableHandler extends AbstractTableHandler {
      *
      * @see de.miethxml.kabeja.parser.table.DXFTableHandler#getTableKey()
      */
+    @Override
     public String getTableKey() {
         return key;
     }
@@ -54,6 +56,7 @@ public class DXFDimensionStyleTableHandler extends AbstractTableHandler {
      * @see de.miethxml.kabeja.parser.table.DXFTableHandler#parseGroup(int,
      *      de.miethxml.kabeja.parser.DXFValue)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         switch (groupCode) {
         case AbstractEntityHandler.FLAGS:
@@ -76,6 +79,7 @@ public class DXFDimensionStyleTableHandler extends AbstractTableHandler {
      *
      * @see de.miethxml.kabeja.parser.table.DXFTableHandler#startParsing()
      */
+    @Override
     public void startParsing() {
         style = new DXFDimensionStyle();
     }

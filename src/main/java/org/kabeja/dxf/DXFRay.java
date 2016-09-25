@@ -30,6 +30,7 @@ public class DXFRay extends DXFEntity {
     /* (non-Javadoc)
      * @see de.miethxml.kabeja.dxf.DXFEntity#getBounds()
      */
+    @Override
     public Bounds getBounds() {
         // we will only add the base point
         //the end is infinite
@@ -42,6 +43,7 @@ public class DXFRay extends DXFEntity {
     /* (non-Javadoc)
      * @see de.miethxml.kabeja.dxf.DXFEntity#getType()
      */
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_RAY;
     }
@@ -74,6 +76,7 @@ public class DXFRay extends DXFEntity {
         this.direction = direction;
     }
 
+    @Override
     public double getLength() {
         return 0;
     }

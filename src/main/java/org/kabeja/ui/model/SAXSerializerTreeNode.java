@@ -29,13 +29,16 @@ public class SAXSerializerTreeNode extends AbstractProcessingTreeNode {
         this.serializer = serializer;
     }
 
+    @Override
     protected void initializeChildren() {
     }
 
+    @Override
     public boolean getAllowsChildren() {
         return true;
     }
 
+    @Override
     public boolean isLeaf() {
         return false;
     }

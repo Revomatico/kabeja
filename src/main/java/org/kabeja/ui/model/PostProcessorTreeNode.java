@@ -28,14 +28,17 @@ public class PostProcessorTreeNode extends AbstractProcessingTreeNode {
         this.pp = pp;
     }
 
+    @Override
     protected void initializeChildren() {
         this.propertiesToChildren(this.pp.getProperties());
     }
 
+    @Override
     public boolean getAllowsChildren() {
         return true;
     }
 
+    @Override
     public boolean isLeaf() {
         return this.pp.getProperties().size() > 0;
     }

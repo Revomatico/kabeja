@@ -32,6 +32,7 @@ public class DXFSolid extends DXFEntity {
     public DXFSolid() {
     }
 
+    @Override
     public Bounds getBounds() {
         Bounds bounds = new Bounds();
 
@@ -103,10 +104,12 @@ public class DXFSolid extends DXFEntity {
         this.point4 = point4;
     }
 
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_SOLID;
     }
 
+    @Override
     public double getLength() {
         double length = 0.0;
         length += MathUtils.distance(this.point1, this.point2);

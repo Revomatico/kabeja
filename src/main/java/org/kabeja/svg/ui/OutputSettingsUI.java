@@ -74,6 +74,7 @@ public class OutputSettingsUI extends AbstractPropertiesEditor
     protected JRadioButton landscapeSelection;
     protected boolean initialized = false;
 
+    @Override
     public void setServiceManager(ServiceManager manager) {
         Object[] objects = manager.getServiceComponents(ApplicationToolBar.SERVICE);
 
@@ -82,6 +83,7 @@ public class OutputSettingsUI extends AbstractPropertiesEditor
                     "Output Settings",
                     new ImageIcon(UIUtils.resourceToBytes(this.getClass(),
                             "/icons/paper_settings.gif"))) {
+                    @Override
                     public void actionPerformed(ActionEvent e) {
                         showDialog();
                     }
@@ -112,6 +114,7 @@ public class OutputSettingsUI extends AbstractPropertiesEditor
 
             customPaper = new JCheckBox();
             customPaper.addItemListener(new ItemListener() {
+                    @Override
                     public void itemStateChanged(ItemEvent e) {
                         enableCustomPaper(e.getStateChange() == ItemEvent.SELECTED);
                     }
@@ -176,8 +179,10 @@ public class OutputSettingsUI extends AbstractPropertiesEditor
 
             JButton button = new JButton("OK");
             button.addActionListener(new ActionListener() {
+                    @Override
                     public void actionPerformed(ActionEvent e) {
                         SwingUtilities.invokeLater(new Runnable() {
+                                @Override
                                 public void run() {
                                     dialog.setVisible(false);
                                     updateProperties();

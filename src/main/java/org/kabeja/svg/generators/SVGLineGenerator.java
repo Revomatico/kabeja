@@ -31,6 +31,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 public class SVGLineGenerator extends AbstractSVGSAXGenerator
     implements SVGPathBoundaryGenerator {
+    @Override
     public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         DXFLine line = (DXFLine) entity;
@@ -49,6 +50,7 @@ public class SVGLineGenerator extends AbstractSVGSAXGenerator
         SVGUtils.emptyElement(handler, SVGConstants.SVG_LINE, attr);
     }
 
+    @Override
     public String getSVGPath(DXFEntity entity) {
         DXFLine line = (DXFLine) entity;
         Point start = line.getStartPoint();

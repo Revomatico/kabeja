@@ -35,6 +35,7 @@ public class DXFAttribHandler extends DXFTextHandler {
     /* (non-Javadoc)
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#parseGroup(int, de.miethxml.kabeja.parser.DXFValue)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         switch (groupCode) {
             case ATTRIB_TEXT_LENGTH:
@@ -52,6 +53,7 @@ public class DXFAttribHandler extends DXFTextHandler {
         }
     }
 
+    @Override
     public void startDXFEntity() {
         text = new DXFAttrib();
     }
@@ -59,6 +61,7 @@ public class DXFAttribHandler extends DXFTextHandler {
     /* (non-Javadoc)
      * @see de.miethxml.kabeja.parser.entities.DXFEntityHandler#getDXFEntityName()
      */
+    @Override
     public String getDXFEntityName() {
         return DXFConstants.ENTITY_TYPE_ATTRIB;
     }

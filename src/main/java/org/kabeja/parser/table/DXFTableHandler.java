@@ -27,6 +27,7 @@ import org.kabeja.parser.Handler;
 public interface DXFTableHandler extends Handler {
     public String getTableKey();
 
+    @Override
     public void setDXFDocument(DXFDocument doc);
 
     public void startParsing();

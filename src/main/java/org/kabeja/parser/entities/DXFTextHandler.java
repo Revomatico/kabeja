@@ -54,6 +54,7 @@ public class DXFTextHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#endParsing()
      */
+    @Override
     public void endDXFEntity() {
         text.setText(this.content);
         this.content = StringUtils.EMPTY;
@@ -64,6 +65,7 @@ public class DXFTextHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#getEntity()
      */
+    @Override
     public DXFEntity getDXFEntity() {
         return text;
     }
@@ -73,6 +75,7 @@ public class DXFTextHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#getEntityName()
      */
+    @Override
     public String getDXFEntityName() {
         return DXFConstants.ENTITY_TYPE_TEXT;
     }
@@ -82,6 +85,7 @@ public class DXFTextHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#isFollowSequence()
      */
+    @Override
     public boolean isFollowSequence() {
         // TODO Auto-generated method stub
         return false;
@@ -93,6 +97,7 @@ public class DXFTextHandler extends AbstractEntityHandler {
      * @see org.dxf2svg.parser.entities.EntityHandler#parseGroup(int,
      *      org.dxf2svg.parser.DXFValue)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         switch (groupCode) {
         case TEXT_VALUE:
@@ -199,6 +204,7 @@ public class DXFTextHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#startParsing()
      */
+    @Override
     public void startDXFEntity() {
         text = new DXFText();
         text.setDXFDocument(this.doc);

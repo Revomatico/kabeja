@@ -34,6 +34,7 @@ public class DXFImageDefHandler extends AbstractDXFObjectHandler {
      *
      * @see de.miethxml.kabeja.parser.objects.DXFObjectHandler#getObjectType()
      */
+    @Override
     public String getObjectType() {
         return DXFConstants.OBJECT_TYPE_IMAGEDEF;
     }
@@ -43,6 +44,7 @@ public class DXFImageDefHandler extends AbstractDXFObjectHandler {
      *
      * @see de.miethxml.kabeja.parser.objects.DXFObjectHandler#startObject()
      */
+    @Override
     public void startObject() {
         imageDef = new DXFImageDefObject();
         imageDef.setDXFDocument(this.doc);
@@ -53,6 +55,7 @@ public class DXFImageDefHandler extends AbstractDXFObjectHandler {
      *
      * @see de.miethxml.kabeja.parser.objects.DXFObjectHandler#endObject()
      */
+    @Override
     public void endObject() {
         // TODO Auto-generated method stub
     }
@@ -62,6 +65,7 @@ public class DXFImageDefHandler extends AbstractDXFObjectHandler {
      *
      * @see de.miethxml.kabeja.parser.objects.DXFObjectHandler#getDXFObject()
      */
+    @Override
     public DXFObject getDXFObject() {
         // TODO Auto-generated method stub
         return imageDef;
@@ -73,6 +77,7 @@ public class DXFImageDefHandler extends AbstractDXFObjectHandler {
      * @see de.miethxml.kabeja.parser.objects.DXFObjectHandler#parseGroup(int,
      *      de.miethxml.kabeja.parser.DXFValue)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         switch (groupCode) {
         case GROUPCODE_FILENAME:

@@ -31,10 +31,12 @@ public class ProcessingEditorViewComponent implements ViewComponent {
     protected JComponent view;
     protected ProcessingManager manager;
 
+    @Override
     public String getTitle() {
         return "ProcessingEditor";
     }
 
+    @Override
     public JComponent getView() {
         if (!this.initialized) {
             this.initialize();
@@ -55,6 +57,7 @@ public class ProcessingEditorViewComponent implements ViewComponent {
         this.view = sp;
     }
 
+    @Override
     public void setProcessingManager(ProcessingManager manager) {
         this.manager = manager;
     }

@@ -47,6 +47,7 @@ public interface DXFEntityHandler extends Handler {
      */
     public abstract String getDXFEntityName();
 
+    @Override
     public void setDXFDocument(DXFDocument doc);
 
     /**

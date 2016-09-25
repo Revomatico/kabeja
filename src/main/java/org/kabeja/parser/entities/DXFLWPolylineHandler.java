@@ -37,6 +37,7 @@ public class DXFLWPolylineHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#endParsing()
      */
+    @Override
     public void endDXFEntity() {
     }
 
@@ -45,6 +46,7 @@ public class DXFLWPolylineHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#getEntity()
      */
+    @Override
     public DXFEntity getDXFEntity() {
         return lwpolyline;
     }
@@ -54,6 +56,7 @@ public class DXFLWPolylineHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#getEntityName()
      */
+    @Override
     public String getDXFEntityName() {
         return ENTITY_NAME;
     }
@@ -63,6 +66,7 @@ public class DXFLWPolylineHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#isFollowSequence()
      */
+    @Override
     public boolean isFollowSequence() {
         return false;
     }
@@ -73,6 +77,7 @@ public class DXFLWPolylineHandler extends AbstractEntityHandler {
      * @see org.dxf2svg.parser.entities.EntityHandler#parseGroup(int,
      *      org.dxf2svg.parser.DXFValue)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         // the different between polyline and lwpolyline is,
         // that the vertices comes not as sequence here.
@@ -134,6 +139,7 @@ public class DXFLWPolylineHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.EntityHandler#startParsing()
      */
+    @Override
     public void startDXFEntity() {
         lwpolyline = new DXFLWPolyline();
     }

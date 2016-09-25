@@ -34,6 +34,7 @@ public class SVG3DFaceGenerator extends AbstractSVGSAXGenerator {
         super();
     }
 
+    @Override
     public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         // all edges are visible

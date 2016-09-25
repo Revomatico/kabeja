@@ -28,6 +28,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 
 public class SVGPointGenerator extends AbstractSVGSAXGenerator {
+    @Override
     public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         DXFPoint point = (DXFPoint) entity;

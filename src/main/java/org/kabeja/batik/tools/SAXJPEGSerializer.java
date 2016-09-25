@@ -29,6 +29,7 @@ public class SAXJPEGSerializer extends AbstractSAXSerializer {
      *
      * @see org.kabeja.xml.SAXSerializer#getMimeType()
      */
+    @Override
     public String getMimeType() {
         return MIME_TYPE_JPEG;
     }
@@ -38,6 +39,7 @@ public class SAXJPEGSerializer extends AbstractSAXSerializer {
      *
      * @see org.kabeja.xml.SAXSerializer#getSuffix()
      */
+    @Override
     public String getSuffix() {
         return SUFFIX_JPEG;
     }
@@ -45,10 +47,12 @@ public class SAXJPEGSerializer extends AbstractSAXSerializer {
     /* (non-Javadoc)
      * @see org.kabeja.batik.tools.AbstractSAXSerializer#createTranscoder()
      */
+    @Override
     protected Transcoder createTranscoder() {
         return new JPEGTranscoder();
     }
 
+    @Override
     protected void setupTranscoder(Transcoder t) {
         super.setupTranscoder(t);
         t.addTranscodingHint(JPEGTranscoder.KEY_QUALITY, new Float(this.quality));

@@ -62,6 +62,7 @@ public class DXFLine extends DXFEntity {
         return start;
     }
 
+    @Override
     public Bounds getBounds() {
         Bounds bounds = new Bounds();
         bounds.addToBounds(this.end);
@@ -70,10 +71,12 @@ public class DXFLine extends DXFEntity {
         return bounds;
     }
 
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_LINE;
     }
 
+    @Override
     public double getLength() {
         return MathUtils.distance(this.start, this.end);
     }

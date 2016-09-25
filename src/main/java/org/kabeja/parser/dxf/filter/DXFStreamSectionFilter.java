@@ -26,6 +26,7 @@ abstract class DXFStreamSectionFilter extends AbstractDXFStreamFilter {
     protected boolean sectionStarts = false;
     protected String section;
 
+    @Override
     public void parseGroup(int groupCode, DXFValue value)
         throws ParseException {
         if ((groupCode == COMMAND_CODE) &&

@@ -92,10 +92,12 @@ public class ProcessingRunViewComponent implements ViewComponent, Serviceable,
     protected Map<String, Object> properties = new HashMap<String, Object>();
     protected ArrayList<DXFDocumentChangeListener> listeners = new ArrayList<DXFDocumentChangeListener>();
 
+    @Override
     public String getTitle() {
         return "Run Processing";
     }
 
+    @Override
     public JComponent getView() {
         this.initialize();
 
@@ -105,7 +107,7 @@ public class ProcessingRunViewComponent implements ViewComponent, Serviceable,
     protected void initialize() {
         if (!this.initialized) {
             JPanel panel = PanelFactory.createTitledPanel(new JPanel(),
-            		Messages.getString("ProcessingRunViewComponent.processing.pipeline"),
+                    Messages.getString("ProcessingRunViewComponent.processing.pipeline"),
                     new ImageIcon(UIUtils.resourceToBytes(this.getClass(),
                             "/icons/project.gif")));
             pipelinePanel = new JPanel(new GridLayout(0, 1, 0, 3));
@@ -144,6 +146,7 @@ public class ProcessingRunViewComponent implements ViewComponent, Serviceable,
         }
     }
 
+    @Override
     public void setProcessingManager(ProcessingManager manager) {
         this.manager = manager;
         this.initialize();
@@ -165,6 +168,7 @@ public class ProcessingRunViewComponent implements ViewComponent, Serviceable,
         pipelinePanel.repaint();
     }
 
+    @Override
     public void setServiceManager(ServiceManager manager) {
         Object[] objects = manager.getServiceComponents(ApplicationToolBar.SERVICE);
 
@@ -173,8 +177,10 @@ public class ProcessingRunViewComponent implements ViewComponent, Serviceable,
                         "/icons/open.gif"))) {
                 private static final long serialVersionUID = 1L;
 
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     Runnable r = new Runnable() {
+                            @Override
                             public void run() {
                                 chooseInput();
                             }
@@ -220,12 +226,14 @@ public class ProcessingRunViewComponent implements ViewComponent, Serviceable,
         mbar.setAction(ApplicationMenuBar.MENU_ID_FILE, action);
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (!this.locked) {
             this.processingPipeline = e.getActionCommand();
             this.locked = true;
 
             Runnable r = new Runnable() {
+                    @Override
                     public void run() {
                         process();
                     }
@@ -365,6 +373,7 @@ public class ProcessingRunViewComponent implements ViewComponent, Serviceable,
         this.logView.setCaretPosition(this.logView.getDocument().getLength());
     }
 
+    @Override
     public void propertiesChanged(Map<String, Object> props) {
         // copy changed properties to my properties
         Iterator<String> i = props.keySet().iterator();
@@ -375,10 +384,12 @@ public class ProcessingRunViewComponent implements ViewComponent, Serviceable,
         }
     }
 
+    @Override
     public void addDXFDocumentChangeListener(DXFDocumentChangeListener listener) {
         this.listeners.add(listener);
     }
 
+    @Override
     public void removeDXFDocumentChangeListener(
         DXFDocumentChangeListener listener) {
         this.listeners.remove(listener);
@@ -450,15 +461,18 @@ public class ProcessingRunViewComponent implements ViewComponent, Serviceable,
             return this.component.getTitle();
         }
 
+        @Override
         public void itemStateChanged(ItemEvent e) {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 SwingUtilities.invokeLater(new Runnable() {
+                        @Override
                         public void run() {
                             setEnabled(true);
                         }
                     });
             } else {
                 SwingUtilities.invokeLater(new Runnable() {
+                        @Override
                         public void run() {
                             setEnabled(false);
                         }

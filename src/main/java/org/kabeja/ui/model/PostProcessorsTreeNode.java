@@ -39,10 +39,12 @@ public class PostProcessorsTreeNode extends AbstractProcessingTreeNode {
         }
     }
 
+    @Override
     public boolean getAllowsChildren() {
         return true;
     }
 
+    @Override
     public boolean isLeaf() {
         return false;
     }

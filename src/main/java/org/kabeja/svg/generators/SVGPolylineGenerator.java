@@ -37,6 +37,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 public class SVGPolylineGenerator extends AbstractSVGSAXGenerator
     implements SVGPathBoundaryGenerator {
+    @Override
     public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         // the polyline will emit as a svg:path
@@ -114,6 +115,7 @@ public class SVGPolylineGenerator extends AbstractSVGSAXGenerator
      *
      * @see de.miethxml.kabeja.dxf.helpers.HatchBoundaryElement#getSVGPath()
      */
+    @Override
     public String getSVGPath(DXFEntity entity) {
         // create the path
         DXFPolyline pline = (DXFPolyline) entity;

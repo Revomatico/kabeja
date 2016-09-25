@@ -47,6 +47,7 @@ public class ImageBase64Encoder extends XMLFilterImpl implements SAXFilter {
      *
      * @see org.kabeja.xml.SAXFilter#setProperties(java.util.Map)
      */
+    @Override
     public void setProperties(Map<String, Object> properties) {
     }
 
@@ -116,6 +117,7 @@ public class ImageBase64Encoder extends XMLFilterImpl implements SAXFilter {
         return StringUtils.EMPTY;
     }
 
+    @Override
     public Map<String, Object> getProperties() {
         return this.properties;
     }

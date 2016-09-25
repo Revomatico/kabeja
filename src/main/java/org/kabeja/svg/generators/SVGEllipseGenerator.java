@@ -31,6 +31,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 public class SVGEllipseGenerator extends AbstractSVGSAXGenerator
     implements SVGPathBoundaryGenerator {
+    @Override
     public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         DXFEllipse ellipse = (DXFEllipse) entity;
@@ -77,6 +78,7 @@ public class SVGEllipseGenerator extends AbstractSVGSAXGenerator
         }
     }
 
+    @Override
     public String getSVGPath(DXFEntity entity) {
         DXFEllipse ellipse = (DXFEllipse) entity;
 

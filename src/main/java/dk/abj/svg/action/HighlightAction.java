@@ -29,6 +29,8 @@ import java.awt.event.ItemListener;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 
+import org.apache.batik.anim.dom.SVGDOMImplementation;
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.dxf.DXFDocument;
 import org.kabeja.dxf.DXFEntity;
 import org.kabeja.svg.SVGUtils;
@@ -43,9 +45,6 @@ import org.w3c.dom.events.EventTarget;
 import org.w3c.dom.svg.SVGDocument;
 
 import de.miethxml.toolkit.ui.UIUtils;
-
-import org.apache.batik.anim.dom.SVGDOMImplementation;
-import org.apache.commons.lang.StringUtils;
 
 
 public class HighlightAction extends AbstractAction implements SVGDocumentAction,
@@ -75,6 +74,7 @@ public class HighlightAction extends AbstractAction implements SVGDocumentAction
         super(b);
     }
 
+    @Override
     public void handleEvent(Event evt) {
         if (this.activated) {
             oldElem = elem;
@@ -112,6 +112,7 @@ public class HighlightAction extends AbstractAction implements SVGDocumentAction
         this.labelID.setAttributeNS(null, "visibility", "hidden");
     }
 
+    @Override
     public void setDocument(SVGDocument doc) {
         Element el = doc.getElementById("draft");
         prepare(el.getChildNodes());
@@ -166,9 +167,11 @@ public class HighlightAction extends AbstractAction implements SVGDocumentAction
         // this.highlightStrokeWidth = this.strokeWidth;
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
     }
 
+    @Override
     public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
             this.activated = true;
@@ -178,26 +181,26 @@ public class HighlightAction extends AbstractAction implements SVGDocumentAction
     }
 
     protected void showHandle(Event e, Element el) {
-        //		  MouseEvent mevt = (MouseEvent) e;
-        //		  SVGDocument doc = ((SVGDocument)this.labelID
-        //			.getOwnerDocument());
-        //		    SVGMatrix screen = doc.getRootElement().getScreenCTM();
-        //			SVGMatrix matrix =  doc.getRootElement().getScreenCTM()
-        //					.inverse();
-        //			 double startX = matrix.getA() * mevt.getClientX()
-        //					+ matrix.getC() * mevt.getClientY() + matrix.getE();
-        //			double startY = matrix.getB() * mevt.getClientX()
-        //					+ matrix.getD() * mevt.getClientY() + matrix.getF();
-        //			this.labelID.setAttributeNS(null, "x", StringUtils.EMPTY+startX);
-        //			this.labelID.setAttributeNS(null, "y", StringUtils.EMPTY+startY);
-        //			String s = doc.getDocumentElement().getAttribute("viewBox");
+        //          MouseEvent mevt = (MouseEvent) e;
+        //          SVGDocument doc = ((SVGDocument)this.labelID
+        //            .getOwnerDocument());
+        //            SVGMatrix screen = doc.getRootElement().getScreenCTM();
+        //            SVGMatrix matrix =  doc.getRootElement().getScreenCTM()
+        //                    .inverse();
+        //             double startX = matrix.getA() * mevt.getClientX()
+        //                    + matrix.getC() * mevt.getClientY() + matrix.getE();
+        //            double startY = matrix.getB() * mevt.getClientX()
+        //                    + matrix.getD() * mevt.getClientY() + matrix.getF();
+        //            this.labelID.setAttributeNS(null, "x", StringUtils.EMPTY+startX);
+        //            this.labelID.setAttributeNS(null, "y", StringUtils.EMPTY+startY);
+        //            String s = doc.getDocumentElement().getAttribute("viewBox");
         //            System.out.println("s="+s);
-        //			String[] data = s.split("\\s+");
-        //			double w = Double.parseDouble(data[2]);
-        //	
-        //			float width = (float) (screen.getA() * w + screen.getC() * 0
-        //					+ screen.getE());
-        //			 
+        //            String[] data = s.split("\\s+");
+        //            double w = Double.parseDouble(data[2]);
+        //
+        //            float width = (float) (screen.getA() * w + screen.getC() * 0
+        //                    + screen.getE());
+        //
         String handle = SVGUtils.reverseID(el.getAttribute("id"));
         DXFEntity entity = this.dxfDocument.getDXFEntityByID(handle);
         System.out.println("Selected Entity=" + handle);
@@ -209,10 +212,11 @@ public class HighlightAction extends AbstractAction implements SVGDocumentAction
         }
 
         //
-        //			this.labelID.setAttributeNS(null, "visibility", "visible");
-        //			this.labelID.setTextContent("Handle="+handle);
+        //            this.labelID.setAttributeNS(null, "visibility", "visible");
+        //            this.labelID.setTextContent("Handle="+handle);
     }
 
+    @Override
     public void setDXFDocument(DXFDocument doc) {
         this.dxfDocument = doc;
     }

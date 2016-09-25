@@ -39,6 +39,7 @@ public class BoundsDebugger extends AbstractPostProcessor {
      *
      * @see de.miethxml.kabeja.tools.PostProcessor#process(de.miethxml.kabeja.dxf.DXFDocument)
      */
+    @Override
     public void process(DXFDocument doc, Map<String, Object> context) throws ProcessorException {
         //set all blocks to color gray
         Iterator<DXFBlock> i = doc.getDXFBlockIterator();

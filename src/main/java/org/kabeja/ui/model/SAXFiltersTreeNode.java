@@ -38,10 +38,12 @@ public class SAXFiltersTreeNode extends AbstractProcessingTreeNode {
         }
     }
 
+    @Override
     public boolean getAllowsChildren() {
         return true;
     }
 
+    @Override
     public boolean isLeaf() {
         return false;
     }

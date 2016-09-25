@@ -78,6 +78,7 @@ public class SAXPrettyOutputter extends AbstractSAXSerializer
         this.encoding = DEFAULT_ENCODING;
     }
 
+    @Override
     public void characters(char[] ch, int start, int length)
         throws SAXException {
         try {
@@ -99,6 +100,7 @@ public class SAXPrettyOutputter extends AbstractSAXSerializer
         }
     }
 
+    @Override
     public void endDocument() throws SAXException {
         try {
             this.out.flush();
@@ -110,6 +112,7 @@ public class SAXPrettyOutputter extends AbstractSAXSerializer
         }
     }
 
+    @Override
     public void endElement(String namespaceURI, String localName, String qName)
         throws SAXException {
         try {
@@ -138,23 +141,29 @@ public class SAXPrettyOutputter extends AbstractSAXSerializer
         parent = false;
     }
 
+    @Override
     public void endPrefixMapping(String prefix) throws SAXException {
     }
 
+    @Override
     public void ignorableWhitespace(char[] ch, int start, int length)
         throws SAXException {
     }
 
+    @Override
     public void processingInstruction(String target, String data)
         throws SAXException {
     }
 
+    @Override
     public void setDocumentLocator(Locator locator) {
     }
 
+    @Override
     public void skippedEntity(String name) throws SAXException {
     }
 
+    @Override
     public void startDocument() throws SAXException {
         indent = 0;
 
@@ -170,6 +179,7 @@ public class SAXPrettyOutputter extends AbstractSAXSerializer
         }
     }
 
+    @Override
     public void startElement(String namespaceURI, String localName,
         String qName, Attributes atts) throws SAXException {
         this.indent++;
@@ -209,7 +219,7 @@ public class SAXPrettyOutputter extends AbstractSAXSerializer
                 // }
                 String value = atts.getValue(i);
                 // BUG!! if(value == null){
-                // BUG!! 	value="";
+                // BUG!!     value="";
                 // BUG!! }
                 // BUG!! this.out.write(qname + "=\"" + encodeXML(atts.getValue(i)) +
                 // BUG!!    "\"");
@@ -226,6 +236,7 @@ public class SAXPrettyOutputter extends AbstractSAXSerializer
         this.textContentList.add(Boolean.valueOf(false));
     }
 
+    @Override
     public void startPrefixMapping(String prefix, String uri)
         throws SAXException {
     }
@@ -287,6 +298,7 @@ public class SAXPrettyOutputter extends AbstractSAXSerializer
      *
      * @see org.kabeja.xml.SAXSerializer#getMimeType()
      */
+    @Override
     public String getMimeType() {
         return MIMETYPE;
     }
@@ -296,6 +308,7 @@ public class SAXPrettyOutputter extends AbstractSAXSerializer
      *
      * @see org.kabeja.xml.SAXSerializer#getSuffix()
      */
+    @Override
     public String getSuffix() {
         if (gzip) {
             return SUFFIX_GZIP;
@@ -309,6 +322,7 @@ public class SAXPrettyOutputter extends AbstractSAXSerializer
      *
      * @see org.kabeja.xml.SAXSerializer#setOutput(java.io.OutputStream)
      */
+    @Override
     public void setOutput(OutputStream out) {
         OutputStream bout = null;
 

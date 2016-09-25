@@ -25,13 +25,13 @@ import javax.swing.JComponent;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.dxf.DXFDocument;
 import org.kabeja.svg.SVGGenerator;
 import org.kabeja.svg.ui.PopUpButton;
 import org.kabeja.ui.impl.AbstractPropertiesEditor;
 
 import de.miethxml.toolkit.ui.UIUtils;
-import org.apache.commons.lang.StringUtils;
 
 
 public class LayoutSwitchAction extends AbstractPropertiesEditor
@@ -39,14 +39,17 @@ public class LayoutSwitchAction extends AbstractPropertiesEditor
     PopUpButton button;
     JCheckBoxMenuItem defaultItem;
 
+    @Override
     public JComponent getView() {
         if (this.button == null) {
             ItemListener l = new ItemListener() {
+                    @Override
                     public void itemStateChanged(ItemEvent e) {
                         if (e.getStateChange() == ItemEvent.SELECTED) {
                             properties.put(SVGGenerator.PROPERTY_DOCUMENT_BOUNDS_RULE,
                                 ((JCheckBoxMenuItem) e.getItem()).getText());
                             SwingUtilities.invokeLater(new Runnable() {
+                                    @Override
                                     public void run() {
                                         firePropertiesChangedEvent();
                                     }
@@ -93,6 +96,7 @@ public class LayoutSwitchAction extends AbstractPropertiesEditor
         return this.button;
     }
 
+    @Override
     public void setDXFDocument(DXFDocument doc) {
         this.defaultItem.setSelected(true);
     }

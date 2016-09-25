@@ -30,6 +30,7 @@ public class SVGAttribGenerator extends SVGTextGenerator {
      * @see de.miethxml.kabeja.svg.SVGGenerator#toSAX(org.xml.sax.ContentHandler)
      */
 
+    @Override
     public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
             TransformContext transformContext) throws SAXException {
         DXFAttrib attrib = (DXFAttrib) entity;

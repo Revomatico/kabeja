@@ -43,8 +43,10 @@ public class MemoryUsageToolbarComponent implements Serviceable, Startable {
         view.setMaximumSize(new Dimension(60, 24));
     }
 
+    @Override
     public void start() {
         Thread t = new Thread(new Runnable() {
+                    @Override
                     public void run() {
                         while (!interrupted) {
                             long total = Runtime.getRuntime().maxMemory();
@@ -67,10 +69,12 @@ public class MemoryUsageToolbarComponent implements Serviceable, Startable {
         t.start();
     }
 
+    @Override
     public void stop() {
         interrupted = true;
     }
 
+    @Override
     public void setServiceManager(ServiceManager manager) {
         this.initialize();
 

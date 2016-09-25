@@ -34,6 +34,7 @@ public class ProcessingTreeModelPresenter extends AbstractProcessingTreeNode
         this.setProcessorManager(manager);
     }
 
+    @Override
     public boolean isLeaf() {
         return false;
     }
@@ -58,14 +59,17 @@ public class ProcessingTreeModelPresenter extends AbstractProcessingTreeNode
         addChild(node);
     }
 
+    @Override
     public boolean getAllowsChildren() {
         return false;
     }
 
+    @Override
     public void addTreeModelListener(TreeModelListener l) {
         this.listeners.add(l);
     }
 
+    @Override
     public Object getChild(Object parent, int index) {
         //delegate to nodes
         AbstractProcessingTreeNode node = (AbstractProcessingTreeNode) parent;
@@ -73,32 +77,38 @@ public class ProcessingTreeModelPresenter extends AbstractProcessingTreeNode
         return node.getChildAt(index);
     }
 
+    @Override
     public int getChildCount(Object parent) {
         AbstractProcessingTreeNode node = (AbstractProcessingTreeNode) parent;
 
         return node.getChildCount();
     }
 
+    @Override
     public int getIndexOfChild(Object parent, Object child) {
         AbstractProcessingTreeNode node = (AbstractProcessingTreeNode) parent;
 
         return node.getIndex((AbstractProcessingTreeNode) child);
     }
 
+    @Override
     public Object getRoot() {
         return this;
     }
 
+    @Override
     public boolean isLeaf(Object obj) {
         AbstractProcessingTreeNode node = (AbstractProcessingTreeNode) obj;
 
         return node.isLeaf();
     }
 
+    @Override
     public void removeTreeModelListener(TreeModelListener l) {
         this.listeners.remove(l);
     }
 
+    @Override
     public void valueForPathChanged(TreePath path, Object newValue) {
         System.out.println("Changed path=" + path);
     }

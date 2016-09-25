@@ -22,8 +22,8 @@ import java.io.FileNotFoundException;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
-import org.apache.commons.lang.StringUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.processing.ProcessingManager;
 import org.kabeja.tools.SAXProcessingManagerBuilder;
 
@@ -38,8 +38,10 @@ public class OpenProcessingAction extends AbstractAction {
         this.container = container;
     }
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         Thread t = new Thread(new Runnable() {
+                    @Override
                     public void run() {
                         openProcessing();
                     }

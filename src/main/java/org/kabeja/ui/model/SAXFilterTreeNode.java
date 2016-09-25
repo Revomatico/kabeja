@@ -30,14 +30,17 @@ public class SAXFilterTreeNode extends AbstractProcessingTreeNode {
         this.filter = filter;
     }
 
+    @Override
     protected void initializeChildren() {
         this.propertiesToChildren(filter.getProperties());
     }
 
+    @Override
     public boolean getAllowsChildren() {
         return false;
     }
 
+    @Override
     public boolean isLeaf() {
         return false;
     }

@@ -56,6 +56,7 @@ public class DXFViewTableHandler extends AbstractTableHandler {
     public static final int GROUPCODE_USE_UCS = 72;
     private DXFView view;
 
+    @Override
     public void endParsing() {
         this.doc.addDXFView(view);
     }
@@ -63,6 +64,7 @@ public class DXFViewTableHandler extends AbstractTableHandler {
     /* (non-Javadoc)
      * @see org.kabeja.parser.table.DXFTableHandler#getTableKey()
      */
+    @Override
     public String getTableKey() {
         return DXFConstants.TABLE_KEY_VIEW;
     }
@@ -70,6 +72,7 @@ public class DXFViewTableHandler extends AbstractTableHandler {
     /* (non-Javadoc)
      * @see org.kabeja.parser.table.DXFTableHandler#parseGroup(int, org.kabeja.parser.DXFValue)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         switch (groupCode) {
         case GROUPCODE_CENTER_X:
@@ -192,6 +195,7 @@ public class DXFViewTableHandler extends AbstractTableHandler {
     /* (non-Javadoc)
      * @see org.kabeja.parser.table.DXFTableHandler#startParsing()
      */
+    @Override
     public void startParsing() {
         view = new DXFView();
     }

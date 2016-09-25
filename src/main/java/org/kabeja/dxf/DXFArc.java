@@ -74,6 +74,7 @@ public class DXFArc extends DXFEntity {
      *
      * @see org.kabeja.dxf.DXFEntity#updateViewPort()
      */
+    @Override
     public Bounds getBounds() {
         Bounds bounds = new Bounds();
         Point start = this.getStartPoint();
@@ -184,10 +185,12 @@ public class DXFArc extends DXFEntity {
     /**
      *
      */
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_ARC;
     }
 
+    @Override
     public double getLength() {
         double alpha = this.getTotalAngle();
 

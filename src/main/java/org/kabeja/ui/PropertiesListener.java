@@ -23,9 +23,9 @@ import java.util.Map;
  *
  */
 public interface PropertiesListener {
-	/**
-	 * Will be called every time the properties have changed
-	 * @param properties changed Properties
-	 */
+    /**
+     * Will be called every time the properties have changed
+     * @param properties changed Properties
+     */
     public void propertiesChanged(Map<String, Object> properties);
 }

@@ -155,14 +155,17 @@ public class DXFDictionary extends DXFObject {
         return new Iterator<DXFObject>() {
                 int count = 0;
 
+                @Override
                 public boolean hasNext() {
                     return count < records.size();
                 }
 
+                @Override
                 public DXFObject next() {
                     return records.get(count++).getDXFObject();
                 }
 
+                @Override
                 public void remove() {
                     records.remove(count - 1);
                 }

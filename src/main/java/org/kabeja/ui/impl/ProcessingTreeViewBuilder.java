@@ -81,6 +81,7 @@ public class ProcessingTreeViewBuilder {
                         "/icons/expand_all.gif")));
         item.setMnemonic('E');
         item.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     int row = 0;
 
@@ -97,6 +98,7 @@ public class ProcessingTreeViewBuilder {
                         "/icons/collapse_all.gif")));
         item.setMnemonic('C');
         item.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     int row = tree.getRowCount() - 1;
 

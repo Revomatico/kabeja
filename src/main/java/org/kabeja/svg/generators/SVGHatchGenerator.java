@@ -39,6 +39,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 
 public class SVGHatchGenerator extends AbstractSVGSAXGenerator {
+    @Override
     public void toSAX(ContentHandler handler, Map<String, Object> svgContext, DXFEntity entity,
         TransformContext transformContext) throws SAXException {
         DXFHatch hatch = (DXFHatch) entity;

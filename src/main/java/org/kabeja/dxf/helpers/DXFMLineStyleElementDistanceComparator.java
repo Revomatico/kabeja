@@ -21,6 +21,7 @@ import org.kabeja.dxf.objects.DXFMLineStyleElement;
 
 
 public class DXFMLineStyleElementDistanceComparator implements Comparator<DXFMLineStyleElement> {
+    @Override
     public int compare(DXFMLineStyleElement el1, DXFMLineStyleElement el2) {
 
         if (el1.getOffset() > el2.getOffset()) {

@@ -53,6 +53,7 @@ public class DXFCircle extends DXFEntity {
         return center;
     }
 
+    @Override
     public Bounds getBounds() {
         Bounds bounds = new Bounds();
         ParametricPlane plane = new ParametricPlane(this.getExtrusion());
@@ -65,10 +66,12 @@ public class DXFCircle extends DXFEntity {
         return bounds;
     }
 
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_CIRCLE;
     }
 
+    @Override
     public double getLength() {
         return 2 * Math.PI * this.radius;
     }

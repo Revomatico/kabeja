@@ -64,10 +64,12 @@ public class DXFMText extends DXFText {
         return this.refheight;
     }
 
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_MTEXT;
     }
 
+    @Override
     public double getRotation() {
         if (rotation != 0.0) {
             return rotation;
@@ -86,10 +88,12 @@ public class DXFMText extends DXFText {
         return rotation;
     }
 
+    @Override
     public TextDocument getTextDocument() {
         return this.textDoc;
     }
 
+    @Override
     public void setText(String text) {
         this.text = text;
 
@@ -100,6 +104,7 @@ public class DXFMText extends DXFText {
         return attachmentpointLocation;
     }
 
+    @Override
     public boolean isOmitLineType() {
         return true;
     }
@@ -107,6 +112,7 @@ public class DXFMText extends DXFText {
     /* (non-Javadoc)
      * @see org.kabeja.dxf.DXFEntity#getBounds()
      */
+    @Override
     public Bounds getBounds() {
         Bounds bounds = new Bounds();
         int l = this.textDoc.getMaximumLineLength();

@@ -43,6 +43,7 @@ public class DXFPlotSettings extends DXFObject {
     protected double customScaleNumerator = 1.0;
     protected double customScaleDenominator = 1.0;
 
+    @Override
     public String getObjectType() {
         return DXFConstants.OBJECT_TYPE_PLOTSETTINGS;
     }

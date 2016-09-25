@@ -40,10 +40,12 @@ public class PropertyTreeNode extends AbstractProcessingTreeNode {
     protected void initializeChildren() {
     }
 
+    @Override
     public boolean getAllowsChildren() {
         return false;
     }
 
+    @Override
     public boolean isLeaf() {
         return true;
     }

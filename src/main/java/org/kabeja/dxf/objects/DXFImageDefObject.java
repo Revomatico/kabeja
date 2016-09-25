@@ -28,6 +28,7 @@ public class DXFImageDefObject extends DXFObject {
     /* (non-Javadoc)
      * @see de.miethxml.kabeja.dxf.objects.DXFObject#getObjectType()
      */
+    @Override
     public String getObjectType() {
         return DXFConstants.OBJECT_TYPE_IMAGEDEF;
     }

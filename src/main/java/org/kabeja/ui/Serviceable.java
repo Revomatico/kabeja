@@ -21,9 +21,9 @@ package org.kabeja.ui;
  *
  */
 public interface Serviceable {
-	/**
-	 * Set the @see ServiceManager of the application.
-	 * @param manager
-	 */
+    /**
+     * Set the @see ServiceManager of the application.
+     * @param manager
+     */
     public void setServiceManager(ServiceManager manager);
 }

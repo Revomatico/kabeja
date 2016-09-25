@@ -44,6 +44,7 @@ public class DXFArcHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.DXFEntityHandler#endDXFEntity()
      */
+    @Override
     public void endDXFEntity() {
     }
 
@@ -52,6 +53,7 @@ public class DXFArcHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.DXFEntityHandler#getDXFEntity()
      */
+    @Override
     public DXFEntity getDXFEntity() {
         return arc;
     }
@@ -61,6 +63,7 @@ public class DXFArcHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.DXFEntityHandler#getDXFEntityName()
      */
+    @Override
     public String getDXFEntityName() {
         return ENTITY_NAME;
     }
@@ -70,6 +73,7 @@ public class DXFArcHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.DXFEntityHandler#isFollowSequence()
      */
+    @Override
     public boolean isFollowSequence() {
         return false;
     }
@@ -80,6 +84,7 @@ public class DXFArcHandler extends AbstractEntityHandler {
      * @see org.dxf2svg.parser.entities.DXFEntityHandler#parseGroup(int,
      *      org.dxf2svg.parser.DXFValue)
      */
+    @Override
     public void parseGroup(int groupCode, DXFValue value) {
         switch (groupCode) {
         case GROUPCODE_START_X:
@@ -124,6 +129,7 @@ public class DXFArcHandler extends AbstractEntityHandler {
      *
      * @see org.dxf2svg.parser.entities.DXFEntityHandler#startDXFEntity()
      */
+    @Override
     public void startDXFEntity() {
         arc = new DXFArc();
     }

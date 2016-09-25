@@ -76,6 +76,7 @@ public class DXFText extends DXFEntity {
      *
      * @see org.dxf2svg.dxf.DXFEntity#setDXFDocument(org.dxf2svg.dxf.DXFDocument)
      */
+    @Override
     public void setDXFDocument(DXFDocument doc) {
         super.setDXFDocument(doc);
     }
@@ -85,6 +86,7 @@ public class DXFText extends DXFEntity {
      *
      * @see org.dxf2svg.dxf.DXFEntity#updateViewPort()
      */
+    @Override
     public Bounds getBounds() {
         Bounds bounds = new Bounds();
 
@@ -369,6 +371,7 @@ public class DXFText extends DXFEntity {
         this.upsideDown = upsideDown;
     }
 
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_TEXT;
     }
@@ -454,10 +457,12 @@ public class DXFText extends DXFEntity {
         return alignmentPoint;
     }
 
+    @Override
     public boolean isOmitLineType() {
         return true;
     }
 
+    @Override
     public double getLength() {
         return 0;
     }

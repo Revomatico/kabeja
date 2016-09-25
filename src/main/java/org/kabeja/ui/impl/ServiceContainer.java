@@ -41,6 +41,7 @@ public class ServiceContainer implements ServiceManager, Application {
         this.components.add(c);
     }
 
+    @Override
     public Component[] getServiceComponents(String service) {
         List<Component> l = this.getServiceComponentsByServiceField(service);
         return l.toArray(new Component[l.size()]);
@@ -84,6 +85,7 @@ public class ServiceContainer implements ServiceManager, Application {
             new OpenProcessingAction(this));
     }
 
+    @Override
     public void start() {
         this.setupComponents();
 
@@ -98,6 +100,7 @@ public class ServiceContainer implements ServiceManager, Application {
         }
     }
 
+    @Override
     public void stop() {
         Iterator<Component> i = this.components.iterator();
 

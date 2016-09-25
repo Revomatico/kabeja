@@ -227,14 +227,14 @@ public class Bounds {
      */
     public boolean isValid() {
         //later 3D bounds
-        //		if ((this.max_x == Double.NEGATIVE_INFINITY)
-        //				|| (this.max_y == Double.NEGATIVE_INFINITY)
-        //				|| (this.min_x == Double.POSITIVE_INFINITY)
-        //				|| (this.min_y == Double.POSITIVE_INFINITY)
-        //				|| (this.max_z == Double.NEGATIVE_INFINITY)
-        //				|| (this.min_z == Double.POSITIVE_INFINITY)) {
-        //			return false;
-        //		}
+        //        if ((this.max_x == Double.NEGATIVE_INFINITY)
+        //                || (this.max_y == Double.NEGATIVE_INFINITY)
+        //                || (this.min_x == Double.POSITIVE_INFINITY)
+        //                || (this.min_y == Double.POSITIVE_INFINITY)
+        //                || (this.max_z == Double.NEGATIVE_INFINITY)
+        //                || (this.min_z == Double.POSITIVE_INFINITY)) {
+        //            return false;
+        //        }
         if ((this.max_x == Double.NEGATIVE_INFINITY) ||
                 (this.max_y == Double.NEGATIVE_INFINITY) ||
                 (this.min_x == Double.POSITIVE_INFINITY) ||

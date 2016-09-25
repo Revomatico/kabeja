@@ -22,11 +22,11 @@ package org.kabeja.ui;
  *
  */
 public interface ServiceManager {
-	
-	/**
-	 * 
-	 * @param service the searched service 
-	 * @return an array of Components which provides the service
-	 */
+    
+    /**
+     * 
+     * @param service the searched service 
+     * @return an array of Components which provides the service
+     */
     public Component[] getServiceComponents(String service);
 }

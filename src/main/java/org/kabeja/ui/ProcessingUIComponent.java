@@ -24,10 +24,10 @@ import org.kabeja.processing.ProcessingManager;
  */
 
 public interface ProcessingUIComponent extends Component {
-	/**
-	 * Set the current @see ProcessingManager of the application.
-	 * Could be called multiple times.
-	 * @param manager
-	 */
+    /**
+     * Set the current @see ProcessingManager of the application.
+     * Could be called multiple times.
+     * @param manager
+     */
     public void setProcessingManager(ProcessingManager manager);
 }

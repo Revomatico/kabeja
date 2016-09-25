@@ -27,6 +27,7 @@ public class DXFAttrib extends DXFText {
     /* (non-Javadoc)
      * @see de.miethxml.kabeja.dxf.DXFEntity#getType()
      */
+    @Override
     public String getType() {
         return DXFConstants.ENTITY_TYPE_ATTRIB;
     }

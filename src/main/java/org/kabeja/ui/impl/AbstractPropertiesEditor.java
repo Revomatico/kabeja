@@ -28,18 +28,22 @@ public abstract class AbstractPropertiesEditor implements PropertiesEditor {
     protected ArrayList<PropertiesListener> listeners = new ArrayList<PropertiesListener>();
     protected Map<String, Object> properties = new HashMap<String, Object>();
 
+    @Override
     public void addPropertiesListener(PropertiesListener listener) {
         this.listeners.add(listener);
     }
 
+    @Override
     public Map<String, Object> getProperties() {
         return this.properties;
     }
 
+    @Override
     public void removePropertiesListener(PropertiesListener listener) {
         this.listeners.remove(listeners);
     }
 
+    @Override
     public void setProperties(Map<String, Object> properties) {
         this.properties = properties;
     }

@@ -29,6 +29,7 @@ public class JToggleButtonGroup implements ActionListener {
     protected boolean selected = false;
     protected JToggleButton selectedButton;
 
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (this.unselectorButtons.contains(e.getSource()) && this.selected) {
             this.selected = false;

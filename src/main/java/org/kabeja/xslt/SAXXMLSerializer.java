@@ -42,6 +42,7 @@ public class SAXXMLSerializer extends XMLFilterImpl implements SAXSerializer {
      *
      * @see org.kabeja.xml.SAXSerializer#getMimeType()
      */
+    @Override
     public String getMimeType() {
         // TODO Auto-generated method stub
         return MIME_TYPE;
@@ -52,6 +53,7 @@ public class SAXXMLSerializer extends XMLFilterImpl implements SAXSerializer {
      *
      * @see org.kabeja.xml.SAXSerializer#getSuffix()
      */
+    @Override
     public String getSuffix() {
         // TODO Auto-generated method stub
         return SUFFIX;
@@ -62,6 +64,7 @@ public class SAXXMLSerializer extends XMLFilterImpl implements SAXSerializer {
      *
      * @see org.kabeja.xml.SAXSerializer#setOutput(java.io.OutputStream)
      */
+    @Override
     public void setOutput(OutputStream out) {
         this.out = out;
     }
@@ -71,6 +74,7 @@ public class SAXXMLSerializer extends XMLFilterImpl implements SAXSerializer {
      *
      * @see org.kabeja.xml.SAXSerializer#setProperties(java.util.Map)
      */
+    @Override
     public void setProperties(Map<String, Object> properties) {
         this.properties = properties;
     }
@@ -96,6 +100,7 @@ public class SAXXMLSerializer extends XMLFilterImpl implements SAXSerializer {
         super.startDocument();
     }
 
+    @Override
     public Map<String, Object> getProperties() {
         return this.properties;
     }

@@ -68,16 +68,16 @@ public class DXFEllipse extends DXFEntity {
                         Math.cos(start));
                 Vector v2 = MathUtils.scaleVector(minorAxis, Math.sin(start));
 
-                //				double x = major * Math.cos(start);
-                //				double y = minor * Math.sin(start);
+                //                double x = major * Math.cos(start);
+                //                double y = minor * Math.sin(start);
                 double x = v1.getX() + v2.getX();
                 double y = v1.getY() + v2.getY();
 
-                //				if (alpha != 0.0) {
-                //					double lx = x;
-                //					x = lx * Math.cos(alpha) - y * Math.sin(alpha);
-                //					y = lx * Math.sin(alpha) + y * Math.cos(alpha);
-                //				}
+                //                if (alpha != 0.0) {
+                //                    double lx = x;
+                //                    x = lx * Math.cos(alpha) - y * Math.sin(alpha);
+                //                    y = lx * Math.sin(alpha) + y * Math.cos(alpha);
+                //                }
                 Point p = plane.getPoint(x, y);
 
                 bounds.addToBounds(p);

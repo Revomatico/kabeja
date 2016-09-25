@@ -68,6 +68,7 @@ public class DXFParser implements HandlerManager, Handler, Parser, DXFHandler {
      *
      * @see org.kabeja.parser.Parser#parse(java.lang.String)
      */
+    @Override
     public void parse(String file) throws ParseException {
         parse(file, DEFAULT_ENCODING);
     }
@@ -77,6 +78,7 @@ public class DXFParser implements HandlerManager, Handler, Parser, DXFHandler {
      *
      * @see org.kabeja.parser.Parser#parse(java.lang.String, java.lang.String)
      */
+    @Override
     public void parse(String file, String encoding) throws ParseException {
         try {
             parse(new FileInputStream(file), encoding);
@@ -91,6 +93,7 @@ public class DXFParser implements HandlerManager, Handler, Parser, DXFHandler {
      * @see org.kabeja.parser.Parser#parse(java.io.InputStream,
      *      java.lang.String)
      */
+    @Override
     public void parse(InputStream input, String encoding)
         throws ParseException {
         String currentKey = StringUtils.EMPTY;
@@ -160,6 +163,7 @@ public class DXFParser implements HandlerManager, Handler, Parser, DXFHandler {
         }
     }
 
+    @Override
     public void parseGroup(int keyCode, DXFValue value)
         throws ParseException {
         //System.out.println(""+keyCode);
@@ -213,6 +217,7 @@ public class DXFParser implements HandlerManager, Handler, Parser, DXFHandler {
      *
      * @see org.kabeja.parser.Parser#getDocument()
      */
+    @Override
     public DXFDocument getDocument() {
         return doc;
     }
@@ -222,6 +227,7 @@ public class DXFParser implements HandlerManager, Handler, Parser, DXFHandler {
         handlers.put(handler.getSectionKey(), handler);
     }
 
+    @Override
     public void addHandler(Handler handler) {
         addDXFSectionHandler((DXFSectionHandler) handler);
     }
@@ -237,6 +243,7 @@ public class DXFParser implements HandlerManager, Handler, Parser, DXFHandler {
      *
      * @see org.kabeja.parser.Parser#releaseDXFDocument()
      */
+    @Override
     public void releaseDXFDocument() {
         this.doc = null;
 
@@ -259,10 +266,12 @@ public class DXFParser implements HandlerManager, Handler, Parser, DXFHandler {
      *
      * @see org.kabeja.parser.Parser#setDXFDocument(org.kabeja.dxf.DXFDocument)
      */
+    @Override
     public void setDXFDocument(DXFDocument doc) {
         this.doc = doc;
     }
 
+    @Override
     public boolean supportedExtension(String extension) {
         return extension.toLowerCase().equals(EXTENSION);
     }
@@ -292,6 +301,7 @@ public class DXFParser implements HandlerManager, Handler, Parser, DXFHandler {
         this.filter = handler;
     }
 
+    @Override
     public String getName() {
         return PARSER_NAME;
     }
