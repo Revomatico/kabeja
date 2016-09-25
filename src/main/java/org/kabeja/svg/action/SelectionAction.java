@@ -27,7 +27,6 @@ import java.util.Map;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 
-import org.apache.batik.dom.svg.SVGDOMImplementation;
 import org.kabeja.processing.BoundsFilter;
 import org.kabeja.svg.SVGConstants;
 import org.kabeja.svg.SVGUtils;
@@ -42,6 +41,8 @@ import org.w3c.dom.svg.SVGDocument;
 import org.w3c.dom.svg.SVGMatrix;
 
 import de.miethxml.toolkit.ui.UIUtils;
+
+import org.apache.batik.anim.dom.SVGDOMImplementation;
 import org.apache.commons.lang.StringUtils;
 
 

@@ -17,7 +17,7 @@ package org.kabeja.svg.tools;
 
 import java.util.Map;
 
-import org.apache.batik.dom.svg.SVGDOMImplementation;
+import org.apache.batik.anim.dom.SVGDOMImplementation;
 import org.apache.batik.dom.util.SAXDocumentFactory;
 import org.kabeja.dxf.DXFDocument;
 import org.kabeja.svg.SVGGenerator;

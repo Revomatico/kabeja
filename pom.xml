@@ -8,7 +8,7 @@
     <groupId>org.kabeja</groupId>
     <artifactId>kabeja</artifactId>
     <name>kabeja</name>
-    <version>0.4.6</version>
+    <version>0.4.7</version>
     <packaging>jar</packaging>
     <description>Kabeja is a java library for parsing DXF and converting to SVG
 (dxf2svg). The library supports the SAX-api and can integrated
@@ -26,31 +26,6 @@ to jpeg, tiff, png and pdf are included.
 
     <inceptionYear>2005</inceptionYear>
  
-    <distributionManagement>
-        <repository>
-            <id>m2</id>
-            <name>Repository m2.antea.bogus</name>
-            <url>scpexe://maven.antea.bogus/srv/maven</url>
-        </repository>
-    </distributionManagement>
-
-   <repositories>
-        <!-- Repository condivisa Antea. -->
-        <repository>
-            <id>antea</id>
-            <name>Repository Aziendale Antea</name>
-            <url>http://m2.antea.bogus</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
-
     <developers>
         <developer>
             <id>simijhag</id>
@@ -171,7 +146,7 @@ to jpeg, tiff, png and pdf are included.
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-swing</artifactId>
-            <version>1.8pre</version>
+            <version>1.8</version>
         </dependency>
         <dependency>
             <groupId>de.miethxml</groupId>
@@ -181,13 +156,23 @@ to jpeg, tiff, png and pdf are included.
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-transcoder</artifactId>
-            <version>1.8pre</version>
+            <version>1.8</version>
         </dependency>
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-js</artifactId>
-            <version>1.8pre</version>
+            <version>1.8</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-anim</artifactId>
+            <version>1.8</version>
+        </dependency>
+   		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>fop</artifactId>
+			<version>2.1</version>
+		</dependency>
     </dependencies>
 
     <reporting>

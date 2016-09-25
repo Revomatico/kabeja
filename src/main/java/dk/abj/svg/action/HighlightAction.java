@@ -29,7 +29,6 @@ import java.awt.event.ItemListener;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 
-import org.apache.batik.dom.svg.SVGDOMImplementation;
 import org.kabeja.dxf.DXFDocument;
 import org.kabeja.dxf.DXFEntity;
 import org.kabeja.svg.SVGUtils;
@@ -44,6 +43,8 @@ import org.w3c.dom.events.EventTarget;
 import org.w3c.dom.svg.SVGDocument;
 
 import de.miethxml.toolkit.ui.UIUtils;
+
+import org.apache.batik.anim.dom.SVGDOMImplementation;
 import org.apache.commons.lang.StringUtils;
 
 
