@@ -15,13 +15,15 @@
 */
 package org.kabeja.math;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
+import org.junit.Test;
 import org.kabeja.dxf.helpers.Point;
 import org.kabeja.dxf.helpers.Vector;
 
 
-public class ParametricPlaneTest extends TestCase {
+public class ParametricPlaneTest {
+    @Test
     public void testDirectionY() {
         ParametricPlane p = new ParametricPlane(new Point(0, 0, 0),
                 new Point(1, 0, 0), new Vector(0, 0, 1));
@@ -31,6 +33,7 @@ public class ParametricPlaneTest extends TestCase {
         assertEquals(0.0, y.getZ(), 0.001);
     }
 
+    @Test
     public void testDirectionX() {
         ParametricPlane p = new ParametricPlane(new Point(0, 0, 0),
                 new Point(0, 1, 0), new Vector(0, 0, 1));
@@ -40,6 +43,7 @@ public class ParametricPlaneTest extends TestCase {
         assertEquals(0.0, y.getZ(), 0.001);
     }
 
+    @Test
     public void testPoint1() {
         ParametricPlane plane = new ParametricPlane(new Point(0, 0, 0),
                 new Point(1, 0, 0), new Vector(0, 0, 1));
@@ -51,6 +55,7 @@ public class ParametricPlaneTest extends TestCase {
         assertEquals(0.0, p.getZ(), 0.001);
     }
 
+    @Test
     public void testParameters() {
         ParametricPlane plane = new ParametricPlane(new Point(0, 0, 0),
                 new Point(1, 0, 0), new Vector(0, 0, 1));
@@ -61,6 +66,7 @@ public class ParametricPlaneTest extends TestCase {
         assertEquals(3.0, paras[1], 0.001);
     }
 
+    @Test
     public void testIsOnPlane() {
         ParametricPlane plane = new ParametricPlane(new Point(0, 0, 0),
                 new Point(1, 0, 0), new Vector(0, 0, 1));
@@ -69,6 +75,7 @@ public class ParametricPlaneTest extends TestCase {
         assertEquals(true, plane.isOnPlane(p));
     }
 
+    @Test
     public void testIsNotPlane() {
         ParametricPlane plane = new ParametricPlane(new Point(0, 0, 0),
                 new Point(1, 0, 0), new Vector(0, 0, 1));
@@ -77,6 +84,7 @@ public class ParametricPlaneTest extends TestCase {
         assertEquals(false, plane.isOnPlane(p));
     }
 
+    @Test
     public void testNormal() {
         ParametricPlane plane = new ParametricPlane(new Point(0, 0, 0),
                 new Point(1, 0, 0), new Point(1.0, 0.001, 0));

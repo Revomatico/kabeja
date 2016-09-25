@@ -15,15 +15,17 @@
 */
 package org.kabeja.dxf;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
+import org.junit.Test;
 import org.kabeja.dxf.helpers.Point;
 import org.kabeja.dxf.helpers.Vector;
 
 
-public class DXFExtrusionTest extends TestCase {
+public class DXFExtrusionTest {
     double DELTA = 0.0000000001;
 
+    @Test
     public void testLineExtrusion() {
         DXFLine line = new DXFLine();
         line.setStartPoint(new Point(0, 0, 0));
@@ -37,6 +39,7 @@ public class DXFExtrusionTest extends TestCase {
         assertEquals(10.0, p2.getZ(), DELTA);
     }
 
+    @Test
     public void testLinePlaneExtrusion() {
         DXFLine line = new DXFLine();
         line.setStartPoint(new Point(0, 0, 0));

@@ -15,12 +15,14 @@
 */
 package org.kabeja.math;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
+import org.junit.Test;
 import org.kabeja.dxf.helpers.Point;
 
 
-public class NURBSTest extends TestCase {
+public class NURBSTest {
+    @Test
     public void testPointAt() {
         Point[] points = new Point[] {
                 new Point(0, 0, 0), new Point(1.0, 1.0, 0.0),
@@ -38,6 +40,7 @@ public class NURBSTest extends TestCase {
         assertEquals(6.0 / 5.0, p.getY(), 0.001);
     }
 
+    @Test
     public void testBaseFunctions1() {
         Point[] points = new Point[] {  };
         double[] knots = new double[] { 0, 0, 0, 1, 2, 3, 4, 4, 5, 5 };
@@ -51,6 +54,7 @@ public class NURBSTest extends TestCase {
         assertEquals(1.0 / 8.0, bf[2], 0.00001);
     }
 
+    @Test
     public void testBaseFunctions2() {
         Point[] points = new Point[] {
                 new Point(0, 0, 0), new Point(1, 1, 0), new Point(3, 2, 0),

@@ -15,14 +15,16 @@
 */
 package org.kabeja.dxf;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
+import org.junit.Test;
 import org.kabeja.dxf.helpers.Point;
 
 
-public class DXFPolylineTest extends TestCase {
+public class DXFPolylineTest {
     public final static double DELTA = 0.0000000001;
 
+    @Test
     public void testBounds() {
         DXFPolyline pl = new DXFPolyline();
         pl.addVertex(new DXFVertex());
@@ -33,6 +35,7 @@ public class DXFPolylineTest extends TestCase {
         assertEquals(100, b.getHeight(), 0.0);
     }
 
+    @Test
     public void testBulgedBoundsEqualsNegativeRadius() {
         DXFPolyline pl = new DXFPolyline();
         DXFVertex v = new DXFVertex(new Point(0, 0, 0));
@@ -50,6 +53,7 @@ public class DXFPolylineTest extends TestCase {
         assertEquals(-50, b.getMinimumY(), DELTA);
     }
 
+    @Test
     public void testBulgedBoundsEqualsPositiveRadius() {
         DXFPolyline pl = new DXFPolyline();
         DXFVertex v = new DXFVertex(new Point(0, 0, 0));
@@ -67,6 +71,7 @@ public class DXFPolylineTest extends TestCase {
         assertEquals(0, b.getMinimumY(), DELTA);
     }
 
+    @Test
     public void testBulgedBoundsLowerPositiveRadius() {
         DXFPolyline pl = new DXFPolyline();
         DXFVertex v = new DXFVertex(new Point(0, 0, 0));
@@ -84,6 +89,7 @@ public class DXFPolylineTest extends TestCase {
         assertEquals(0, b.getMinimumY(), DELTA);
     }
 
+    @Test
     public void testBulgedBoundsLowerNegativeRadius() {
         DXFPolyline pl = new DXFPolyline();
         DXFVertex v = new DXFVertex(new Point(0, 0, 0));
@@ -101,6 +107,7 @@ public class DXFPolylineTest extends TestCase {
         assertEquals(-25, b.getMinimumY(), DELTA);
     }
 
+    @Test
     public void testBulgedBoundsGreaterPositiveRadius() {
         DXFPolyline pl = new DXFPolyline();
         DXFVertex v = new DXFVertex(new Point(0, 0, 0));
@@ -120,6 +127,7 @@ public class DXFPolylineTest extends TestCase {
         assertEquals(0, b.getMinimumY(), DELTA);
     }
 
+    @Test
     public void testBulgedBoundsGreaterNegativeRadius() {
         DXFPolyline pl = new DXFPolyline();
         DXFVertex v = new DXFVertex(new Point(0, 0, 0));
@@ -137,8 +145,5 @@ public class DXFPolylineTest extends TestCase {
         assertEquals(100, b.getHeight(), DELTA);
         assertEquals(0, b.getMaximumY(), DELTA);
         assertEquals(-100, b.getMinimumY(), DELTA);
-    }
-
-    public void testBulgedLength() {
     }
 }
