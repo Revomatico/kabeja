@@ -19,6 +19,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
@@ -51,10 +52,10 @@ import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.image.ImageTranscoder;
 import org.apache.batik.transcoder.image.JPEGTranscoder;
+import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.svg.SVGDocument;
 
 import de.miethxml.toolkit.ui.SmallShadowBorder;
-import org.apache.commons.lang.StringUtils;
 
 
 /**
@@ -83,6 +84,14 @@ public class SVGViewer {
     }
 
     public void initialize() {
+        svgCanvas = new JSVGCanvas();
+
+        if (!GraphicsEnvironment.isHeadless()) {
+            initializeGUI();
+        }
+    }
+
+    public void initializeGUI() {
         frame = new JFrame("SVGViewer");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -93,8 +102,10 @@ public class SVGViewer {
         uriField = new JTextField(30);
 
         uriField.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     Runnable r = new Runnable() {
+                            @Override
                             public void run() {
                                 load(new File(uriField.getText()));
                             }
@@ -109,6 +120,7 @@ public class SVGViewer {
 
         JButton button = new JButton("Open");
         button.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     int value = fc.showOpenDialog(frame);
 
@@ -116,6 +128,7 @@ public class SVGViewer {
                         svgCanvas.setSVGDocument(null);
 
                         Runnable r = new Runnable() {
+                                @Override
                                 public void run() {
                                     infoLabel.setText("Starting ......");
                                     cards.show(parentPanel, "info");
@@ -136,8 +149,10 @@ public class SVGViewer {
 
         button = new JButton("Zoom in");
         button.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     SwingUtilities.invokeLater(new Runnable() {
+                            @Override
                             public void run() {
                                 AffineTransform at = new AffineTransform();
                                 scaleXY += .3;
@@ -151,8 +166,10 @@ public class SVGViewer {
         panel.add(button);
         button = new JButton("Zoom out");
         button.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     SwingUtilities.invokeLater(new Runnable() {
+                            @Override
                             public void run() {
                                 AffineTransform at = new AffineTransform();
                                 scaleXY -= .3;
@@ -166,11 +183,13 @@ public class SVGViewer {
 
         button = new JButton("Export JPEG");
         button.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     int value = fc.showSaveDialog(frame);
 
                     if (value == JFileChooser.APPROVE_OPTION) {
                         Runnable r = new Runnable() {
+                                @Override
                                 public void run() {
                                     File file = fc.getSelectedFile();
 
@@ -194,33 +213,37 @@ public class SVGViewer {
         cards = new CardLayout();
         parentPanel = new JPanel(cards);
 
-        svgCanvas = new JSVGCanvas();
-
         svgCanvas.addSVGDocumentLoaderListener(new SVGDocumentLoaderAdapter() {
+                @Override
                 public void documentLoadingStarted(SVGDocumentLoaderEvent e) {
                     infoLabel.setText("Loading Draft...");
                 }
 
+                @Override
                 public void documentLoadingCompleted(SVGDocumentLoaderEvent e) {
                     infoLabel.setText("Draft Loaded.");
                 }
             });
 
         svgCanvas.addGVTTreeBuilderListener(new GVTTreeBuilderAdapter() {
+                @Override
                 public void gvtBuildStarted(GVTTreeBuilderEvent e) {
                     infoLabel.setText("Building...");
                 }
 
+                @Override
                 public void gvtBuildCompleted(GVTTreeBuilderEvent e) {
                     infoLabel.setText("Build Done.");
                 }
             });
 
         svgCanvas.addGVTTreeRendererListener(new GVTTreeRendererAdapter() {
+                @Override
                 public void gvtRenderingPrepare(GVTTreeRendererEvent e) {
                     infoLabel.setText("Rendering Draft...");
                 }
 
+                @Override
                 public void gvtRenderingCompleted(GVTTreeRendererEvent e) {
                     infoLabel.setText(StringUtils.EMPTY);
                     cards.show(parentPanel, "view");
@@ -268,7 +291,11 @@ public class SVGViewer {
             }
 
             SVGDocument doc = f.createSVGDocument(uri);
-            this.svgCanvas.setDocumentState(JSVGCanvas.ALWAYS_DYNAMIC);
+            if (GraphicsEnvironment.isHeadless()) {
+                this.svgCanvas.setDocumentState(JSVGCanvas.ALWAYS_STATIC);
+            } else {
+                this.svgCanvas.setDocumentState(JSVGCanvas.ALWAYS_DYNAMIC);
+            }
 
             // add a script to doc here by adding the script element
             this.svgCanvas.setSVGDocument(doc);
@@ -288,6 +315,7 @@ public class SVGViewer {
 
     public void saveToJPEG(OutputStream out) {
         ImageTranscoder trans = new JPEGTranscoder();
+        trans.addTranscodingHint(JPEGTranscoder.KEY_QUALITY, 0.9f);
 
         try {
             trans.transcode(new TranscoderInput(this.svgCanvas.getSVGDocument()),
@@ -295,5 +323,12 @@ public class SVGViewer {
         } catch (TranscoderException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * @return the svgCanvas
+     */
+    public final JSVGCanvas getSvgCanvas() {
+        return svgCanvas;
     }
 }
