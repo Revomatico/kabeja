@@ -164,7 +164,7 @@ public class DXFTextParser {
                         doc.addStyledParagraph(p);
                         p = createParagraphFromParent(p);
 
-                        if (paras.size() > 0) {
+                        if (!paras.isEmpty()) {
                             p = paras.pop();
                         }
                     }

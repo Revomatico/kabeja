@@ -71,7 +71,7 @@ public class ProcessPipeline {
         List<Map<String, Object>> saxFilterProperties = new ArrayList<Map<String, Object>>();
 
         // setup saxfilters
-        if (this.saxFilterConfigs.size() > 0) {
+        if (!saxFilterConfigs.isEmpty()) {
             Iterator<SAXFilterConfig> i2 = saxFilterConfigs.iterator();
             SAXFilterConfig sc = i2.next();
             SAXFilter first = this.manager.getSAXFilter(sc.getFilterName());

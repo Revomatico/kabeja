@@ -67,7 +67,7 @@ public class DXFFileTransferHandler extends TransferHandler {
             try {
                 List<?> list = (List<?>) t.getTransferData(DataFlavor.javaFileListFlavor);
 
-                if (list.size() > 0) {
+                if (!list.isEmpty()) {
                     Iterator<?> i = list.iterator();
 
                     while (i.hasNext()) {
@@ -118,7 +118,7 @@ public class DXFFileTransferHandler extends TransferHandler {
     public boolean importData(JComponent c, Transferable t) {
         List<File> files = getFileList(t);
 
-        if (files.size() > 0) {
+        if (!files.isEmpty()) {
             //we take the first one
             File f = files.get(0);
 

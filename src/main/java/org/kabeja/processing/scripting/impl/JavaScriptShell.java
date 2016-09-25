@@ -434,7 +434,7 @@ public class JavaScriptShell extends AbstractPostProcessor
                     e1.printStackTrace();
                 }
             } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-                if ((historyPos >= 0) && (history.size() > 0)) {
+                if ((historyPos >= 0) && !history.isEmpty()) {
                     if ((historyPos >= history.size()) && (history.size() > 1)) {
                         historyPos = history.size() - 2;
                     }
@@ -448,7 +448,7 @@ public class JavaScriptShell extends AbstractPostProcessor
 
                 e.consume();
             } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                if ((historyPos < history.size()) && (history.size() > 0)) {
+                if ((historyPos < history.size()) && !history.isEmpty()) {
                     if ((historyPos < 0) && (history.size() > 1)) {
                         historyPos = 1;
                     }

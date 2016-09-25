@@ -58,7 +58,7 @@ public class HatchBoundaryLoop {
         Bounds bounds = new Bounds();
 
         // System.out.println("edges="+edges.size());
-        if (edges.size() > 0) {
+        if (!edges.isEmpty()) {
             Iterator<DXFEntity> i = edges.iterator();
 
             while (i.hasNext()) {

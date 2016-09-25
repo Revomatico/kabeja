@@ -40,6 +40,6 @@ public class PostProcessorTreeNode extends AbstractProcessingTreeNode {
 
     @Override
     public boolean isLeaf() {
-        return this.pp.getProperties().size() > 0;
+        return !this.pp.getProperties().isEmpty();
     }
 }
