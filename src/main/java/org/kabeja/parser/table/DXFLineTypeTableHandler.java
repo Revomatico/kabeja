@@ -53,7 +53,6 @@ public class DXFLineTypeTableHandler extends AbstractTableHandler {
      */
     @Override
     public String getTableKey() {
-        // TODO Auto-generated method stub
         return TABLE_KEY;
     }
 

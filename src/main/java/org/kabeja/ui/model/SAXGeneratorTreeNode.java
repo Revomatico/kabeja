@@ -58,7 +58,6 @@ public class SAXGeneratorTreeNode extends AbstractProcessingTreeNode {
 
     @Override
     public boolean isLeaf() {
-        // TODO Auto-generated method stub
         return false;
     }
 }

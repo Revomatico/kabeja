@@ -74,7 +74,6 @@ public class DXFImageHandler extends AbstractEntityHandler {
      */
     @Override
     public DXFEntity getDXFEntity() {
-        // TODO Auto-generated method stub
         return image;
     }
 

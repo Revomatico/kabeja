@@ -95,7 +95,6 @@ public class SAXParserBuilder implements ContentHandler {
     @Override
     public void characters(char[] ch, int start, int length)
         throws SAXException {
-        // TODO Auto-generated method stub
     }
 
     /*
@@ -105,7 +104,6 @@ public class SAXParserBuilder implements ContentHandler {
      */
     @Override
     public void endDocument() throws SAXException {
-        // TODO Auto-generated method stub
     }
 
     /*
@@ -130,7 +128,6 @@ public class SAXParserBuilder implements ContentHandler {
      */
     @Override
     public void endPrefixMapping(String prefix) throws SAXException {
-        // TODO Auto-generated method stub
     }
 
     /*
@@ -141,7 +138,6 @@ public class SAXParserBuilder implements ContentHandler {
     @Override
     public void ignorableWhitespace(char[] ch, int start, int length)
         throws SAXException {
-        // TODO Auto-generated method stub
     }
 
     /*
@@ -153,7 +149,6 @@ public class SAXParserBuilder implements ContentHandler {
     @Override
     public void processingInstruction(String target, String data)
         throws SAXException {
-        // TODO Auto-generated method stub
     }
 
     /*
@@ -163,7 +158,6 @@ public class SAXParserBuilder implements ContentHandler {
      */
     @Override
     public void setDocumentLocator(Locator locator) {
-        // TODO Auto-generated method stub
     }
 
     /*
@@ -245,7 +239,6 @@ public class SAXParserBuilder implements ContentHandler {
     @Override
     public void startPrefixMapping(String prefix, String uri)
         throws SAXException {
-        // TODO Auto-generated method stub
     }
 
     public Parser getParser() {

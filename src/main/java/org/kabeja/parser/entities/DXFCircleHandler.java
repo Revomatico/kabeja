@@ -63,7 +63,6 @@ public class DXFCircleHandler extends AbstractEntityHandler {
      */
     @Override
     public String getDXFEntityName() {
-        // TODO Auto-generated method stub
         return ENTITY_NAME;
     }
 

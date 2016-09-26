@@ -159,7 +159,6 @@ public class Main {
                 sc.setProcessingManager(this.processorManager);
                 sc.start();
             } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

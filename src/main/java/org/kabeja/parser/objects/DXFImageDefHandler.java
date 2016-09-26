@@ -57,7 +57,6 @@ public class DXFImageDefHandler extends AbstractDXFObjectHandler {
      */
     @Override
     public void endObject() {
-        // TODO Auto-generated method stub
     }
 
     /*
@@ -67,7 +66,6 @@ public class DXFImageDefHandler extends AbstractDXFObjectHandler {
      */
     @Override
     public DXFObject getDXFObject() {
-        // TODO Auto-generated method stub
         return imageDef;
     }
 

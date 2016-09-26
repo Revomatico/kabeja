@@ -299,7 +299,6 @@ public class JavaScriptShell extends AbstractPostProcessor
 
             return line;
         } catch (BadLocationException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -430,7 +429,6 @@ public class JavaScriptShell extends AbstractPostProcessor
                         e.consume();
                     }
                 } catch (BadLocationException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             } else if (e.getKeyCode() == KeyEvent.VK_UP) {
@@ -494,7 +492,6 @@ public class JavaScriptShell extends AbstractPostProcessor
             try {
                 ScriptableObject.defineClass(this.scope, Global.class);
             } catch (Exception e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 

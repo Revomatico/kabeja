@@ -68,6 +68,5 @@ public class VisibilityFilter extends AbstractPostProcessor {
      */
     @Override
     public void setProperties(Map<String, Object> properties) {
-        // TODO Auto-generated method stub
     }
 }

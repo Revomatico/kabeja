@@ -360,7 +360,6 @@ public class DXFViewport extends DXFEntity {
 
     @Override
     public double getLength() {
-        // TODO Auto-generated method stub
         return 0;
     }
 

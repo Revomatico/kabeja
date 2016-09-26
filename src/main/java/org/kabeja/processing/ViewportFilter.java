@@ -94,10 +94,9 @@ public class ViewportFilter extends AbstractPostProcessor {
     }
 
     /* (non-Javadoc)
-         * @see org.kabeja.tools.PostProcessor#setProperties(java.util.Map)
-         */
+     * @see org.kabeja.tools.PostProcessor#setProperties(java.util.Map)
+     */
     @Override
     public void setProperties(Map<String, Object> properties) {
-        // TODO Auto-generated method stub
     }
 }

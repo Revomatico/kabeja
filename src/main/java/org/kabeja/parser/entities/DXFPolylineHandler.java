@@ -51,8 +51,6 @@ public class DXFPolylineHandler extends AbstractEntityHandler {
      */
     public DXFPolylineHandler() {
         super();
-
-        // TODO Auto-generated constructor stub
     }
 
     /*

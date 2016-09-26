@@ -68,7 +68,6 @@ public class DXFShapeHandler extends AbstractEntityHandler {
      */
     @Override
     public boolean isFollowSequence() {
-        // TODO Auto-generated method stub
         return false;
     }
 

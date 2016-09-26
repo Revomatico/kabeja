@@ -107,10 +107,8 @@ public class ImageBase64Encoder extends XMLFilterImpl implements SAXFilter {
 
             return new String(bos.toByteArray());
         } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
 

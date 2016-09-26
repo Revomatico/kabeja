@@ -31,7 +31,6 @@ public class ParserTreeNode extends AbstractProcessingTreeNode {
 
     @Override
     protected String getLabel() {
-        // TODO Auto-generated method stub
         return parser.getName();
     }
 

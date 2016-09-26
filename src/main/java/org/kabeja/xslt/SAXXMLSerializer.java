@@ -44,7 +44,6 @@ public class SAXXMLSerializer extends XMLFilterImpl implements SAXSerializer {
      */
     @Override
     public String getMimeType() {
-        // TODO Auto-generated method stub
         return MIME_TYPE;
     }
 
@@ -55,7 +54,6 @@ public class SAXXMLSerializer extends XMLFilterImpl implements SAXSerializer {
      */
     @Override
     public String getSuffix() {
-        // TODO Auto-generated method stub
         return SUFFIX;
     }
 

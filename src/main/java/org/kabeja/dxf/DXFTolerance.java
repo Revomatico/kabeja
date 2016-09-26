@@ -46,7 +46,6 @@ public class DXFTolerance extends DXFEntity {
      */
     @Override
     public String getType() {
-        // TODO Auto-generated method stub
         return DXFConstants.ENTITY_TYPE_TOLERANCE;
     }
 

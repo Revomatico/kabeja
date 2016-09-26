@@ -94,13 +94,10 @@ public class SAXServiceContainerBuilder implements ContentHandler {
                                      .loadClass(className).newInstance();
                     this.container.addComponent((Component) obj);
                 } catch (InstantiationException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             } else if (ELEMET_COMPONENTS.equals(localName)) {
@@ -112,7 +109,6 @@ public class SAXServiceContainerBuilder implements ContentHandler {
     @Override
     public void startPrefixMapping(String prefix, String uri)
         throws SAXException {
-        // TODO Auto-generated method stub
     }
 
     public ServiceContainer getServiceContainer() {

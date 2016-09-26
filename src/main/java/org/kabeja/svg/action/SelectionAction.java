@@ -234,7 +234,6 @@ public class SelectionAction extends AbstractAction implements SVGDocumentAction
         // update the properties data
         double height = Double.parseDouble(this.selectionRectangle.getAttribute(
                     "height"));
-        // TODO Auto-generated method stub
         this.properties.put(BoundsFilter.PROPERTY_X,
             this.selectionRectangle.getAttribute("x"));
         this.properties.put(BoundsFilter.PROPERTY_Y,

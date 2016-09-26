@@ -240,8 +240,7 @@ public class DXFPolyline extends DXFEntity {
     }
 
     public boolean isConstantWidth() {
-        //TODO review to see if the
-        //property is always set correct
+        //TODO review to see if the property is always set correct
         if (!this.constantWidth) {
             return false;
         } else {
