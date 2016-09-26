@@ -138,7 +138,6 @@ to jpeg, tiff, png and pdf are included.
                     <archive>
                         <manifest>
                             <mainClass>org.kabeja.ui.viewer.Main</mainClass>
-                            <addClasspath>true</addClasspath>
                         </manifest>
                     </archive>
                 </configuration>
