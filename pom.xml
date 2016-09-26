@@ -24,6 +24,15 @@ to jpeg, tiff, png and pdf are included.
         </url>
     </issueManagement>
 
+    <distributionManagement>
+        <downloadUrl>https://github.com/don-vip/kabeja/releases</downloadUrl>
+        <site>
+            <id>github</id>
+            <name>Github</name>
+            <url>https://github.com/don-vip/kabeja</url>
+        </site>
+    </distributionManagement>
+
     <repositories>
         <repository>
             <id>in-project</id>
@@ -77,13 +86,13 @@ to jpeg, tiff, png and pdf are included.
     </licenses>
     <scm>
         <connection>
-            scm:cvs:pserver:anonymous@${project.artifactId}.cvs.sourceforge.net:/cvsroot/${project.artifactId}:${project.artifactId}/
+            scm:git:git://github.com/don-vip/kabeja.git
         </connection>
         <developerConnection>
-            scm:cvs:ext:developername@${project.artifactId}.cvs.sourceforge.net:/cvsroot/${project.artifactId}:${project.artifactId}/
+            scm:git:git://github.com/don-vip/kabeja.git
         </developerConnection>
         <url>
-            http://${project.artifactId}.cvs.sourceforge.net/${project.artifactId}/${project.artifactId}/
+            https://github.com/don-vip/kabeja
         </url>
     </scm>
 
@@ -100,12 +109,12 @@ to jpeg, tiff, png and pdf are included.
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
-                <version>2.3.2</version>
+                <version>3.5.1</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.4</version>
+                <version>2.7</version>
                 <executions>
                     <execution>
                         <goals>
@@ -117,7 +126,7 @@ to jpeg, tiff, png and pdf are included.
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.4.3</version>
+                <version>3.0.1</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
@@ -133,7 +142,7 @@ to jpeg, tiff, png and pdf are included.
                         </manifest>
                     </archive>
                 </configuration>
-                <version>2.3.1</version>
+                <version>3.0.2</version>
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -147,6 +156,7 @@ to jpeg, tiff, png and pdf are included.
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                 </configuration>
+                <version>2.6</version>
             </plugin>
         </plugins>
     </build>
@@ -175,8 +185,24 @@ to jpeg, tiff, png and pdf are included.
         </dependency>
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-extension</artifactId>
+            <version>${batik.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-svg-dom</artifactId>
+            <version>${batik.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-swing</artifactId>
             <version>${batik.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.python</groupId>
+                    <artifactId>jython</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
@@ -198,22 +224,22 @@ to jpeg, tiff, png and pdf are included.
                         </link>
                     </links>
                 </configuration>
-                <version>2.7</version>
+                <version>2.10.4</version>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>surefire-report-maven-plugin</artifactId>
-                <version>2.0-beta-1</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.19.1</version>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>changelog-maven-plugin</artifactId>
-                <version>2.0-beta-1</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-changelog-plugin</artifactId>
+                <version>2.3</version>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jxr-maven-plugin</artifactId>
-                <version>2.0-beta-1</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.5</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -228,27 +254,27 @@ to jpeg, tiff, png and pdf are included.
                 <version>2.4</version>
             </plugin>
             <plugin>
-                <artifactId>
-                    maven-project-info-reports-plugin
-                </artifactId>
-                <version>2.0-beta-2</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.9</version>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <configuration>
                     <targetJdk>${java.version}</targetJdk>
                 </configuration>
-                <version>2.5</version>
+                <version>3.6</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jdepend-maven-plugin</artifactId>
-                <version>2.0-beta-2</version>
+                <version>2.0</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.4</version>
+                <version>2.7</version>
             </plugin>
         </plugins>
     </reporting>
