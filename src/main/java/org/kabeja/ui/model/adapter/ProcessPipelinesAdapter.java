@@ -51,7 +51,7 @@ public class ProcessPipelinesAdapter implements TreeNode {
     }
 
     @Override
-    public Enumeration<?> children() {
+    public Enumeration<? extends TreeNode> children() {
         return null;
     }
 
