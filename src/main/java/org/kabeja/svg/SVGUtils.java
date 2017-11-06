@@ -27,8 +27,9 @@ import org.xml.sax.helpers.AttributesImpl;
  *
  */
 public class SVGUtils {
-    public static String DEFAUL_ATTRIBUTE_TYPE = "CDATA";
-    public static String DEFAULT_ID_NAME_PREFIX = "ID_";
+    public static final String DEFAUL_ATTRIBUTE_TYPE = "CDATA";
+    public static final String DEFAULT_ID_NAME_PREFIX = "ID_";
+    public static final Character MARKER = '$';
     private static DecimalFormat format;
 
     static {
@@ -139,12 +140,12 @@ public class SVGUtils {
                         (c == '-') || (c == '_') || (c == '.') || (c == ':')) {
                     buf.append(c);
                 } else {
-                    // normally we have to check all id to garante it will be a
-                    // unique,
+                    // normally we have to check all id to garante it will be unique,
                     // but we convert the current char to a int with "_"-prefix
-                    buf.append("_#");
-                    buf.append((int) c);
-                    buf.append('_');
+                    buf.append('_')
+                       .append(MARKER)
+                       .append((int) c)
+                       .append('_');
                 }
             }
 
@@ -190,12 +191,12 @@ public class SVGUtils {
                 } else if (marker) {
                     if (Character.isDigit(c) && start) {
                         number.append(c);
-                    } else if (c != '#') {
+                    } else if (c != MARKER) {
                         marker = false;
                         buf.append('_');
                         buf.append(c);
                     } else {
-                        // is #
+                        // is MARKER
                         start = true;
                     }
                 } else {
