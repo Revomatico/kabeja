@@ -156,32 +156,40 @@ to jpeg, tiff, png and pdf are included.
     <dependency>
       <groupId>org.apache.xmlgraphics</groupId>
       <artifactId>batik-swing</artifactId>
-      <version>1.8pre</version>
+      <version>1.10</version>
     </dependency>
     <dependency>
       <groupId>de.miethxml</groupId>
       <artifactId>miethxml-ui</artifactId>
       <version>0.0.1</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/legacy-lib/miethxml-ui.jar</systemPath>
+      <!-- sources at https://github.com/Evolveum/connector-legacy-libs -->
     </dependency>
     <dependency>
       <groupId>org.apache.xmlgraphics</groupId>
       <artifactId>batik-transcoder</artifactId>
-      <version>1.8pre</version>
+      <version>1.10</version>
     </dependency>
     <dependency>
       <groupId>org.apache.xmlgraphics</groupId>
       <artifactId>batik-js</artifactId>
-      <version>1.8pre</version>
+      <version>1.8</version>
     </dependency>
     <dependency>
       <groupId>org.apache.xmlgraphics</groupId>
       <artifactId>batik-svg-dom</artifactId>
-      <version>1.8pre</version>
+      <version>1.11</version>
     </dependency>
     <dependency>
       <groupId>org.apache.xmlgraphics</groupId>
       <artifactId>fop</artifactId>
       <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.xmlgraphics</groupId>
+      <artifactId>batik-test-swing</artifactId>
+      <version>1.10</version>
     </dependency>
   </dependencies>
 

@@ -17,7 +17,6 @@ package org.kabeja.dxf.helpers;
 
 import org.kabeja.dxf.DXFConstants;
 
-
 /**
  * @author <a href="mailto:simon.mieth@gmx.de>Simon Mieth</a>
  *
@@ -25,79 +24,83 @@ import org.kabeja.dxf.DXFConstants;
  *
  */
 public class Point {
-    protected double x = 0.0;
-    protected double y = 0.0;
-    protected double z = 0.0;
+  protected double x = 0.0;
+  protected double y = 0.0;
+  protected double z = 0.0;
 
-    public Point() {
+  public Point() {
+  }
+
+  public Point(double x, double y, double z) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+
+  /**
+   * @return Returns the x.
+   */
+  public double getX() {
+    return x;
+  }
+
+  /**
+   * @param x
+   *          The x to set.
+   */
+  public void setX(double x) {
+    this.x = x;
+  }
+
+  /**
+   * @return Returns the y.
+   */
+  public double getY() {
+    return y;
+  }
+
+  /**
+   * @param y
+   *          The y to set.
+   */
+  public void setY(double y) {
+    this.y = y;
+  }
+
+  /**
+   * @return Returns the z.
+   */
+  public double getZ() {
+    return z;
+  }
+
+  /**
+   * @param z
+   *          The z to set.
+   */
+  public void setZ(double z) {
+    this.z = z;
+  }
+
+  public String toString() {
+    return super.toString() + "[" + this.x + "," + this.y + "," + this.z + "]";
+  }
+
+  public boolean equals(Object obj) {
+    if (obj instanceof Point) {
+      Point p = (Point) obj;
+      double d = DXFConstants.POINT_CONNECTION_RADIUS;
+
+      if ((Math.abs(x - p.getX()) <= d) && (Math.abs(y - p.getY()) <= d)) {
+        return Math.abs(z - p.getZ()) <= d;
+      }
     }
 
-    public Point(double x, double y, double z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
+    return false;
+  }
 
-    /**
-     * @return Returns the x.
-     */
-    public double getX() {
-        return x;
-    }
-
-    /**
-     * @param x
-     *            The x to set.
-     */
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    /**
-     * @return Returns the y.
-     */
-    public double getY() {
-        return y;
-    }
-
-    /**
-     * @param y
-     *            The y to set.
-     */
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    /**
-     * @return Returns the z.
-     */
-    public double getZ() {
-        return z;
-    }
-
-    /**
-     * @param z
-     *            The z to set.
-     */
-    public void setZ(double z) {
-        this.z = z;
-    }
-
-    public String toString() {
-        return super.toString() + "[" + this.x + "," + this.y + "," + this.z +
-        "]";
-    }
-
-    public boolean equals(Object obj) {
-        if (obj instanceof Point) {
-            Point p = (Point) obj;
-            double d = DXFConstants.POINT_CONNECTION_RADIUS;
-
-            if ((Math.abs(x - p.getX()) <= d) && (Math.abs(y - p.getY()) <= d)) {
-                return Math.abs(z - p.getZ()) <= d;
-            }
-        }
-
-        return false;
-    }
+  @Override
+  public int hashCode() {
+    throw new RuntimeException("Not implemented yet!!!");
+  }
 }

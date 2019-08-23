@@ -27,7 +27,9 @@ import java.util.Map;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 
-import org.apache.batik.dom.svg.SVGDOMImplementation;
+import de.miethxml.toolkit.ui.UIUtils;
+import org.apache.batik.anim.dom.SVGDOMImplementation;
+import org.apache.commons.lang.StringUtils;
 import org.kabeja.processing.BoundsFilter;
 import org.kabeja.svg.SVGConstants;
 import org.kabeja.svg.SVGUtils;
@@ -40,9 +42,6 @@ import org.w3c.dom.events.EventTarget;
 import org.w3c.dom.events.MouseEvent;
 import org.w3c.dom.svg.SVGDocument;
 import org.w3c.dom.svg.SVGMatrix;
-
-import de.miethxml.toolkit.ui.UIUtils;
-import org.apache.commons.lang.StringUtils;
 
 
 public class SelectionAction extends AbstractAction implements SVGDocumentAction,

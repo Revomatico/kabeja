@@ -37,7 +37,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import org.apache.batik.dom.svg.SAXSVGDocumentFactory;
+import de.miethxml.toolkit.ui.SmallShadowBorder;
+import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
 import org.apache.batik.swing.JSVGCanvas;
 import org.apache.batik.swing.JSVGScrollPane;
 import org.apache.batik.swing.gvt.GVTTreeRendererAdapter;
@@ -51,10 +52,8 @@ import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.image.ImageTranscoder;
 import org.apache.batik.transcoder.image.JPEGTranscoder;
-import org.w3c.dom.svg.SVGDocument;
-
-import de.miethxml.toolkit.ui.SmallShadowBorder;
 import org.apache.commons.lang.StringUtils;
+import org.w3c.dom.svg.SVGDocument;
 
 
 /**

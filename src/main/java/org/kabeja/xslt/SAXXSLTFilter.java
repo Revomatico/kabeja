@@ -86,7 +86,7 @@ public class SAXXSLTFilter extends AbstractSAXFilter {
         while (i.hasNext()) {
             String name = (String) i.next();
 
-            if (!PROPERTY_XSLTSTYLESHEET.equals(i)) {
+            if (!PROPERTY_XSLTSTYLESHEET.equals(name)) {
                 tf.setParameter(name, this.properties.get(name));
             }
         }
