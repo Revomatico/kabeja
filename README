@@ -1,3 +1,5 @@
+[![Download](https://api.bintray.com/packages/raisercostin/maven/kabeja/images/download.svg)](https://bintray.com/raisercostin/maven/kabeja/_latestVersion)
+
 Kabeja is a small library for parsing DXF-Files and converting
 this to SVG. It is licensed under the Apache Software License 2.0.
 
@@ -144,10 +146,33 @@ Any help and feedback are greatly appreciated.
 Mail: simon.mieth@gmx.de
 
 
+# Configuration
 
+## Usage
 
-# Build & Release new version with
+### Maven
+
+#### Dependency
+See released versions at https://bintray.com/beta/#/raisercostin/maven/connector-scripted-sql
 
 ```
-mvn release:prepare release:perform -DskipTests=true -Prelease -Darguments="-DskipTests=true -Prelease"
+<dependency>
+  <groupId>org.kabeja</groupId>
+  <artifactId>kabeja</artifactId>
+  <version>0.4.7</version>
+</dependency>
 ```
+
+#### Repository
+```
+<repository>
+  <id>raisercostin-bintray</id>
+  <url>https://dl.bintray.com/raisercostin/maven</url>
+  <releases><enabled>true</enabled></releases>
+  <snapshots><enabled>false</enabled></snapshots>
+</repository>
+```
+
+## Development
+
+- To release `mvn release:prepare release:perform -DskipTests=true -Prelease -Darguments="-DskipTests=true -Prelease"`
