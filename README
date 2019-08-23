@@ -146,3 +146,8 @@ Mail: simon.mieth@gmx.de
 
 
 
+# Build & Release new version with
+
+```
+mvn release:prepare release:perform -DskipTests=true -Prelease -Darguments="-DskipTests=true -Prelease"
+```
