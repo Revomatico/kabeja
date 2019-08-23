@@ -2,3 +2,5 @@
 target/
 .idea
 kabeja.iml
+/.project
+/.settings
