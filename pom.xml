@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.kabeja</groupId>
   <artifactId>kabeja</artifactId>
   <name>kabeja</name>
-  <version>0.4.8-SNAPSHOT</version>
+  <version>0.4.8</version>
   <packaging>jar</packaging>
   <description>
     Kabeja is a java library for parsing DXF and converting to SVG (dxf2svg).
@@ -22,7 +21,7 @@
     <connection>scm:git:${git.url}.git</connection>
     <developerConnection>scm:git:${git.url}.git</developerConnection>
     <url>${git.url}</url>
-    <tag>${project.artifactId}-${project.version}</tag>
+    <tag>kabeja-0.4.8</tag>
   </scm>
   <distributionManagement>
     <repository>
