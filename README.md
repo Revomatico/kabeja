@@ -176,3 +176,13 @@ See released versions at https://bintray.com/beta/#/raisercostin/maven/connector
 ## Development
 
 - To release `mvn release:prepare release:perform -DskipTests=true -Prelease -Darguments="-DskipTests=true -Prelease"`
+
+# Resources
+- http://kabeja.sourceforge.net/examples.html
+- https://sourceforge.net/projects/kabeja/
+- https://sourceforge.net/p/kabeja/discussion/510351/
+- https://sourceforge.net/p/kabeja/code/HEAD/tree/
+- https://sourceforge.net/projects/kabeja/files/kabeja-inkscape-extension/kabeja-inkscape-extension-0.4/
+- https://sourceforge.net/p/kabeja/bugs/
+- https://sourceforge.net/p/kabeja/wiki/Home/
+- http://kabeja.sourceforge.net/docs/user/userguide.html
