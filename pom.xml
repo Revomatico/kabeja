@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.kabeja</groupId>
   <artifactId>kabeja</artifactId>
@@ -106,14 +107,31 @@
       <artifactId>batik-swing</artifactId>
       <version>1.11</version>
     </dependency>
+    <!-- <dependency> <groupId>de.miethxml</groupId> <artifactId>miethxml-ui</artifactId> <version>0.0.1</version> <scope>system</scope> <systemPath>${basedir}/legacy-lib/miethxml-ui.jar</systemPath> 
+      </dependency> -->
     <dependency>
-      <groupId>de.miethxml</groupId>
-      <artifactId>miethxml-ui</artifactId>
-      <version>0.0.1</version>
-      <scope>system</scope>
-      <systemPath>${basedir}/legacy-lib/miethxml-ui.jar</systemPath>
-      <!-- sources at https://github.com/Evolveum/connector-legacy-libs -->
+      <groupId>com.neuronrobotics</groupId>
+      <artifactId>BowlerScriptingKernel</artifactId>
+      <!-- <version>0.23.1</version> -->
+      <!-- <version>0.45.1</version> -->
+      <version>0.29.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.neuronrobotics</groupId>
+          <artifactId>CHDK-PTP-Java</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.bubblecloud.jbullet</groupId>
+          <artifactId>jbullet</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
+    <dependency>
+      <groupId>org.reactfx</groupId>
+      <artifactId>reactfx</artifactId>
+      <version>2.0-M5</version>
+    </dependency>
+    <!-- <dependency> <groupId>com.neuronrobotics</groupId> <artifactId>CHDK-PTP-Java</artifactId> <version>1.11</version> </dependency> -->
     <dependency>
       <groupId>org.apache.xmlgraphics</groupId>
       <artifactId>batik-transcoder</artifactId>
