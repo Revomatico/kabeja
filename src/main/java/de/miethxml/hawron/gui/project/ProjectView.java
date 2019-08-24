@@ -1,0 +1,57 @@
+/*
+   Copyright 2005 Simon Mieth
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+package de.miethxml.hawron.gui.project;
+
+import java.util.List;
+
+import javax.swing.JComponent;
+
+import de.miethxml.hawron.project.ProjectComponent;
+
+
+/**
+ *
+ * @author <a href="mailto:simon.mieth@gmx.de">Simon Mieth </a>
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+public interface ProjectView extends ProjectComponent {
+    public static final String ROLE = ProjectView.class.getName();
+
+    public abstract void addProjectViewComponent(
+        ProjectViewComponent component);
+
+    public abstract void removeProjectViewComponent(
+        ProjectViewComponent component);
+
+    public abstract void activateProjectViewComponent(int index);
+
+    public abstract void activateProjectViewComponent(
+        ProjectViewComponent component);
+
+    public abstract void activateProjectViewComponent(String key);
+
+    public abstract ProjectViewComponent getActiveProjectViewComponent();
+
+    public abstract List getProjectViewComponents();
+
+    public abstract JComponent getView();
+}
