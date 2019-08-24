@@ -29,10 +29,6 @@ import de.miethxml.toolkit.conf.LocaleImpl;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
-import org.apache.log.Hierarchy;
-import org.apache.log.Logger;
-
-
 /**
  *
  * @author <a href="mailto:simon.mieth@gmx.de">Simon Mieth </a>
@@ -42,7 +38,6 @@ import org.apache.log.Logger;
  * @deprecated
  */
 public class FTPTableModel implements TableModel {
-    Logger logger = Hierarchy.getDefaultHierarchy().getLoggerFor("TableModel");
     ArrayList listeners;
     String user;
     String password;

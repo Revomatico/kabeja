@@ -136,48 +136,15 @@
     <!-- de.miethxml -->
     <!-- <dependency> <groupId>de.miethxml</groupId> <artifactId>miethxml-ui</artifactId> <version>0.0.1</version> <scope>system</scope> <systemPath>${basedir}/legacy-lib/miethxml-ui.jar</systemPath> 
       </dependency> -->
-<!--     <dependency>
-      http://repo1.maven.org/maven2/com/neuronrobotics/JCSG/0.7.2/
-      <groupId>com.neuronrobotics</groupId>
-      <artifactId>JCSG</artifactId>
-      <version>0.7.2</version> this is uberjar
-      <version>0.8.0</version>
-    </dependency>
- -->    <!-- de.miethxml: https://sourceforge.net/projects/hawron/files/hawron/ -->
-    <dependency>
-      <!-- https://repo1.maven.org/maven2/com/neuronrobotics/BowlerScriptingKernel/ -->
-      <groupId>com.neuronrobotics</groupId>
-      <artifactId>BowlerScriptingKernel</artifactId>
-      <!-- <version>0.23.2</version> this is uberjar -->
-      <!-- <version>0.31.3</version> -->
-      <version>0.36.0</version>
-      <!-- <version>0.45.1</version> -->
-      <exclusions>
-        <exclusion>
-          <groupId>com.neuronrobotics</groupId>
-          <artifactId>CHDK-PTP-Java</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.bubblecloud.jbullet</groupId>
-          <artifactId>jbullet</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>com.google.zxing</groupId>
-          <artifactId>zxing-parent</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>net.java.openjdk</groupId>
-          <artifactId>ant-javafx</artifactId>
-          <!-- <version>8b106</version> -->
-        </exclusion>
-        <exclusion>
-          <groupId>net.java.openjdk</groupId>
-          <artifactId>jfxrt</artifactId>
-          <!-- <version>8b106</version> -->
-        </exclusion>
-      </exclusions>
-      <!-- <type>zip</type> -->
-    </dependency>
+    <!-- <dependency> http://repo1.maven.org/maven2/com/neuronrobotics/JCSG/0.7.2/ <groupId>com.neuronrobotics</groupId> <artifactId>JCSG</artifactId> 
+      <version>0.7.2</version> this is uberjar <version>0.8.0</version> </dependency> -->    <!-- de.miethxml: https://sourceforge.net/projects/hawron/files/hawron/ -->
+    <!-- https://repo1.maven.org/maven2/com/neuronrobotics/BowlerScriptingKernel/ -->
+    <!-- <dependency> <groupId>com.neuronrobotics</groupId> <artifactId>BowlerScriptingKernel</artifactId> <version>0.23.2</version> <version>0.23.2</version> 
+      this is uberjar <version>0.31.3</version> <version>0.36.0</version> <version>0.45.1</version> <exclusions> <exclusion> <groupId>com.neuronrobotics</groupId> 
+      <artifactId>CHDK-PTP-Java</artifactId> </exclusion> <exclusion> <groupId>org.bubblecloud.jbullet</groupId> <artifactId>jbullet</artifactId> </exclusion> 
+      <exclusion> <groupId>com.google.zxing</groupId> <artifactId>zxing-parent</artifactId> </exclusion> <exclusion> <groupId>net.java.openjdk</groupId> 
+      <artifactId>ant-javafx</artifactId> <version>8b106</version> </exclusion> <exclusion> <groupId>net.java.openjdk</groupId> <artifactId>jfxrt</artifactId> 
+      <version>8b106</version> </exclusion> </exclusions> <type>zip</type> </dependency> -->
     <dependency>
       <!-- for de.miethxml -->
       <groupId>jgoodies</groupId>
@@ -196,11 +163,7 @@
       <version>3.2.0</version>
       <type>pom</type>
     </dependency>
-    <dependency>
-      <groupId>logkit</groupId>
-      <artifactId>logkit</artifactId>
-      <version>2.0</version>
-    </dependency>
+    <!-- <dependency> <groupId>logkit</groupId> <artifactId>logkit</artifactId> <version>2.0</version> </dependency> -->
     <dependency>
       <groupId>org.reactfx</groupId>
       <artifactId>reactfx</artifactId>
@@ -246,6 +209,49 @@
       <groupId>commons-compress</groupId>
       <artifactId>commons-compress</artifactId>
       <version>20050911</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-net</groupId>
+      <artifactId>commons-net</artifactId>
+      <version>1.2.1</version>
+    </dependency>
+
+    <!-- modern -->
+    <!-- <dependency> <groupId>org.apache.jmeter</groupId> <artifactId>ApacheJMeter_slf4j_logkit</artifactId> <version>3.1</version> </dependency> -->
+    <dependency>
+      <groupId>logkit</groupId>
+      <artifactId>logkit</artifactId>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.28</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>1.7.28</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl104-over-slf4j</artifactId>
+      <version>1.5.8</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>log4j-over-slf4j</artifactId>
+      <version>1.7.28</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jul-to-slf4j</artifactId>
+      <version>1.7.28</version>
     </dependency>
   </dependencies>
   <build>
