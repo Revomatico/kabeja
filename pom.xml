@@ -21,7 +21,7 @@
     <connection>scm:git:${git.url}.git</connection>
     <developerConnection>scm:git:${git.url}.git</developerConnection>
     <url>${git.url}</url>
-    <tag>kabeja-0.4.9</tag>
+    <tag>${project.artifactId}-${project.version}</tag>
   </scm>
   <distributionManagement>
     <repository>
