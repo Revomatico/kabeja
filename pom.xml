@@ -4,7 +4,7 @@
   <groupId>org.kabeja</groupId>
   <artifactId>kabeja</artifactId>
   <name>kabeja</name>
-  <version>0.4.9</version>
+  <version>0.4.10-SNAPSHOT</version>
   <packaging>jar</packaging>
   <description>
     Kabeja is a java library for parsing DXF and converting to SVG (dxf2svg).
@@ -21,7 +21,7 @@
     <connection>scm:git:${git.url}.git</connection>
     <developerConnection>scm:git:${git.url}.git</developerConnection>
     <url>${git.url}</url>
-    <tag>kabeja-0.4.9</tag>
+    <tag>${project.artifactId}-${project.version}</tag>
   </scm>
   <distributionManagement>
     <repository>
