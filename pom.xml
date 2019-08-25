@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.kabeja</groupId>
   <artifactId>kabeja</artifactId>
@@ -22,7 +21,7 @@
     <connection>scm:git:${git.url}.git</connection>
     <developerConnection>scm:git:${git.url}.git</developerConnection>
     <url>${git.url}</url>
-    <tag>${project.artifactId}-${project.version}</tag>
+    <tag>kabeja-0.4.9</tag>
   </scm>
   <distributionManagement>
     <repository>
@@ -258,6 +257,26 @@
       <artifactId>batik-codec</artifactId>
       <version>1.9</version>
     </dependency>
+    <dependency>
+      <groupId>avalon-framework</groupId>
+      <artifactId>avalon-framework-api</artifactId>
+      <version>4.1.5</version>
+    </dependency>
+<!--     <dependency>
+      <groupId>excalibur-logger</groupId>
+      <artifactId>excalibur-logger</artifactId>
+      <version>2.1</version>
+    </dependency> -->
+    <dependency>
+      <groupId>org.apache.excalibur.containerkit</groupId>
+      <artifactId>excalibur-instrument-api</artifactId>
+      <version>2.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.excalibur.containerkit</groupId>
+      <artifactId>excalibur-logger</artifactId>
+      <version>2.2.1</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -376,7 +395,7 @@
           <target>${target.java.version}</target>
           <showDeprecation>true</showDeprecation>
           <fork>true</fork>
-          <verbose>true</verbose>
+          <verbose>false</verbose>
           <meminitial>512m</meminitial>
           <maxmem>1024m</maxmem>
           <optimize>true</optimize>
