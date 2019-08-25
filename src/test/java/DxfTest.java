@@ -26,13 +26,14 @@ public class DxfTest {
 
   public static void main(String[] args) {
     Exporter format = Exporter.JPG;
-    export("samples/dxf/Sample3.dxf", format);
-    export("samples/dxf/draft1.dxf", format);
-    export("samples/dxf/draft2.dxf", format);
-    export("samples/dxf/draft3.dxf", format);
-    export("samples/dxf/draft4.dxf", format);
-    export("samples/dxf/hatch_1.dxf", format);
-    export("samples/dxf/hatch_16.dxf", format);
+    String dir = "samples/dxf/";
+    export(dir+"Sample3.dxf", format);
+    export(dir+"draft1.dxf", format);
+    export(dir+"draft2.dxf", format);
+    export(dir+"draft3.dxf", format);
+    export(dir+"draft4.dxf", format);
+    export(dir+"hatch_1.dxf", format);
+    export(dir+"hatch_16.dxf", format);
   }
 
   public static enum Exporter {
